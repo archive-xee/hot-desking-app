@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { TicketForSale } from "@/src/components/organisms/Ticket"
+import { TicketForSale } from "@/src/components/organisms/Ticket/"
 
 export default function TicketPage() {
   return (
@@ -11,7 +11,7 @@ export default function TicketPage() {
 }
 
 const TicketPageTitle = () => {
-  return <h1 className="text-center text-xl font-bold">사용권 구매</h1>
+  return <h1 className="text-center text-xl font-bold">이용권 구매하기</h1>
 }
 
 const TicketViewContainer = () => {
