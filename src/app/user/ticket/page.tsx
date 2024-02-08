@@ -1,5 +1,5 @@
-import { TicketOfUser } from "@/src/components/organisms/Ticket"
-import TicketViewContainer from "@/src/components/templates/ticket_view_container"
+import { TicketOfUser } from "@/src/components/molecules/Ticket"
+import TicketViewContainer from "@/src/components/organisms/TicketViewContainer"
 
 export default function UserTicketPage() {
   return (

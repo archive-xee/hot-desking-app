@@ -1,6 +1,6 @@
 import Image from "next/image"
-import { TicketForSale } from "@/src/components/organisms/Ticket/"
-import TicketViewContainer from "@/src/components/templates/ticket_view_container"
+import { TicketForSale } from "@/src/components/molecules/Ticket/index"
+import TicketViewContainer from "@/src/components/organisms/TicketViewContainer"
 
 export default function TicketPage() {
   return (
