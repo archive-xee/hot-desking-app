@@ -11,7 +11,7 @@ export default function HomePage() {
       </HomeNavSection>
       <HomeNavSection title="구매/등록">
         <HomeNavButton label="이용권" destination="/ticket" />
-        <HomeNavButton label="쿠폰" destination={""} />
+        <HomeNavButton label="쿠폰" destination="/coupon" />
       </HomeNavSection>
       <HomeNavSection title="변경">
         <HomeNavButton label="이동" destination={""} />
