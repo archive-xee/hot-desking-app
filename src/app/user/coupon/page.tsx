@@ -31,6 +31,16 @@ export default function UserCouponPage() {
             ></CouponOfUser>
           </>
         }
+        actions={
+          <div className="flex flex-row gap-2">
+            <button
+              type="button"
+              className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+            >
+              사용하기
+            </button>
+          </div>
+        }
       ></ListViewContainer>
     </div>
   )
