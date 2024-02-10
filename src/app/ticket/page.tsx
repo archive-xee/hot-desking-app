@@ -1,7 +1,7 @@
 import Image from "next/image"
+import Link from "next/link"
 import { TicketForSale } from "@/src/components/molecules/Ticket/index"
 import TicketViewContainer from "@/src/components/organisms/TicketViewContainer"
-
 export default function TicketPage() {
   return (
     <div className="m-auto mx-1 flex flex-col gap-2 py-1">
@@ -35,12 +35,14 @@ export default function TicketPage() {
           </>
         }
         actions={
-          <button
-            type="button"
-            className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
-          >
-            쿠폰 적용
-          </button>
+          <Link href="/user/coupon">
+            <button
+              type="button"
+              className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+            >
+              쿠폰 적용
+            </button>
+          </Link>
         }
       />
     </div>
