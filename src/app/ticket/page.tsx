@@ -7,6 +7,7 @@ export default function TicketPage() {
     <div className="m-auto mx-1 flex flex-col gap-2 py-1">
       <TicketPageTitle />
       <ListViewContainer
+        title="정해진 기간동안 사용할 수 있습니다."
         tabs={TicketTypeTab()}
         listItems={
           <>
