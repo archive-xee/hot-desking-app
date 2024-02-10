@@ -1,14 +1,14 @@
 import Image from "next/image"
 import Link from "next/link"
 import { TicketForSale } from "@/src/components/molecules/Ticket/index"
-import TicketViewContainer from "@/src/components/organisms/TicketViewContainer"
+import ListViewContainer from "@/src/components/organisms/ListViewContainer"
 export default function TicketPage() {
   return (
     <div className="m-auto mx-1 flex flex-col gap-2 py-1">
       <TicketPageTitle />
-      <TicketViewContainer
+      <ListViewContainer
         tabs={TicketTypeTab()}
-        tickets={
+        listItems={
           <>
             <TicketForSale
               ticket={{

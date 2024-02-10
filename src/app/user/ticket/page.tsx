@@ -1,12 +1,12 @@
 import { TicketOfUser } from "@/src/components/molecules/Ticket"
-import TicketViewContainer from "@/src/components/organisms/TicketViewContainer"
+import ListViewContainer from "@/src/components/organisms/ListViewContainer"
 
 export default function UserTicketPage() {
   return (
     <div className="m-auto mx-1 flex flex-col gap-2 py-1">
       <UserTicketPageTitle />
-      <TicketViewContainer
-        tickets={
+      <ListViewContainer
+        listItems={
           <>
             <TicketOfUser
               ticket={{
@@ -108,7 +108,7 @@ export default function UserTicketPage() {
             </button>
           </div>
         }
-      ></TicketViewContainer>
+      ></ListViewContainer>
     </div>
   )
 }
