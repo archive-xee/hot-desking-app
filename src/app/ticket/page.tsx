@@ -1,7 +1,8 @@
 import Image from "next/image"
 import Link from "next/link"
-import { TicketForSale } from "@/src/components/molecules/Ticket/index"
+import { TicketForSale, TicketInModal } from "@/src/components/molecules/Ticket/index"
 import ListViewContainer from "@/src/components/organisms/ListViewContainer"
+import { Modal } from "@/src/components/organisms/Modal"
 export default function TicketPage() {
   return (
     <div className="m-auto mx-1 flex flex-col gap-2 py-1">
@@ -11,17 +12,44 @@ export default function TicketPage() {
         tabs={TicketTypeTab()}
         listItems={
           <>
-            <TicketForSale
-              ticket={{
-                id: "1",
-                type: "oneday",
-                bookable: "locker",
-                price: 10000,
-                period: 86400,
-                issuedAt: 1706946429,
-                expiresAt: 1707551229,
-              }}
-            ></TicketForSale>
+            <Modal
+              trigger={
+                <TicketForSale
+                  ticket={{
+                    id: "1",
+                    type: "oneday",
+                    bookable: "locker",
+                    price: 10000,
+                    period: 86400,
+                    issuedAt: 1706946429,
+                    expiresAt: 1707551229,
+                  }}
+                ></TicketForSale>
+              }
+              title="티켓입니다"
+              content={
+                <TicketInModal
+                  ticket={{
+                    id: "1",
+                    type: "time",
+                    bookable: "seat",
+                    price: 10000,
+                    period: 86400,
+                    issuedAt: 1706946429,
+                    expiresAt: 1707551229,
+                  }}
+                ></TicketInModal>
+              }
+              actions={
+                <button
+                  type="button"
+                  className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+                >
+                  확인
+                </button>
+              }
+            ></Modal>
+
             <TicketForSale
               ticket={{
                 id: "1",
