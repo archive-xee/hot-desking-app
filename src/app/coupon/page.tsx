@@ -4,16 +4,16 @@
 
 export default function CouponPage() {
   return (
-    <div className="m-auto mx-1 flex flex-col gap-2 py-1">
+    <>
       <CouponPageTitle />
       <CouponRegisterForm />
-    </div>
-  )
+    </>
+  );
 }
 
 const CouponPageTitle = () => {
-  return <h1 className="text-center text-xl font-bold">쿠폰 등록하기</h1>
-}
+  return <h1 className="text-center text-xl font-bold">쿠폰 등록하기</h1>;
+};
 
 const CouponRegisterForm = () => {
   return (
@@ -47,5 +47,5 @@ const CouponRegisterForm = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};

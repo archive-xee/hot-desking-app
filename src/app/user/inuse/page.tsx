@@ -3,7 +3,7 @@ import { TicketInUse } from "@/src/components/molecules/Ticket";
 // 남은 수량이 정말 필요한가?
 export default function TicketInUsePage() {
   return (
-    <div className="m-auto mx-1 flex flex-col gap-2 py-1">
+    <>
       <TicketInUseTitle />
       <VerticalListViewContainer
         actions={
@@ -55,7 +55,7 @@ export default function TicketInUsePage() {
           </>
         }
       />
-    </div>
+    </>
   );
 }
 
