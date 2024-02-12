@@ -1,5 +1,5 @@
-import Image from "next/image"
-import Link from "next/link"
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -16,7 +16,7 @@ export default function Header() {
       <h1 className="text-lg font-bold">궁극의 창작공간</h1>
       <div className="grow"></div>
       <div className="flex flex-row gap-2">
-        <Link href="/user/ticket" className="hover:underline">
+        <Link href="/user/inuse" className="hover:underline">
           내 이용권
         </Link>
         <Link href="/signup" className="hover:underline">
@@ -30,5 +30,5 @@ export default function Header() {
         </Link>
       </div>
     </div>
-  )
+  );
 }

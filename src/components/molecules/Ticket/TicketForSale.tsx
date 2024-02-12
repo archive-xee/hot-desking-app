@@ -1,31 +1,38 @@
-import Image from "next/image"
-import type { Ticket } from "@/src/models/ticket"
-import { Bookable } from "@/src/models/ticket"
+import Image from "next/image";
+import type { Ticket } from "@/src/models/ticket";
+import { Bookable } from "@/src/models/ticket";
 
 const TicketForSale = (props: { ticket: Ticket }) => {
-  const { ticket } = props
-  const bookableKorean = getBookableKorean(ticket.bookable)
+  const { ticket } = props;
+  const bookableKorean = getBookableKorean(ticket.bookable);
 
   const borderColors: { [key in Bookable]: string } = {
     seat: "border-blue-100",
     meetingroom: "border-yellow-500",
     rentbox: "border-teal-100",
     locker: "border-purple-100",
-  }
+  };
 
   const bookableColors: { [key in Bookable]: string } = {
     seat: "bg-blue-700",
     meetingroom: "bg-yellow-700",
     rentbox: "bg-teal-500",
     locker: "bg-purple-700",
-  }
+  };
 
   return (
-    <div className={`flex ${borderColors[ticket.bookable]} flex-row rounded-lg border border-solid bg-white-300`}>
+    <div
+      className={`flex ${borderColors[ticket.bookable]} flex-row rounded-lg border border-solid bg-white-300`}
+    >
       <div
-        className={`flex ${bookableColors[ticket.bookable]} size-20 flex-col items-center justify-center gap-1 rounded-l-lg bg-black-300`}
+        className={`flex ${bookableColors[ticket.bookable]} size-20 flex-col items-center justify-center gap-1 rounded-l-lg`}
       >
-        <Image src={`/icons/bookable/${ticket.bookable}.png`} alt="이것도 해야겠네" width="24" height="24"></Image>
+        <Image
+          src={`/icons/bookable/${ticket.bookable}.png`}
+          alt="이것도 해야겠네"
+          width="24"
+          height="24"
+        ></Image>
         <p className="text-white-100">{bookableKorean}</p>
       </div>
       <div className="flex grow flex-row justify-between pl-2">
@@ -44,20 +51,20 @@ const TicketForSale = (props: { ticket: Ticket }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const getBookableKorean = (type: Bookable): string => {
   switch (type) {
     case "seat":
-      return "좌석"
+      return "좌석";
     case "meetingroom":
-      return "미팅룸"
+      return "미팅룸";
     case "rentbox":
-      return "대여함"
+      return "대여함";
     default:
-      return "사물함"
+      return "사물함";
   }
-}
+};
 
-export default TicketForSale
+export default TicketForSale;
