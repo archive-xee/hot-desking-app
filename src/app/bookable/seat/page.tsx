@@ -1,11 +1,13 @@
+import MeetingRoomBox from "@/src/components/molecules/MeetingRoomBox"
 import SeatBox from "@/src/components/molecules/SeatBox"
-import { seat1, seat2 } from "@/src/models/bookable"
+import { seat1, seat2, meetingRoom1 } from "@/src/models/bookable"
 
 export default function SeatViewPage() {
   return (
     <>
       <SeatViewPageTitle />
       <SeatBoxMap>
+        <MeetingRoomBox meetingRoom={meetingRoom1}></MeetingRoomBox>
         <SeatBox seat={seat1} />
         <SeatBox seat={seat2} />
       </SeatBoxMap>
