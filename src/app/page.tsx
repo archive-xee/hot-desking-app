@@ -4,7 +4,7 @@ export default function HomePage() {
   return (
     <div className="flex flex-col">
       <HomeNavSection title="입실">
-        <HomeNavButton label="좌석" destination={""} />
+        <HomeNavButton label="좌석" destination="/bookable/seat" />
         <HomeNavButton label="미팅룸" destination={""} />
         <HomeNavButton label="사물함" destination={""} />
         <HomeNavButton label="대여함" destination={""} />
