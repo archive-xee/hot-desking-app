@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { TicketOfUser } from "@/src/components/molecules/Ticket"
 import ListViewContainer from "@/src/components/organisms/ListViewContainer"
 
@@ -78,14 +79,16 @@ export default function UserMeetingRoomTicketPage() {
           </>
         }
         actions={
-          <div className="flex flex-row gap-2">
-            <button
-              type="button"
-              className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
-            >
-              구매하기
-            </button>
-          </div>
+          <Link href="/ticket">
+            <div className="flex flex-row gap-2">
+              <button
+                type="button"
+                className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+              >
+                구매하기
+              </button>
+            </div>
+          </Link>
         }
       ></ListViewContainer>
     </>
