@@ -1,12 +1,13 @@
-export type TicketType = "oneday" | "period" | "time" | "discount"
-export type Bookable = "seat" | "meetingroom" | "rentbox" | "locker"
+import { BookableType } from "@/src/models/bookable";
+
+export type TicketType = "oneday" | "period" | "time" | "discount";
 
 export type Ticket = {
-  id: string
-  type: TicketType
-  bookable: Bookable
-  price: number
-  period: number
-  issuedAt: number
-  expiresAt: number
-}
+  id: string;
+  type: TicketType;
+  bookable: BookableType;
+  price: number;
+  period: number;
+  issuedAt: number;
+  expiresAt: number;
+};

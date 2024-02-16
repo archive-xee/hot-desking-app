@@ -1,11 +1,12 @@
-export type CouponType = "timebonus" | "discount"
-export type Bookable = "seat" | "meetingroom" | "rentbox" | "locker"
+import { BookableType } from "@/src/models/bookable";
+
+export type CouponType = "timebonus" | "discount";
 
 export type Coupon = {
-  id: string
-  type: CouponType
-  bookable: Bookable
-  digit: number
-  issuedAt: number
-  expiresAt: number
-}
+  id: string;
+  type: CouponType;
+  bookable: BookableType;
+  digit: number;
+  issuedAt: number;
+  expiresAt: number;
+};
