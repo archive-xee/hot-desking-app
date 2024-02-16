@@ -10,7 +10,7 @@ const MeetingRoomBox = (props: { meetingRoom: MeetingRoomModel }) => {
   return isUsed ? (
     <_MeetingRoomBox label={meetingRoom.id} bgColor={bgColor} borderColor={borderColor}></_MeetingRoomBox>
   ) : (
-    <Link href={isLogin ? "/user/ticket" : "/login"}>
+    <Link href={isLogin ? "/user/ticket/meetingroom" : "/login"}>
       <_MeetingRoomBox label={meetingRoom.id} bgColor={bgColor} borderColor={borderColor}></_MeetingRoomBox>
     </Link>
   )
