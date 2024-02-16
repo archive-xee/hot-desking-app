@@ -4,8 +4,7 @@ export default function HomePage() {
   return (
     <div className="flex flex-col">
       <HomeNavSection title="입실">
-        <HomeNavButton label="좌석" destination="/bookable/seat" />
-        <HomeNavButton label="미팅룸" destination={""} />
+        <HomeNavButton label={"좌석\n회의실"} destination="/booth" />
         <HomeNavButton label="사물함" destination={""} />
         <HomeNavButton label="대여함" destination={""} />
       </HomeNavSection>
@@ -48,7 +47,13 @@ const HomeNavButton = (props: NavButtonProps) => {
   return (
     <Link href={props.destination}>
       <div className="flex size-20 items-center justify-center rounded-lg bg-blue-700 hover:bg-blue-500">
-        <h3 className="font-medium  text-white-100">{props.label}</h3>
+        <h3 className="font-medium  text-white-100">
+          {props.label.split("\n").map((str, idx) => (
+            <p className="text-center" key={idx}>
+              {str}
+            </p>
+          ))}
+        </h3>
       </div>
     </Link>
   )

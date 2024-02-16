@@ -16,7 +16,7 @@ export default function SeatViewPage() {
 }
 
 const SeatViewPageTitle = () => {
-  return <h1 className="text-center text-xl font-bold">좌석 현황</h1>
+  return <h1 className="text-center text-xl font-bold">좌석/회의실 현황</h1>
 }
 
 const SeatBoxMap = (props: { children: React.ReactNode }) => {
