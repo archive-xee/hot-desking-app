@@ -19,11 +19,11 @@ export default function Header() {
         <Link href="/user/ticket/board" className="hover:underline">
           내 이용권
         </Link>
-        <Link href="/signup" className="hover:underline">
-          로그아웃
-        </Link>
-        <Link href="/signin" className="hover:underline">
+        <Link href="/login" className="hover:underline">
           로그인
+        </Link>
+        <Link href="/logout" className="hover:underline">
+          로그아웃
         </Link>
       </div>
     </div>
