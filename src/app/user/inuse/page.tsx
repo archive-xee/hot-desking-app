@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { TicketInUse } from "@/src/components/molecules/Ticket";
+import Link from "next/link"
+import { TicketInUse } from "@/src/components/molecules/Ticket"
 // 남은 수량이 정말 필요한가?
 export default function TicketInUsePage() {
   return (
@@ -56,26 +56,26 @@ export default function TicketInUsePage() {
         }
       />
     </>
-  );
+  )
 }
 
 // 티켓인모달도 가능할듯...?
 
 const TicketInUseTitle = () => {
-  return <h1 className="text-center text-xl font-bold">내 쿠폰 리스트</h1>;
-};
+  return <h1 className="text-center text-xl font-bold">내 쿠폰 리스트</h1>
+}
 
 // 이건 아마도 새로 만들어야하는...
 // 가로로 스크롤이 되는?
 
 type VerticalListViewContainerProps = {
-  title: string;
-  listItems: React.ReactNode;
-  actions?: React.ReactNode;
-};
+  title: string
+  listItems: React.ReactNode
+  actions?: React.ReactNode
+}
 
 const VerticalListViewContainer = (props: VerticalListViewContainerProps) => {
-  const { title, listItems, actions } = props;
+  const { title, listItems, actions } = props
 
   return (
     <div className="container mx-auto  max-w-screen-md  overflow-hidden rounded-lg border border-black-100">
@@ -83,11 +83,9 @@ const VerticalListViewContainer = (props: VerticalListViewContainerProps) => {
         <p>{title}</p>
       </div>
       <div className="flex w-full flex-col gap-2 px-4 py-2">
-        <div className={`flex max-h-96 flex-row gap-2 overflow-x-auto `}>
-          {listItems}
-        </div>
+        <div className={`flex max-h-96 flex-row gap-2 overflow-x-auto `}>{listItems}</div>
         <div className="flex flex-row justify-end">{actions}</div>
       </div>
     </div>
-  );
-};
+  )
+}

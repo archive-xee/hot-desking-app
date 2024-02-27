@@ -1,41 +1,37 @@
-"use client";
-import { useEffect, useRef, useState } from "react";
+"use client"
+import { useEffect, useRef, useState } from "react"
 
 type ModalProps = {
-  trigger: React.ReactNode;
-  title: string;
-  content: React.ReactNode;
-  actions?: React.ReactNode;
-};
+  trigger: React.ReactNode
+  title: string
+  content: React.ReactNode
+  actions?: React.ReactNode
+}
 
 export const Modal = (props: ModalProps) => {
-  const { trigger, title, content, actions } = props;
-  const [showModal, setShowModal] = useState(false);
+  const { trigger, title, content, actions } = props
+  const [showModal, setShowModal] = useState(false)
   const handleTriggerClicked = () => {
-    setShowModal(!showModal);
-  };
+    setShowModal(!showModal)
+  }
   const handleCloseClicked = () => {
-    setShowModal(!showModal);
-  };
-  const modalRef = useRef<HTMLDivElement>(null);
+    setShowModal(!showModal)
+  }
+  const modalRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
     const closeModal = (e: MouseEvent) => {
-      if (
-        showModal &&
-        modalRef.current &&
-        !modalRef.current.contains(e.target as Node)
-      ) {
+      if (showModal && modalRef.current && !modalRef.current.contains(e.target as Node)) {
         // 이벤트가 발생한 노드가 모달 컴포넌트 내부에 존재하지 않는다면 close
-        setShowModal(false);
+        setShowModal(false)
       }
-    };
+    }
 
-    document.addEventListener("mousedown", closeModal);
+    document.addEventListener("mousedown", closeModal)
 
     return () => {
-      document.removeEventListener("mousedown", closeModal);
-    };
-  }, [showModal]);
+      document.removeEventListener("mousedown", closeModal)
+    }
+  }, [showModal])
 
   return (
     <div className="relative">
@@ -68,5 +64,5 @@ export const Modal = (props: ModalProps) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}

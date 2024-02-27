@@ -1,5 +1,5 @@
-import { CouponOfUser } from "@/src/components/molecules/Coupon";
-import ListViewContainer from "@/src/components/organisms/ListViewContainer";
+import { CouponOfUser } from "@/src/components/molecules/Coupon"
+import ListViewContainer from "@/src/components/organisms/ListViewContainer"
 
 export default function UserCouponPage() {
   return (
@@ -43,9 +43,9 @@ export default function UserCouponPage() {
         }
       ></ListViewContainer>
     </>
-  );
+  )
 }
 
 const UserCouponPageTitle = () => {
-  return <h1 className="text-center text-xl font-bold">내 쿠폰 리스트</h1>;
-};
+  return <h1 className="text-center text-xl font-bold">내 쿠폰 리스트</h1>
+}
