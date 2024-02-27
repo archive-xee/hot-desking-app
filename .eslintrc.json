@@ -24,7 +24,7 @@
       "error",
       {
         "trailingComma": "all",
-        "endOfLine": "lf",
+        "endOfLine": "auto",
         "semi": false,
         "printWidth": 120,
         "tabWidth": 2
