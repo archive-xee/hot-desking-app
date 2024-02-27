@@ -1,20 +1,20 @@
 import Image from "next/image"
+import { BookableType } from "@/src/models/bookable"
 import type { Ticket, TicketType } from "@/src/models/ticket"
-import { Bookable } from "@/src/models/ticket"
 
 const TicketInModal = (props: { ticket: Ticket }) => {
   const { ticket } = props
   const bookableKorean = getBookableKorean(ticket.bookable)
   const ticketTypeKorean = getTicketTypeKorean(ticket.type)
 
-  const borderColors: { [key in Bookable]: string } = {
+  const borderColors: { [key in BookableType]: string } = {
     seat: "border-blue-100",
     meetingroom: "border-yellow-500",
     rentbox: "border-teal-100",
     locker: "border-purple-100",
   }
 
-  const bookableColors: { [key in Bookable]: string } = {
+  const bookableColors: { [key in BookableType]: string } = {
     seat: "bg-blue-500",
     meetingroom: "bg-yellow-500",
     rentbox: "bg-teal-300",
@@ -51,7 +51,7 @@ const TicketInModal = (props: { ticket: Ticket }) => {
   )
 }
 
-const getBookableKorean = (type: Bookable): string => {
+const getBookableKorean = (type: BookableType): string => {
   switch (type) {
     case "seat":
       return "좌석"
