@@ -1,5 +1,5 @@
-import { TicketOfUser } from "@/src/components/molecules/Ticket";
-import ListViewContainer from "@/src/components/organisms/ListViewContainer";
+import { TicketOfUser } from "@/src/components/molecules/Ticket"
+import ListViewContainer from "@/src/components/organisms/ListViewContainer"
 
 export default function UserTicketPage() {
   return (
@@ -108,11 +108,12 @@ export default function UserTicketPage() {
             </button>
           </div>
         }
+        title="사용가능한 티켓"
       ></ListViewContainer>
     </>
-  );
+  )
 }
 
 const UserTicketPageTitle = () => {
-  return <h1 className="text-center text-xl font-bold">이용권 사용하기</h1>;
-};
+  return <h1 className="text-center text-xl font-bold">이용권 사용하기</h1>
+}
