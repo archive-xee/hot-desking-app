@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint --dir src",
     "format": "next lint --fix --dir src",
-    "prepare": "husky install",
+    "prepare": "npx husky install",
     "lint-staged": "lint-staged"
   },
   "dependencies": {
