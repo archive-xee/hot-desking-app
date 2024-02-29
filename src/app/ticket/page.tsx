@@ -41,12 +41,26 @@ export default function TicketPage() {
                 ></TicketInModal>
               }
               actions={
-                <button
-                  type="button"
-                  className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
-                >
-                  확인
-                </button>
+                <>
+                  <button
+                    type="button"
+                    className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+                  >
+                    일회성결제
+                  </button>
+                  <button
+                    type="button"
+                    className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+                  >
+                    정기결제
+                  </button>
+                  <button
+                    type="button"
+                    className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+                  >
+                    예약결제
+                  </button>
+                </>
               }
             ></Modal>
 
@@ -74,9 +88,6 @@ export default function TicketPage() {
           </Link>
         }
       />
-      <p>
-        <br /> Ticket[ id, ticketType ]의 리스트
-      </p>
     </>
   )
 }
