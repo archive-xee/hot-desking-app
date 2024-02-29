@@ -74,6 +74,9 @@ export default function TicketPage() {
           </Link>
         }
       />
+      <p>
+        <br /> Ticket[ id, ticketType ]의 리스트
+      </p>
     </>
   )
 }
