@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { TicketForSale, TicketInModal } from "@/src/components/molecules/Ticket/index"
+import { TicketForSale } from "@/src/components/molecules/Ticket/index"
 import ListViewContainer from "@/src/components/organisms/ListViewContainer"
 import { Modal } from "@/src/components/organisms/Modal"
 export default function TicketPage() {
@@ -27,19 +27,7 @@ export default function TicketPage() {
                 ></TicketForSale>
               }
               title="티켓입니다"
-              content={
-                <TicketInModal
-                  ticket={{
-                    id: "1",
-                    type: "time",
-                    bookable: "seat",
-                    price: 10000,
-                    period: 86400,
-                    issuedAt: 1706946429,
-                    expiresAt: 1707551229,
-                  }}
-                ></TicketInModal>
-              }
+              content={<></>}
               actions={
                 <>
                   <button

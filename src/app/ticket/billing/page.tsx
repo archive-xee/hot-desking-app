@@ -1,11 +1,11 @@
-import { TicketInModal } from "@/src/components/molecules/Ticket/index"
+import { CardTicket } from "@/src/components/molecules/Ticket/index"
 // import { Modal } from "@/src/components/organisms/Modal"
 
 export default function BillingTicketPage() {
   return (
     <>
       <BillingTicketPageTitle />
-      <TicketInModal
+      <CardTicket
         ticket={{
           id: "1",
           type: "time",
@@ -15,8 +15,8 @@ export default function BillingTicketPage() {
           issuedAt: 1706946429,
           expiresAt: 1707551229,
         }}
-      ></TicketInModal>
-      <TicketInModal
+      ></CardTicket>
+      <CardTicket
         ticket={{
           id: "1",
           type: "time",
@@ -26,7 +26,7 @@ export default function BillingTicketPage() {
           issuedAt: 1706946429,
           expiresAt: 1707551229,
         }}
-      ></TicketInModal>
+      ></CardTicket>
       <p>
         <br /> Ticket[ id, ticketType, expiresAt ]의 리스트
         <br /> 구매하기 위해 티켓을 눌렀을 때 나오는 모달에는

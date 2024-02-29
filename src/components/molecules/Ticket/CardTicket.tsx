@@ -2,7 +2,7 @@ import Image from "next/image"
 import { BookableType } from "@/src/models/bookable"
 import type { Ticket, TicketType } from "@/src/models/ticket"
 
-const TicketInModal = (props: { ticket: Ticket }) => {
+const CardTicket = (props: { ticket: Ticket }) => {
   const { ticket } = props
   const bookableKorean = getBookableKorean(ticket.bookable)
   const ticketTypeKorean = getTicketTypeKorean(ticket.type)
@@ -76,4 +76,4 @@ const getTicketTypeKorean = (type: TicketType): string => {
       return "시간"
   }
 }
-export default TicketInModal
+export default CardTicket
