@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { TicketInUse } from "@/src/components/molecules/Ticket"
-// 남은 수량이 정말 필요한가?
+
+// 사용하지 않음 Deprecated
 export default function TicketInUsePage() {
   return (
     <>
