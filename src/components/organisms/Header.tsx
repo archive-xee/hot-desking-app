@@ -22,9 +22,6 @@ export default function Header() {
         <Link href="/signin" className="hover:underline">
           로그인
         </Link>
-        <Link href="/signoff" className="hover:underline">
-          회원가입
-        </Link>
       </div>
     </div>
   )
