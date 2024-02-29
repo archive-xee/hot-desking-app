@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { TicketForSale } from "@/src/components/molecules/Ticket/index"
+import { StretchTicket } from "@/src/components/molecules/Ticket"
 import ListViewContainer from "@/src/components/organisms/ListViewContainer"
 import { Modal } from "@/src/components/organisms/Modal"
 export default function TicketPage() {
@@ -14,7 +14,7 @@ export default function TicketPage() {
           <>
             <Modal
               trigger={
-                <TicketForSale
+                <StretchTicket
                   ticket={{
                     id: "1",
                     type: "oneday",
@@ -24,7 +24,7 @@ export default function TicketPage() {
                     issuedAt: 1706946429,
                     expiresAt: 1707551229,
                   }}
-                ></TicketForSale>
+                ></StretchTicket>
               }
               title="티켓입니다"
               content={<></>}
@@ -52,7 +52,7 @@ export default function TicketPage() {
               }
             ></Modal>
 
-            <TicketForSale
+            <StretchTicket
               ticket={{
                 id: "1",
                 type: "time",
@@ -62,7 +62,7 @@ export default function TicketPage() {
                 issuedAt: 1706946429,
                 expiresAt: 1707551229,
               }}
-            ></TicketForSale>
+            ></StretchTicket>
           </>
         }
         actions={
