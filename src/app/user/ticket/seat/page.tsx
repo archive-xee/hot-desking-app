@@ -91,6 +91,11 @@ export default function UserSeatTicketPage() {
           </Link>
         }
       ></ListViewContainer>
+      <p>
+        url route의 맞는 bookableType에 따라 UserTicket [ id, ticketType, expiresAt, userId ]의 리스트를 요청
+        <br />
+        사용하기 위해 티켓을 눌렀을 때 나오는 모달에는 선택된 티켓을 프로퍼티로 보내겠음
+      </p>
     </>
   )
 }
