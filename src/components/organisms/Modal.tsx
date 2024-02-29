@@ -45,21 +45,18 @@ export const Modal = (props: ModalProps) => {
           aria-hidden="true"
           className="fixed left-1/2 top-1/2 flex w-full max-w-sm -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-lg border border-black-100  bg-white-300 "
         >
-          <div className="bg-white-500 py-2 text-center">
+          <div className="relative flex flex-row justify-center bg-white-500 py-2">
             <h2 className="font-bold">{title}</h2>
+            <div
+              onClick={handleCloseClicked}
+              className=" absolute  bottom-1.5 right-5 rounded-lg border border-red-700 bg-white-100 px-2  py-1 text-sm font-medium text-red-700 hover:bg-red-300 hover:text-white-100 "
+            >
+              ✖
+            </div>
           </div>
           <div className="flex w-full flex-col gap-6 px-4 py-2">
             <div className="overflow-y-auto">{content}</div>
-            <div className="flex flex-wrap justify-center gap-2">
-              {actions}
-              <button
-                type="button"
-                onClick={handleCloseClicked}
-                className="rounded-lg border border-red-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-red-300 hover:text-white-100 "
-              >
-                닫기
-              </button>
-            </div>
+            <div className="flex flex-wrap justify-center gap-2">{actions}</div>
           </div>
         </div>
       )}
