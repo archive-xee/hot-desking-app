@@ -1,12 +1,15 @@
-// import Image from "next/image"
-// import { TicketForSale } from "@/src/components/molecules/Ticket/index"
-// import TicketViewContainer from "@/src/components/organisms/TicketViewContainer"
-
 export default function CouponPage() {
   return (
     <>
       <CouponPageTitle />
       <CouponRegisterForm />
+      <p>
+        <br /> QR코드 찍으면 QR객체의 string을 받아올 거고
+        <br /> string은 Coupon객체의 CouponType, issuedAt, expiresAt을 서버에서 알아서 잘 섞어서 만든 uuid
+        <br /> 다시 말하면 QR객체의 string은 Coupon 객체의 PR key임
+        <br /> 쿠폰등록 버튼을 누르면 DiscountCoupon, TimebonusCoupon 중 PR Key가 string과 맞는 객체가
+        <br /> UserDiscountCoupon, USerTimebonusCoupon가 되어 User에게 할당될 것임
+      </p>
     </>
   )
 }

@@ -2,19 +2,19 @@ import Link from "next/link"
 import { TicketOfUser } from "@/src/components/molecules/Ticket"
 import ListViewContainer from "@/src/components/organisms/ListViewContainer"
 
-export default function UserMeetingRoomTicketPage() {
+export default function UserSeatTicketPage() {
   return (
     <>
       <UserTicketPageTitle />
       <ListViewContainer
-        title="나의 회의실 이용권"
+        title="나의 좌석 이용권"
         listItems={
           <>
             <TicketOfUser
               ticket={{
                 id: "1",
                 type: "time",
-                bookable: "meetingroom",
+                bookable: "seat",
                 price: 10000,
                 period: 86400,
                 issuedAt: 1706946429,
@@ -25,7 +25,7 @@ export default function UserMeetingRoomTicketPage() {
               ticket={{
                 id: "1",
                 type: "time",
-                bookable: "meetingroom",
+                bookable: "seat",
                 price: 10000,
                 period: 86400,
                 issuedAt: 1706946429,
@@ -36,7 +36,7 @@ export default function UserMeetingRoomTicketPage() {
               ticket={{
                 id: "1",
                 type: "time",
-                bookable: "meetingroom",
+                bookable: "seat",
                 price: 10000,
                 period: 86400,
                 issuedAt: 1706946429,
@@ -47,7 +47,7 @@ export default function UserMeetingRoomTicketPage() {
               ticket={{
                 id: "1",
                 type: "time",
-                bookable: "meetingroom",
+                bookable: "seat",
                 price: 10000,
                 period: 86400,
                 issuedAt: 1706946429,
@@ -58,7 +58,7 @@ export default function UserMeetingRoomTicketPage() {
               ticket={{
                 id: "1",
                 type: "time",
-                bookable: "meetingroom",
+                bookable: "seat",
                 price: 10000,
                 period: 86400,
                 issuedAt: 1706946429,
@@ -69,7 +69,7 @@ export default function UserMeetingRoomTicketPage() {
               ticket={{
                 id: "1",
                 type: "time",
-                bookable: "meetingroom",
+                bookable: "seat",
                 price: 10000,
                 period: 86400,
                 issuedAt: 1706946429,
@@ -91,6 +91,11 @@ export default function UserMeetingRoomTicketPage() {
           </Link>
         }
       ></ListViewContainer>
+      <p>
+        url route의 맞는 bookableType에 따라 UserTicket [ id, ticketType, expiresAt, userId ]의 리스트를 요청
+        <br />
+        사용하기 위해 티켓을 눌렀을 때 나오는 모달에는 선택된 티켓을 프로퍼티로 보내겠음
+      </p>
     </>
   )
 }

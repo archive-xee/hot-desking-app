@@ -3,10 +3,11 @@ import Link from "next/link"
 export default function HomePage() {
   return (
     <div className="flex flex-col">
-      <HomeNavSection title="입실">
-        <HomeNavButton label={"좌석\n회의실"} destination="/booth" />
-        <HomeNavButton label="사물함" destination={""} />
-        <HomeNavButton label="대여함" destination={""} />
+      <HomeNavSection title="현황(각 좌석, 회의실, 사물함, 대여함에 QR코드가 붙여지면 사라질 섹션)">
+        <HomeNavButton label="좌석" destination="/booth/seat" />
+        <HomeNavButton label="회의실" destination="/booth/meetingroom" />
+        <HomeNavButton label="사물함" destination="/booth/locker" />
+        <HomeNavButton label="대여함" destination="/booth/rentitem" />
       </HomeNavSection>
       <HomeNavSection title="구매/등록">
         <HomeNavButton label="이용권" destination="/ticket" />

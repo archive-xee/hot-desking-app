@@ -50,7 +50,7 @@ export const Modal = (props: ModalProps) => {
           </div>
           <div className="flex w-full flex-col gap-6 px-4 py-2">
             <div className="overflow-y-auto">{content}</div>
-            <div className="flex flex-row justify-center gap-2">
+            <div className="flex flex-wrap justify-center gap-2">
               {actions}
               <button
                 type="button"
