@@ -8,7 +8,7 @@ export default function LockerViewPage() {
         <br /> ticketId: string | null
       </p>
 
-      <Link href="/user/ticket/seat">
+      <Link href="/user/ticket/locker">
         <button
           type="submit"
           className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
