@@ -105,25 +105,23 @@ const TicketPageTitle = () => {
 
 const TicketTypeTab = () => {
   return (
-    <aside>
-      <ul className="h-full w-32 bg-white-300 py-2 font-medium">
-        <li className="flex flex-row p-2  hover:bg-yellow-300">
-          <Image src="/icons/ticket/period.png" alt="기간권" width="24" height="24"></Image>
-          <span className="ms-3">기간권</span>
-        </li>
-        <li className="flex flex-row p-2 hover:bg-purple-100">
-          <Image src="/icons/ticket/oneday.png" alt="당일권" width="24" height="24"></Image>
-          <span className="ms-3">당일권</span>
-        </li>
-        <li className="flex flex-row p-2 hover:bg-blue-300">
-          <Image src="/icons/ticket/time.png" alt="시간권" width="24" height="24"></Image>
-          <span className="ms-3">시간권</span>
-        </li>
-        <li className="flex flex-row p-2  hover:bg-teal-100">
-          <Image src="/icons/ticket/discount.png" alt="할인권" width="24" height="24"></Image>
-          <span className="ms-3">할인권</span>
-        </li>
-      </ul>
-    </aside>
+    <div className="flex flex-row bg-white-300">
+      <div className="flex grow flex-row  justify-center p-2  hover:bg-yellow-300">
+        <Image src="/icons/ticket/period.png" alt="기간권" width="24" height="24"></Image>
+        <span className="ms-3">기간권</span>
+      </div>
+      <div className="flex grow flex-row justify-center p-2 hover:bg-purple-100">
+        <Image src="/icons/ticket/oneday.png" alt="당일권" width="24" height="24"></Image>
+        <span className="ms-3">당일권</span>
+      </div>
+      <div className="flex grow flex-row justify-center p-2 hover:bg-blue-300">
+        <Image src="/icons/ticket/time.png" alt="시간권" width="24" height="24"></Image>
+        <span className="ms-3">시간권</span>
+      </div>
+      <div className="flex grow flex-row justify-center p-2  hover:bg-teal-100">
+        <Image src="/icons/ticket/discount.png" alt="할인권" width="24" height="24"></Image>
+        <span className="ms-3">할인권</span>
+      </div>
+    </div>
   )
 }
