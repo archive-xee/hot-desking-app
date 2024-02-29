@@ -1,7 +1,12 @@
+"use client"
+
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { CouponOfUser } from "@/src/components/molecules/Coupon"
 import ListViewContainer from "@/src/components/organisms/ListViewContainer"
 
 export default function UserCouponPage() {
+  const router = useRouter()
   return (
     <>
       <UserCouponPageTitle />
@@ -33,7 +38,16 @@ export default function UserCouponPage() {
         }
         actions={
           <div className="flex flex-row gap-2">
+            <Link href="/coupon">
+              <button
+                type="button"
+                className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+              >
+                등록하기
+              </button>
+            </Link>
             <button
+              onClick={() => router.back()}
               type="button"
               className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
             >

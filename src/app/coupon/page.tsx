@@ -1,3 +1,7 @@
+"use client"
+
+import { useRouter } from "next/navigation"
+
 export default function CouponPage() {
   return (
     <>
@@ -19,6 +23,8 @@ const CouponPageTitle = () => {
 }
 
 const CouponRegisterForm = () => {
+  const router = useRouter()
+
   return (
     <div className="container mx-auto max-w-screen-sm  overflow-hidden  rounded-lg border border-black-100">
       <div className="bg-white-500 py-2 text-center">
@@ -41,6 +47,7 @@ const CouponRegisterForm = () => {
           <div className="my-12"></div>
           <div className="flex flex-row justify-center">
             <button
+              onClick={() => router.back()}
               type="submit"
               className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
             >

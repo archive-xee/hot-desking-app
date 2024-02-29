@@ -9,10 +9,9 @@ export default function HomePage() {
         <HomeNavButton label="사물함" destination="/booth/locker" />
         <HomeNavButton label="대여함" destination="/booth/rentitem" />
       </HomeNavSection>
-      <HomeNavSection title="구매/등록">
+      <HomeNavSection title="구매">
         <HomeNavButton label="일회권" destination="/ticket/oneoff" />
         <HomeNavButton label="정기권" destination="/ticket/billing" />
-        <HomeNavButton label="쿠폰" destination="/coupon" />
       </HomeNavSection>
       <HomeNavSection title="변경">
         <HomeNavButton label="이동" destination={""} />
