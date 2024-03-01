@@ -80,6 +80,14 @@ export default function UserSeatTicketPage() {
         }
         actions={
           <div className="flex flex-row gap-2">
+            <Link href="/ticket/used">
+              <button
+                type="button"
+                className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+              >
+                사용 완료
+              </button>
+            </Link>
             <Link href="/ticket/oneoff">
               <button
                 type="button"
