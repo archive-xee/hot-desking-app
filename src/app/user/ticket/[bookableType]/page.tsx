@@ -79,16 +79,24 @@ export default function UserSeatTicketPage() {
           </>
         }
         actions={
-          <Link href="/ticket">
-            <div className="flex flex-row gap-2">
+          <div className="flex flex-row gap-2">
+            <Link href="/ticket/oneoff">
               <button
                 type="button"
                 className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
               >
-                구매하기
+                일회권 구매
               </button>
-            </div>
-          </Link>
+            </Link>
+            <Link href="/ticket/billing">
+              <button
+                type="button"
+                className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+              >
+                정기권 구매
+              </button>
+            </Link>
+          </div>
         }
       ></ListViewContainer>
       <p>
@@ -96,6 +104,7 @@ export default function UserSeatTicketPage() {
         <br />
         사용하기 위해 티켓을 눌렀을 때 나오는 모달에는 선택된 티켓을 프로퍼티로 보내겠음
       </p>
+      <div className="border">gql</div>
     </>
   )
 }
