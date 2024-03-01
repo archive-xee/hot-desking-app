@@ -8,7 +8,7 @@ export default function RentItemViewPage() {
         <br /> ticketId: string | null
         <br /> itemName: string
       </p>
-
+      <div className="border">gql</div>
       <Link href="/user/ticket/rentitem">
         <button
           type="submit"
