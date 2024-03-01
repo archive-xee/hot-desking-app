@@ -66,14 +66,24 @@ export default function TicketPage() {
           </>
         }
         actions={
-          <Link href="/user/coupon">
-            <button
-              type="button"
-              className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
-            >
-              쿠폰 적용
-            </button>
-          </Link>
+          <>
+            <Link href="/payment/online">
+              <button
+                type="button"
+                className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+              >
+                구매하기
+              </button>
+            </Link>
+            <Link href="/user/coupon">
+              <button
+                type="button"
+                className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+              >
+                쿠폰 적용
+              </button>
+            </Link>
+          </>
         }
       />
       <p>
@@ -83,6 +93,7 @@ export default function TicketPage() {
         <br /> 일회성결제, 예약결제, 정기결제 3가지 옵션 보여줄 거임
         <br /> 각 버튼을 누르면 각 결제타입에 맞는 Order객체를 서버에 보내겠음
       </p>
+      <div className="border">gql</div>
     </>
   )
 }
