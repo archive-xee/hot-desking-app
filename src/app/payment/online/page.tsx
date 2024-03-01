@@ -5,7 +5,7 @@ export default function PaymentOnlinePage() {
       일회권 온라인 결제
       {/* 정기권 온라인결제랑 구별해야함 */}
       <div className="border">gql</div>
-      <Link href="/cardregister">
+      <Link href="/card/register">
         <button>카드 등록하기</button>
       </Link>
       {/* portone 결제 요청 이후 리디렉션 */}
