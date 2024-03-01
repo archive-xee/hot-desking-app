@@ -34,6 +34,7 @@ export default function BillingTicketPage() {
         <br /> 일회성결제, 예약결제, 정기결제 3가지 옵션 보여줄 거임
         <br /> 각 버튼을 누르면 각 결제타입에 맞는 Order객체를 서버에 보내겠음
       </p>
+      <div className="border">gql</div>
     </>
   )
 }

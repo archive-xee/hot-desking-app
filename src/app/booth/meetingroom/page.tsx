@@ -7,7 +7,7 @@ export default function MeetingRoomViewPage() {
         QR코드에서 id를 gql에 담아서 요청을 보내면 응답은 MeetingRoom 클래스의 아래 필드만
         <br /> ticketId: string | null
       </p>
-
+      <div className="border">gql</div>
       <Link href="/user/ticket/meetingroom">
         <button
           type="submit"

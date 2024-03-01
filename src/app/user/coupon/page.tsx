@@ -61,6 +61,7 @@ export default function UserCouponPage() {
         CouponType , discountPercentage, expiresAt]의 리스트
         <br /> 사용하기 위해 쿠폰을 눌렀을 때는 모달에 프로퍼티로 보내겠음
       </p>
+      <div className="border">gql</div>
     </>
   )
 }
