@@ -14,13 +14,17 @@ export default function HomePage() {
         <HomeNavButton label="정기권" destination="/ticket/billing" />
       </HomeNavSection>
       <HomeNavSection title="변경">
-        <HomeNavButton label="이동" destination={""} />
-        <HomeNavButton label="외출" destination={""} />
-        <HomeNavButton label="퇴실" destination={""} />
+        <HomeNavButton label="이동" destination="/change/move" />
+        <HomeNavButton label="외출" destination="/change/nipout" />
+        <HomeNavButton label="퇴실" destination="/change/checkout" />
       </HomeNavSection>
       <HomeNavSection title="예약">
-        <HomeNavButton label="네이버" destination={""} />
+        <HomeExternalLinkButton
+          label="네이버"
+          destination="https://m.place.naver.com/place/1628245132/ticket?entry=ple"
+        />
       </HomeNavSection>
+      <div className="border">gql</div>
     </div>
   )
 }
@@ -57,5 +61,21 @@ const HomeNavButton = (props: NavButtonProps) => {
         </h3>
       </div>
     </Link>
+  )
+}
+
+const HomeExternalLinkButton = (props: NavButtonProps) => {
+  return (
+    <a href={props.destination}>
+      <div className="flex size-20 items-center justify-center rounded-lg bg-blue-700 hover:bg-blue-500">
+        <h3 className="font-medium  text-white-100">
+          {props.label.split("\n").map((str, idx) => (
+            <p className="text-center" key={idx}>
+              {str}
+            </p>
+          ))}
+        </h3>
+      </div>
+    </a>
   )
 }
