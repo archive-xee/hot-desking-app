@@ -1,6 +1,16 @@
 "use client"
 
+import { gql } from "@apollo/client"
 import { useRouter } from "next/navigation"
+
+
+const REGISTER_USER_COUPON = gql`
+  mutation RegisterUserCoupon($userId: string, $couponId: couponId) {
+    registerUserCoupon(userId: $userId, couponId: couponId) {
+      UserCoupon
+    }
+  }
+`
 
 export default function CouponPage() {
   return (
@@ -14,7 +24,11 @@ export default function CouponPage() {
         <br /> 쿠폰등록 버튼을 누르면 DiscountCoupon, TimebonusCoupon 중 PR Key가 string과 맞는 객체가
         <br /> UserDiscountCoupon, USerTimebonusCoupon가 되어 User에게 할당될 것임
       </p>
-      <div className="border">gql</div>
+      <div className="border">mutation RegisterUserCoupon($userId: string, $couponId: couponId) [
+    registerUserCoupon(userId: $userId, couponId: couponId) [
+      UserCoupon # 주석 UserDiscountCoupon, USerTimebonusCoupon
+    ]
+  ]</div>
     </>
   )
 }
