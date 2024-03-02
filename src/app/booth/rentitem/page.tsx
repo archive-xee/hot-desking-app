@@ -1,6 +1,28 @@
-import Link from "next/link"
+"use client"
 
+import { gql } from "@apollo/client"
+import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
+import Link from "next/link"
+import { useSearchParams } from "next/navigation"
+
+const GET_TICKET_ID = gql`
+  query GetTicketId($rentItemId: String!) {
+    RentItem(id: $rentItemId) {
+      ticketId
+      itemName
+    }
+  }
+`
 export default function RentItemViewPage() {
+  const searchParams = useSearchParams()
+  // 궁창/booth/rentItem/?id=1
+  const rentItemId = searchParams.get("id")
+  // const { data } = useQuery(GET_TICKET_ID, {
+  //   variables: { rentItemId },
+  // })
+
+  // if (loading) return "Loading..."
+  // if (error) return `Error! ${error.message}`
   return (
     <>
       <p>
@@ -8,11 +30,13 @@ export default function RentItemViewPage() {
         <br /> ticketId: string | null
         <br /> itemName: string
       </p>
-      <div className="border">gql</div>
+      <div className="border">
+        query GetTicketId($rentItemId: String!) [ RentItem(id: $rentItemId) [ ticketId itemName ] ]
+      </div>
       <Link href="/user/ticket/rentitem">
         <button
           type="submit"
-          className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+          className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
         >
           티켓 사용
         </button>
