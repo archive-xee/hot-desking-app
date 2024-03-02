@@ -1,18 +1,18 @@
 "use client"
 
+// import { gql } from "@apollo/client"
 import Link from "next/link"
 import { StretchTicket } from "@/src/components/molecules/Ticket"
-import { gql } from "@apollo/client"
 
-const GET_USER_COUPON_LIST = gql`
-  query GetUserTicketList($userId: string) {
-    UserTicket(userId: $userId) {
-      id
-      ticketType
-      expiresAt
-    }
-  }
-`
+// const GET_USER_COUPON_LIST = gql`
+//   query GetUserTicketList($userId: string) {
+//     UserTicket(userId: $userId) {
+//       id
+//       ticketType
+//       expiresAt
+//     }
+//   }
+// `
 export default function UserSeatTicketPage() {
   return (
     <>
@@ -43,7 +43,7 @@ export default function UserSeatTicketPage() {
         <Link href="/ticket/used">
           <button
             type="button"
-            className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+            className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
           >
             사용 완료
           </button>
@@ -51,7 +51,7 @@ export default function UserSeatTicketPage() {
         <Link href="/ticket/oneoff">
           <button
             type="button"
-            className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+            className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
           >
             일회권 구매
           </button>
@@ -59,23 +59,18 @@ export default function UserSeatTicketPage() {
         <Link href="/ticket/billing">
           <button
             type="button"
-            className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+            className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
           >
             정기권 구매
           </button>
         </Link>
       </div>
       <p>
-        url route의 맞는 bookableType에 따라 UserTicket [ 
-          id
-      ticketType
-      expiresAt, userId ]의 리스트를 요청
+        url route의 맞는 bookableType에 따라 UserTicket [ id ticketType expiresAt, userId ]의 리스트를 요청
         <br />
         사용하기 위해 티켓을 눌렀을 때 나오는 모달에는 선택된 티켓을 프로퍼티로 보내겠음
       </p>
-      <div className="border">query GetUserTicketList($userId: string) [
-    UserTicket(userId: $userId) 
-      ]</div>
+      <div className="border">query GetUserTicketList($userId: string) [ UserTicket(userId: $userId) ]</div>
     </>
   )
 }

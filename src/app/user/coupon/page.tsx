@@ -1,15 +1,15 @@
 "use client"
 
+// import { gql } from "@apollo/client"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { CouponOfUser } from "@/src/components/molecules/Coupon"
-import { gql } from "@apollo/client"
 
-const GET_USER_COUPON_LIST = gql`
-  query GetUserCouponList($userId: string) {
-    UserCoupon(userId: $userId) 
-  }
-`
+// const GET_USER_COUPON_LIST = gql`
+//   query GetUserCouponList($userId: string) {
+//     UserCoupon(userId: $userId)
+//   }
+// `
 
 export default function UserCouponPage() {
   const router = useRouter()
@@ -40,7 +40,7 @@ export default function UserCouponPage() {
         <Link href="/coupon">
           <button
             type="button"
-            className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+            className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
           >
             등록하기
           </button>
@@ -48,7 +48,7 @@ export default function UserCouponPage() {
         <button
           onClick={() => router.back()}
           type="button"
-          className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+          className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
         >
           사용하기
         </button>
@@ -59,9 +59,7 @@ export default function UserCouponPage() {
         <br /> 사용하기 위해 쿠폰을 눌렀을 때는 모달에 프로퍼티로 보내겠음
       </p>
       userJwt와 userId를 어떻게 연결할지는 생각해보겠음
-      <div className="border"> query GetUserCouponList($userId: string) [
-    UserCoupon(userId: $userId) 
-      ]</div>
+      <div className="border"> query GetUserCouponList($userId: string) [ UserCoupon(userId: $userId) ]</div>
     </>
   )
 }

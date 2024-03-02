@@ -1,20 +1,20 @@
 "use client"
 
-import { gql } from "@apollo/client"
-import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
+// import { gql } from "@apollo/client"
+// import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
 import Link from "next/link"
-import { useSearchParams } from "next/navigation"
+// import { useSearchParams } from "next/navigation"
 
-const GET_TICKET_ID = gql`
-  query GetTicketId($lockerId: String!) {
-    Locker(id: $lockerId) {
-      ticketId
-    }
-  }
-`
+// const GET_TICKET_ID = gql`
+//   query GetTicketId($lockerId: String!) {
+//     Locker(id: $lockerId) {
+//       ticketId
+//     }
+//   }
+// `
 
 export default function LockerViewPage() {
-  const searchParams = useSearchParams()
+  // const searchParams = useSearchParams()
   // 궁창/booth/locker/?id=1
   // const lockerId = searchParams.get("id")
   // const { data } = useQuery(GET_TICKET_ID, {

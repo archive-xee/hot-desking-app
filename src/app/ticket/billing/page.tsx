@@ -1,19 +1,19 @@
 "use client"
-import { CardTicket } from "@/src/components/molecules/Ticket/index"
 // import { Modal } from "@/src/components/organisms/Modal"
-import { gql } from "@apollo/client"
-import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
-import Link from "next/link"
-import { useSearchParams } from "next/navigation"
+// import { gql } from "@apollo/client"
+// import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
+// import Link from "next/link"
+// import { useSearchParams } from "next/navigation"
+import { CardTicket } from "@/src/components/molecules/Ticket/index"
 
-const GET_BILLING_TICKET_LIST = gql`
-  query GetBillingTicketList {
-    BillingTicket {
-      TicketType
-      remaining
-    }
-  }
-`
+// const GET_BILLING_TICKET_LIST = gql`
+//   query GetBillingTicketList {
+//     BillingTicket {
+//       TicketType
+//       remaining
+//     }
+//   }
+// `
 
 export default function BillingTicketPage() {
   return (
@@ -48,12 +48,7 @@ export default function BillingTicketPage() {
         <br /> 일회성결제, 예약결제, 정기결제 3가지 옵션 보여줄 거임
         <br /> 각 버튼을 누르면 각 결제타입에 맞는 Order객체를 서버에 보내겠음
       </p>
-      <div className="border">query GetBillingTicketList [
-    BillingTicket [
-      TicketType
-      remaining
-    ]
-      ]</div>
+      <div className="border">query GetBillingTicketList [ BillingTicket [ TicketType remaining ] ]</div>
     </>
   )
 }

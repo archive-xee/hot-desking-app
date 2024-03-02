@@ -1,22 +1,22 @@
 "use client"
 
-import { gql } from "@apollo/client"
-import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
+// import { gql } from "@apollo/client"
+// import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
 import Link from "next/link"
-import { useSearchParams } from "next/navigation"
+// import { useSearchParams } from "next/navigation"
 
-const GET_TICKET_ID = gql`
-  query GetTicketId($seatType: String!, $seatNumber: String!) {
-    Seat(seatType: $seatNumber, seatNumber: $seatNumber) {
-      ticketId
-    }
-  }
-`
+// const GET_TICKET_ID = gql`
+//   query GetTicketId($seatType: String!, $seatNumber: String!) {
+//     Seat(seatType: $seatNumber, seatNumber: $seatNumber) {
+//       ticketId
+//     }
+//   }
+// `
 export default function SeatViewPage() {
-  const searchParams = useSearchParams()
+  // const searchParams = useSearchParams()
   // 궁창/booth/seat/?seattype=prime&seatnumber=1
-  const seatType = searchParams.get("seattype")
-  const seatNumber = searchParams.get("seatnumber")
+  // const seatType = searchParams.get("seattype")
+  // const seatNumber = searchParams.get("seatnumber")
   // const { data } = useQuery(GET_TICKET_ID, {
   //   variables: { seatType, seatNumber },
   // })

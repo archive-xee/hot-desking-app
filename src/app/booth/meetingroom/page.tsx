@@ -1,21 +1,21 @@
 "use client"
 
-import { gql } from "@apollo/client"
-import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
+// import { gql } from "@apollo/client"
+// import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
 import Link from "next/link"
-import { useSearchParams } from "next/navigation"
+// import { useSearchParams } from "next/navigation"
 
-const GET_TICKET_ID = gql`
-  query GetTicketId($meetingRoomId: String!) {
-    MeetingRoom(id: $meetingRoomId) {
-      ticketId
-    }
-  }
-`
+// const GET_TICKET_ID = gql`
+//   query GetTicketId($meetingRoomId: String!) {
+//     MeetingRoom(id: $meetingRoomId) {
+//       ticketId
+//     }
+//   }
+// `
 export default function MeetingRoomViewPage() {
-  const searchParams = useSearchParams()
+  // const searchParams = useSearchParams()
   // 궁창/booth/MeetingRoom/?id=1
-  const meetingRoomId = searchParams.get("id")
+  // const meetingRoomId = searchParams.get("id")
   // const { data } = useQuery(GET_TICKET_ID, {
   //   variables: { meetingRoomId },
   // })

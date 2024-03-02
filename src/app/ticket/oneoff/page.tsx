@@ -1,20 +1,19 @@
-
 "use client"
-import { gql } from "@apollo/client"
-import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
-import { useSearchParams } from "next/navigation"
+// import { gql } from "@apollo/client"
+// import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
 import Image from "next/image"
 import Link from "next/link"
+// import { useSearchParams } from "next/navigation"
 import { StretchTicket } from "@/src/components/molecules/Ticket"
 
-const GET_BILLING_TICKET_LIST = gql`
-  query GetOneoffTicketList {
-    OneoffTicket {
-      TicketType
-      remaining
-    }
-  }
-`
+// const GET_BILLING_TICKET_LIST = gql`
+//   query GetOneoffTicketList {
+//     OneoffTicket {
+//       TicketType
+//       remaining
+//     }
+//   }
+// `
 export default function TicketPage() {
   return (
     <>
@@ -45,7 +44,7 @@ export default function TicketPage() {
       <Link href="/payment/online">
         <button
           type="button"
-          className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+          className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
         >
           구매하기
         </button>
@@ -53,7 +52,7 @@ export default function TicketPage() {
       <Link href="/user/coupon">
         <button
           type="button"
-          className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+          className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
         >
           쿠폰 적용
         </button>
@@ -65,12 +64,7 @@ export default function TicketPage() {
         <br /> 일회성결제, 예약결제, 정기결제 3가지 옵션 보여줄 거임
         <br /> 각 버튼을 누르면 각 결제타입에 맞는 Order객체를 서버에 보내겠음
       </p>
-      <div className="border">query GetOneoffTicketList [
-    OneoffTicket [
-      TicketType
-      remaining
-    ]
-      ]</div>
+      <div className="border">query GetOneoffTicketList [ OneoffTicket [ TicketType remaining ] ]</div>
     </>
   )
 }
@@ -81,7 +75,7 @@ const OneoffTicketPageTitle = () => {
 
 const OneoffTicketTypeTab = () => {
   return (
-    <div className="flex flex-row bg-white-300">
+    <div className="bg-white-300 flex flex-row">
       <div className="flex grow flex-row  justify-center p-2  hover:bg-yellow-300">
         <Image src="/icons/ticket/period.png" alt="기간권" width="24" height="24"></Image>
         <span className="ms-3">기간권</span>

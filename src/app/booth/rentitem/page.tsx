@@ -1,22 +1,22 @@
 "use client"
 
-import { gql } from "@apollo/client"
-import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
+// import { gql } from "@apollo/client"
+// import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
 import Link from "next/link"
-import { useSearchParams } from "next/navigation"
+// import { useSearchParams } from "next/navigation"
 
-const GET_TICKET_ID = gql`
-  query GetTicketId($rentItemId: String!) {
-    RentItem(id: $rentItemId) {
-      ticketId
-      itemName
-    }
-  }
-`
+// const GET_TICKET_ID = gql`
+//   query GetTicketId($rentItemId: String!) {
+//     RentItem(id: $rentItemId) {
+//       ticketId
+//       itemName
+//     }
+//   }
+// `
 export default function RentItemViewPage() {
-  const searchParams = useSearchParams()
+  // const searchParams = useSearchParams()
   // 궁창/booth/rentItem/?id=1
-  const rentItemId = searchParams.get("id")
+  // const rentItemId = searchParams.get("id")
   // const { data } = useQuery(GET_TICKET_ID, {
   //   variables: { rentItemId },
   // })
