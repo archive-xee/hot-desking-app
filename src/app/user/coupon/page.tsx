@@ -3,6 +3,13 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { CouponOfUser } from "@/src/components/molecules/Coupon"
+import { gql } from "@apollo/client"
+
+const GET_USER_COUPON_LIST = gql`
+  query GetUserCouponList($userId: string) {
+    UserCoupon(userId: $userId) 
+  }
+`
 
 export default function UserCouponPage() {
   const router = useRouter()
@@ -51,7 +58,10 @@ export default function UserCouponPage() {
         CouponType , discountPercentage, expiresAt]의 리스트
         <br /> 사용하기 위해 쿠폰을 눌렀을 때는 모달에 프로퍼티로 보내겠음
       </p>
-      <div className="border">gql</div>
+      userJwt와 userId를 어떻게 연결할지는 생각해보겠음
+      <div className="border"> query GetUserCouponList($userId: string) [
+    UserCoupon(userId: $userId) 
+      ]</div>
     </>
   )
 }

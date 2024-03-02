@@ -1,6 +1,18 @@
+"use client"
+
 import Link from "next/link"
 import { StretchTicket } from "@/src/components/molecules/Ticket"
+import { gql } from "@apollo/client"
 
+const GET_USER_COUPON_LIST = gql`
+  query GetUserTicketList($userId: string) {
+    UserTicket(userId: $userId) {
+      id
+      ticketType
+      expiresAt
+    }
+  }
+`
 export default function UserSeatTicketPage() {
   return (
     <>
@@ -54,11 +66,16 @@ export default function UserSeatTicketPage() {
         </Link>
       </div>
       <p>
-        url route의 맞는 bookableType에 따라 UserTicket [ id, ticketType, expiresAt, userId ]의 리스트를 요청
+        url route의 맞는 bookableType에 따라 UserTicket [ 
+          id
+      ticketType
+      expiresAt, userId ]의 리스트를 요청
         <br />
         사용하기 위해 티켓을 눌렀을 때 나오는 모달에는 선택된 티켓을 프로퍼티로 보내겠음
       </p>
-      <div className="border">gql</div>
+      <div className="border">query GetUserTicketList($userId: string) [
+    UserTicket(userId: $userId) 
+      ]</div>
     </>
   )
 }
