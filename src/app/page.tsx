@@ -24,7 +24,6 @@ export default function HomePage() {
           destination="https://m.place.naver.com/place/1628245132/ticket?entry=ple"
         />
       </HomeNavSection>
-      <div className="border">gql</div>
     </div>
   )
 }
