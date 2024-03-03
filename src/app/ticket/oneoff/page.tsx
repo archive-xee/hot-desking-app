@@ -4,7 +4,7 @@
 import Image from "next/image"
 import Link from "next/link"
 // import { useSearchParams } from "next/navigation"
-import { StretchTicket } from "@/src/components/molecules/Ticket"
+import StretchedTicket from "@/src/components/molecules/Ticket/StretchedTicket"
 
 // const GET_BILLING_TICKET_LIST = gql`
 //   query GetOneoffTicketList {
@@ -19,7 +19,7 @@ export default function TicketPage() {
     <>
       <OneoffTicketPageTitle />
       <OneoffTicketTypeTab />
-      <StretchTicket
+      <StretchedTicket
         ticket={{
           id: "1",
           type: "oneday",
@@ -29,8 +29,8 @@ export default function TicketPage() {
           issuedAt: 1706946429,
           expiresAt: 1707551229,
         }}
-      ></StretchTicket>
-      <StretchTicket
+      ></StretchedTicket>
+      <StretchedTicket
         ticket={{
           id: "1",
           type: "oneday",
@@ -40,7 +40,7 @@ export default function TicketPage() {
           issuedAt: 1706946429,
           expiresAt: 1707551229,
         }}
-      ></StretchTicket>
+      ></StretchedTicket>
       <Link href="/payment/online">
         <button
           type="button"

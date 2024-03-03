@@ -24,25 +24,25 @@ const CardTicket = (props: { ticket: Ticket }) => {
   return (
     <div className="flex flex-row justify-center">
       <div
-        className={`flex ${borderColors[ticket.bookable]} w-56 flex-col overflow-hidden rounded-lg border border-solid bg-white-300`}
+        className={`flex ${borderColors[ticket.bookable]} bg-white-300 w-56 flex-col overflow-hidden rounded-lg border border-solid`}
       >
         <div className={`flex ${bookableColors[ticket.bookable]} flex-row items-center justify-center gap-2 py-2`}>
-          <h3 className="text-lg font-bold text-white-100">8{ticketTypeKorean}권</h3>
+          <h3 className="text-white-100 text-lg font-bold">8{ticketTypeKorean}권</h3>
           <Image src={`/icons/ticket/${ticket.type}.png`} alt="이것도 해야겠네" width="24" height="24"></Image>
         </div>
         <div className={`flex h-44 w-full flex-col items-center justify-center gap-1 py-4 `}>
           <Image src={`/icons/bookable/${ticket.bookable}.png`} alt="이것도 해야겠네" width="48" height="48"></Image>
-          <p className="font-bold text-black-700">{bookableKorean}</p>
+          <p className="text-black-700 font-bold">{bookableKorean}</p>
           <div className="grow"></div>
           <p className="font-bold">유효기간</p>
           <p>2024-01-12 ~ 2024-04-11</p>
         </div>
         <div className="flex h-20 flex-row items-stretch">
-          <div className="flex basis-1/2 flex-col items-center justify-center bg-white-500">
+          <div className="bg-white-500 flex basis-1/2 flex-col items-center justify-center">
             <p className="font-bold">남은 수량</p>
             <p className="text-center">8개</p>
           </div>
-          <div className="flex basis-1/2 items-center  justify-center bg-white-700">
+          <div className="bg-white-700 flex basis-1/2  items-center justify-center">
             <p className="font-bold">6000원</p>
           </div>
         </div>

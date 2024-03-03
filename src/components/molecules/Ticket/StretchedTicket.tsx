@@ -2,7 +2,7 @@ import Image from "next/image"
 import { BookableType } from "@/src/models/bookable"
 import type { Ticket } from "@/src/models/ticket"
 
-const TicketForSale = (props: { ticket: Ticket }) => {
+const StretchedTicket = (props: { ticket: Ticket }) => {
   const { ticket } = props
   const bookableKorean = getBookableKorean(ticket.bookable)
 
@@ -21,7 +21,7 @@ const TicketForSale = (props: { ticket: Ticket }) => {
   }
 
   return (
-    <div className={`flex ${borderColors[ticket.bookable]} flex-row rounded-lg border border-solid bg-white-300`}>
+    <div className={`flex ${borderColors[ticket.bookable]} bg-white-300 flex-row rounded-lg border border-solid`}>
       <div
         className={`flex ${bookableColors[ticket.bookable]} size-20 flex-col items-center justify-center gap-1 rounded-l-lg`}
       >
@@ -37,8 +37,8 @@ const TicketForSale = (props: { ticket: Ticket }) => {
             <p className="font-bold">남은 수량</p>
             <p className="text-center">8개</p>
           </div>
-          <div className="flex size-20 flex-col items-center justify-center rounded-r-lg bg-white-700">
-            <p className="font-bold text-black-700 line-through ">8000원</p>
+          <div className="bg-white-700 flex size-20 flex-col items-center justify-center rounded-r-lg">
+            <p className="text-black-700 font-bold line-through ">8000원</p>
             <p className="font-bold text-red-700">6000원</p>
           </div>
         </div>
@@ -60,4 +60,4 @@ const getBookableKorean = (type: BookableType): string => {
   }
 }
 
-export default TicketForSale
+export default StretchedTicket

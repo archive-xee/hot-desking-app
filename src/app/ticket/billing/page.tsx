@@ -4,7 +4,7 @@
 // import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
 // import Link from "next/link"
 // import { useSearchParams } from "next/navigation"
-import { CardTicket } from "@/src/components/molecules/Ticket/index"
+import CardTicket from "@/src/components/molecules/Ticket/CardTicket"
 
 // const GET_BILLING_TICKET_LIST = gql`
 //   query GetBillingTicketList {

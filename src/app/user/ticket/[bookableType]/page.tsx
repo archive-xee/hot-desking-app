@@ -2,7 +2,7 @@
 
 // import { gql } from "@apollo/client"
 import Link from "next/link"
-import { StretchTicket } from "@/src/components/molecules/Ticket"
+import StretchedTicket from "@/src/components/molecules/Ticket/StretchedTicket"
 
 // const GET_USER_COUPON_LIST = gql`
 //   query GetUserTicketList($userId: string) {
@@ -17,7 +17,7 @@ export default function UserSeatTicketPage() {
   return (
     <>
       <UserTicketPageTitle />
-      <StretchTicket
+      <StretchedTicket
         ticket={{
           id: "1",
           type: "time",
@@ -27,8 +27,8 @@ export default function UserSeatTicketPage() {
           issuedAt: 1706946429,
           expiresAt: 1707551229,
         }}
-      ></StretchTicket>
-      <StretchTicket
+      ></StretchedTicket>
+      <StretchedTicket
         ticket={{
           id: "1",
           type: "time",
@@ -38,7 +38,7 @@ export default function UserSeatTicketPage() {
           issuedAt: 1706946429,
           expiresAt: 1707551229,
         }}
-      ></StretchTicket>
+      ></StretchedTicket>
       <div className="flex flex-row gap-2">
         <Link href="/ticket/used">
           <button
