@@ -2,7 +2,7 @@ import Image from "next/image"
 import { BookableType } from "@/src/models/bookable"
 import type { CouponType, Coupon } from "@/src/models/coupon"
 
-const CouponOfUser = (props: { coupon: Coupon }) => {
+const StretchedCoupon = (props: { coupon: Coupon }) => {
   const { coupon } = props
   const bookableKorean = getBookableKorean(coupon.bookable)
   const ticketTypeKorean = getTicketTypeKorean(coupon.type)
@@ -70,4 +70,4 @@ const getTicketTypeKorean = (type: CouponType): string => {
   }
 }
 
-export default CouponOfUser
+export default StretchedCoupon

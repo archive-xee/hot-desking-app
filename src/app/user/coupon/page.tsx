@@ -3,7 +3,7 @@
 // import { gql } from "@apollo/client"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { CouponOfUser } from "@/src/components/molecules/Coupon"
+import StretchedCoupon from "@/src/components/molecules/Coupon/StretchedCoupon"
 
 // const GET_USER_COUPON_LIST = gql`
 //   query GetUserCouponList($userId: string) {
@@ -16,7 +16,7 @@ export default function UserCouponPage() {
   return (
     <>
       <UserCouponPageTitle />
-      <CouponOfUser
+      <StretchedCoupon
         coupon={{
           id: "1",
           type: "timebonus",
@@ -25,8 +25,8 @@ export default function UserCouponPage() {
           issuedAt: 0,
           expiresAt: 0,
         }}
-      ></CouponOfUser>
-      <CouponOfUser
+      ></StretchedCoupon>
+      <StretchedCoupon
         coupon={{
           id: "2",
           type: "discount",
@@ -35,7 +35,7 @@ export default function UserCouponPage() {
           issuedAt: 0,
           expiresAt: 0,
         }}
-      ></CouponOfUser>
+      ></StretchedCoupon>
       <div className="flex flex-row gap-2">
         <Link href="/coupon">
           <button
