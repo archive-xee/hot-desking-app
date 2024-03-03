@@ -34,7 +34,7 @@ export default function LockerViewPage() {
       <Link href="/user/ticket/locker">
         <button
           type="submit"
-          className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
+          className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
         >
           티켓 사용
         </button>

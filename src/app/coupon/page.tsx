@@ -39,7 +39,7 @@ const CouponRegisterForm = () => {
   const router = useRouter()
 
   return (
-    <div className="border-black-100 container mx-auto  max-w-screen-sm  overflow-hidden rounded-lg border">
+    <div className="container mx-auto max-w-screen-sm  overflow-hidden  rounded-lg border border-black-100">
       <div className="bg-white-500 py-2 text-center">
         {/* 키오스크였을 때 */}
         <p>QR코드 인식기에 QR코드를 가까이 해주세요.</p>
@@ -52,7 +52,7 @@ const CouponRegisterForm = () => {
             <input
               type="qr"
               id="qr"
-              className="border-black-100 bg-white-300 w-full max-w-sm  rounded-lg border p-2.5 text-sm"
+              className="w-full max-w-sm rounded-lg border  border-black-100 bg-white-300 p-2.5 text-sm"
               placeholder="쿠폰 코드"
               required
             />
@@ -62,7 +62,7 @@ const CouponRegisterForm = () => {
             <button
               onClick={() => router.back()}
               type="submit"
-              className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
+              className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
             >
               쿠폰 등록
             </button>

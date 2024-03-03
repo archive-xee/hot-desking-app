@@ -40,7 +40,7 @@ export default function UserCouponPage() {
         <Link href="/coupon">
           <button
             type="button"
-            className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
+            className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
           >
             등록하기
           </button>
@@ -48,7 +48,7 @@ export default function UserCouponPage() {
         <button
           onClick={() => router.back()}
           type="button"
-          className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
+          className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
         >
           사용하기
         </button>
