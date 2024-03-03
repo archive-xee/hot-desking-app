@@ -1,10 +1,10 @@
 "use client"
-// import { Modal } from "@/src/components/organisms/Modal"
+// import { Modal } from "@/components/organisms/Modal"
 // import { gql } from "@apollo/client"
 // import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
 // import Link from "next/link"
 // import { useSearchParams } from "next/navigation"
-import CardTicket from "@/src/components/molecules/Ticket/CardTicket"
+import CardTicket from "@/components/molecules/Ticket/CardTicket"
 
 // const GET_BILLING_TICKET_LIST = gql`
 //   query GetBillingTicketList {

@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { MeetingRoomModel } from "@/src/models/bookable"
+import { MeetingRoomModel } from "@/models/bookable"
 
 const MeetingRoomBox = (props: { meetingRoom: MeetingRoomModel }) => {
   const { meetingRoom } = props
@@ -26,7 +26,7 @@ const _MeetingRoomBox = (props: { label: string; bgColor: string; borderColor: s
         <Chair direction="up" bgColor={bgColor} borderColor={borderColor} />
       </div>
       <div className={`flex h-20 items-center justify-center rounded-lg ${bgColor} border ${borderColor}`}>
-        <h3 className="font-medium  text-black-700">회의 {label}실</h3>
+        <h3 className="text-black-700  font-medium">회의 {label}실</h3>
       </div>
       <div className="flex flex-row justify-around gap-3">
         <Chair direction="down" bgColor={bgColor} borderColor={borderColor} />

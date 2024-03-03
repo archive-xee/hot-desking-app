@@ -1,4 +1,4 @@
-import { BookableType } from "@/src/models/bookable"
+import { BookableType } from "@/models/bookable"
 
 export type TicketType = "oneday" | "period" | "time" | "discount"
 

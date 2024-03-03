@@ -3,7 +3,7 @@
 // import { gql } from "@apollo/client"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import StretchedCoupon from "@/src/components/molecules/Coupon/StretchedCoupon"
+import StretchedCoupon from "@/components/molecules/Coupon/StretchedCoupon"
 
 // const GET_USER_COUPON_LIST = gql`
 //   query GetUserCouponList($userId: string) {
@@ -40,7 +40,7 @@ export default function UserCouponPage() {
         <Link href="/coupon">
           <button
             type="button"
-            className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+            className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
           >
             등록하기
           </button>
@@ -48,7 +48,7 @@ export default function UserCouponPage() {
         <button
           onClick={() => router.back()}
           type="button"
-          className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+          className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
         >
           사용하기
         </button>

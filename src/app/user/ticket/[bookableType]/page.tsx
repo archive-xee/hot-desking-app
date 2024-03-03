@@ -2,7 +2,7 @@
 
 // import { gql } from "@apollo/client"
 import Link from "next/link"
-import StretchedTicket from "@/src/components/molecules/Ticket/StretchedTicket"
+import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
 
 // const GET_USER_COUPON_LIST = gql`
 //   query GetUserTicketList($userId: string) {
@@ -43,7 +43,7 @@ export default function UserSeatTicketPage() {
         <Link href="/ticket/used">
           <button
             type="button"
-            className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+            className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
           >
             사용 완료
           </button>
@@ -51,7 +51,7 @@ export default function UserSeatTicketPage() {
         <Link href="/ticket/oneoff">
           <button
             type="button"
-            className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+            className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
           >
             일회권 구매
           </button>
@@ -59,7 +59,7 @@ export default function UserSeatTicketPage() {
         <Link href="/ticket/billing">
           <button
             type="button"
-            className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+            className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
           >
             정기권 구매
           </button>

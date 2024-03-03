@@ -1,7 +1,7 @@
 import localFont from "next/font/local"
 import { ApolloWrapper } from "./ApolloWrapper"
-import "@/src/app/globals.css"
-import Header from "@/src/components/organisms/Header"
+import "@/app/globals.css"
+import Header from "@/components/organisms/Header"
 
 const PRETENDARD_FONT = localFont({ src: "../static/fonts/Pretendard.woff2" })
 
@@ -10,7 +10,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={PRETENDARD_FONT.className}>
       <body className="text-black-700">
         <ApolloWrapper>
-          <div className="container mx-auto h-lvh bg-white-100">
+          <div className="bg-white-100 container mx-auto h-lvh">
             <main>
               <Header />
               <div className="container px-4 py-2">

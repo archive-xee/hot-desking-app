@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { SeatModel } from "@/src/models/bookable"
+import { SeatModel } from "@/models/bookable"
 
 const SeatBox = (props: { seat: SeatModel }) => {
   const { seat } = props
@@ -21,7 +21,7 @@ const _SeatBox = (props: { label: string; bgColor: string; borderColor: string }
   const { label, bgColor, borderColor } = props
   return (
     <div className={`flex size-20 items-center justify-center rounded-lg ${bgColor} border ${borderColor}`}>
-      <h3 className="font-medium  text-black-700">{label}</h3>
+      <h3 className="text-black-700  font-medium">{label}</h3>
     </div>
   )
 }

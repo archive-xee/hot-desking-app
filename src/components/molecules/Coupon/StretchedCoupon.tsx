@@ -1,6 +1,6 @@
 import Image from "next/image"
-import { BookableType } from "@/src/models/bookable"
-import type { CouponType, Coupon } from "@/src/models/coupon"
+import { BookableType } from "@/models/bookable"
+import type { CouponType, Coupon } from "@/models/coupon"
 
 const StretchedCoupon = (props: { coupon: Coupon }) => {
   const { coupon } = props
@@ -22,9 +22,9 @@ const StretchedCoupon = (props: { coupon: Coupon }) => {
   }
 
   return (
-    <div className={`flex ${borderColors[coupon.bookable]} flex-row rounded-lg border border-solid bg-white-300`}>
+    <div className={`flex ${borderColors[coupon.bookable]} bg-white-300 flex-row rounded-lg border border-solid`}>
       <div
-        className={`flex ${bookableColors[coupon.bookable]} size-20 flex-col items-center justify-center gap-1 rounded-l-lg bg-black-300`}
+        className={`flex ${bookableColors[coupon.bookable]} bg-black-300 size-20 flex-col items-center justify-center gap-1 rounded-l-lg`}
       >
         <Image src={`/icons/bookable/${coupon.bookable}.png`} alt="이것도 해야겠네" width="24" height="24"></Image>
         <p className="text-white-100">{bookableKorean}</p>

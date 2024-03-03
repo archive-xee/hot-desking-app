@@ -4,7 +4,7 @@
 import Image from "next/image"
 import Link from "next/link"
 // import { useSearchParams } from "next/navigation"
-import StretchedTicket from "@/src/components/molecules/Ticket/StretchedTicket"
+import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
 
 // const GET_BILLING_TICKET_LIST = gql`
 //   query GetOneoffTicketList {
@@ -44,7 +44,7 @@ export default function TicketPage() {
       <Link href="/payment/online">
         <button
           type="button"
-          className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+          className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
         >
           구매하기
         </button>
@@ -52,7 +52,7 @@ export default function TicketPage() {
       <Link href="/user/coupon">
         <button
           type="button"
-          className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+          className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
         >
           쿠폰 적용
         </button>
@@ -75,7 +75,7 @@ const OneoffTicketPageTitle = () => {
 
 const OneoffTicketTypeTab = () => {
   return (
-    <div className="flex flex-row bg-white-300">
+    <div className="bg-white-300 flex flex-row">
       <div className="flex grow flex-row  justify-center p-2  hover:bg-yellow-300">
         <Image src="/icons/ticket/period.png" alt="기간권" width="24" height="24"></Image>
         <span className="ms-3">기간권</span>
