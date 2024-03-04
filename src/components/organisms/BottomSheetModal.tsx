@@ -8,7 +8,7 @@ type BottomSheetModalProps = {
   buttonAction: () => void
 }
 
-export const BottomSheetModal = (props: BottomSheetModalProps) => {
+const BottomSheetModal = (props: BottomSheetModalProps) => {
   const { trigger, content, buttonTitle, buttonAction } = props
   const [showBottomSheetModal, setShowBottomSheetModal] = useState(false)
   const handleTriggerClicked = () => {
@@ -61,3 +61,5 @@ export const BottomSheetModal = (props: BottomSheetModalProps) => {
     </div>
   )
 }
+
+export default BottomSheetModal

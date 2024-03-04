@@ -6,6 +6,7 @@ import Link from "next/link"
 // import { useSearchParams } from "next/navigation"
 import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
 
+
 // const GET_BILLING_TICKET_LIST = gql`
 //   query GetOneoffTicketList {
 //     OneoffTicket {
@@ -19,6 +20,7 @@ export default function TicketPage() {
     <>
       <OneoffTicketPageTitle />
       <OneoffTicketTypeTab />
+      <CouponApplicationButton/>
       <StretchedTicket
         ticket={{
           id: "1",
@@ -41,22 +43,6 @@ export default function TicketPage() {
           expiresAt: 1707551229,
         }}
       ></StretchedTicket>
-      <Link href="/payment/online">
-        <button
-          type="button"
-          className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
-        >
-          구매하기
-        </button>
-      </Link>
-      <Link href="/user/coupon">
-        <button
-          type="button"
-          className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
-        >
-          쿠폰 적용
-        </button>
-      </Link>
       <p>
         <br /> Ticket[ id, ticketType, expiresAt ]의 리스트
         <br /> 구매하기 위해 티켓을 눌렀을 때 나오는 모달에는
@@ -94,4 +80,15 @@ const OneoffTicketTypeTab = () => {
       </div>
     </div>
   )
+}
+
+const CouponApplicationButton = () => {
+  return   <Link href="/user/coupon">
+  <button
+    type="button"
+    className="w-full bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
+  >
+    쿠폰 적용
+  </button>
+</Link>
 }
