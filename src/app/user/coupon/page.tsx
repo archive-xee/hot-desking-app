@@ -4,6 +4,7 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import StretchedCoupon from "@/components/molecules/Coupon/StretchedCoupon"
+import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 
 // const GET_USER_COUPON_LIST = gql`
 //   query GetUserCouponList($userId: string) {
@@ -16,7 +17,7 @@ export default function UserCouponPage() {
   return (
     <>
       <UserCouponPageTitle />
-      <StretchedCoupon
+      <BottomSheetModal trigger={<StretchedCoupon
         coupon={{
           id: "1",
           type: "timebonus",
@@ -25,17 +26,21 @@ export default function UserCouponPage() {
           issuedAt: 0,
           expiresAt: 0,
         }}
-      ></StretchedCoupon>
-      <StretchedCoupon
+      ></StretchedCoupon>} buttonTitle="사용하기" buttonAction={() => {
+        router.back()
+      } }      ></BottomSheetModal>
+      <BottomSheetModal trigger={<StretchedCoupon
         coupon={{
-          id: "2",
+          id: "1",
           type: "discount",
           bookable: "locker",
           digit: 10,
           issuedAt: 0,
           expiresAt: 0,
         }}
-      ></StretchedCoupon>
+      ></StretchedCoupon>} buttonTitle="사용하기" buttonAction={() => {
+        router.back()
+      } }      ></BottomSheetModal>
       <div className="flex flex-row gap-2">
         <Link href="/coupon">
           <button
@@ -45,13 +50,6 @@ export default function UserCouponPage() {
             등록하기
           </button>
         </Link>
-        <button
-          onClick={() => router.back()}
-          type="button"
-          className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
-        >
-          사용하기
-        </button>
       </div>
       <p>
         <br /> UserTimeBonusCoupon[ id, userId, bonusTime, CouponType, expiresAt ]의 리스트 + UserDiscountCoupon [ id,
