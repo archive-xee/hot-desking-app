@@ -5,6 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 // import { useSearchParams } from "next/navigation"
 import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
+import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 
 
 // const GET_BILLING_TICKET_LIST = gql`
@@ -21,7 +22,7 @@ export default function TicketPage() {
       <OneoffTicketPageTitle />
       <OneoffTicketTypeTab />
       <CouponApplicationButton/>
-      <StretchedTicket
+      <BottomSheetModal trigger={<StretchedTicket
         ticket={{
           id: "1",
           type: "oneday",
@@ -31,18 +32,7 @@ export default function TicketPage() {
           issuedAt: 1706946429,
           expiresAt: 1707551229,
         }}
-      ></StretchedTicket>
-      <StretchedTicket
-        ticket={{
-          id: "1",
-          type: "oneday",
-          bookable: "locker",
-          price: 10000,
-          period: 86400,
-          issuedAt: 1706946429,
-          expiresAt: 1707551229,
-        }}
-      ></StretchedTicket>
+      ></StretchedTicket>} buttonTitle="구매하기" buttonAction={() => {}}     ></BottomSheetModal>
       <p>
         <br /> Ticket[ id, ticketType, expiresAt ]의 리스트
         <br /> 구매하기 위해 티켓을 눌렀을 때 나오는 모달에는
