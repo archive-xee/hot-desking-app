@@ -23,7 +23,6 @@ export const BottomSheetModal = (props: BottomSheetModalProps) => {
         bottomSheetModalRef.current &&
         !bottomSheetModalRef.current.contains(e.target as Node)
       ) {
-        // 이벤트가 발생한 노드가 모달 컴포넌트 내부에 존재하지 않는다면 close
         setShowBottomSheetModal(false)
       }
     }
@@ -35,15 +34,18 @@ export const BottomSheetModal = (props: BottomSheetModalProps) => {
     }
   }, [showBottomSheetModal])
 
-  // 트리거가 한번 더 있다라는거... 
   return (
     <div>
       <div className="cursor-pointer" onClick={handleTriggerClicked}>
         {trigger}
       </div>
 
-      {showBottomSheetModal && (
-        <div
+      <div
+        className={`fixed inset-0 bg-black bg-opacity-50 flex items-end justify-center p-4 transition-transform ${
+          showBottomSheetModal ? "translate-y-0" : "translate-y-full"
+        }`}
+      >
+          <div
           ref={bottomSheetModalRef}
           aria-hidden="true"
           className="bg-black-700 text-white-300 fixed bottom-0 left-0 flex w-full flex-col overflow-hidden   rounded-t-lg py-4"
@@ -55,7 +57,7 @@ export const BottomSheetModal = (props: BottomSheetModalProps) => {
             </button>
           </div>
         </div>
-      )}
+      </div>
     </div>
   )
 }
