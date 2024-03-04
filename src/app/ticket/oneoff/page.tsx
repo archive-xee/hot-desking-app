@@ -62,21 +62,21 @@ const OneoffTicketPageTitle = () => {
 const OneoffTicketTypeTab = () => {
   return (
     <div className="bg-white-300 flex flex-row">
-      <div className="flex grow flex-row  justify-center p-2  hover:bg-yellow-300">
+      <div className="flex grow flex-row max-sm:flex-col max-sm:items-center justify-center p-2  hover:bg-yellow-300">
         <Image src="/icons/ticket/period.png" alt="기간권" width="24" height="24"></Image>
-        <span className="ms-3">기간권</span>
+        <span className="max-sm:ms-0 ms-3">기간권</span>
       </div>
-      <div className="flex grow flex-row justify-center p-2 hover:bg-purple-100">
+      <div className="flex grow flex-row max-sm:flex-col max-sm:items-center justify-center p-2 hover:bg-purple-100">
         <Image src="/icons/ticket/oneday.png" alt="당일권" width="24" height="24"></Image>
-        <span className="ms-3">당일권</span>
+        <span className="max-sm:ms-0 ms-3">당일권</span>
       </div>
-      <div className="flex grow flex-row justify-center p-2 hover:bg-blue-300">
+      <div className="flex grow flex-row max-sm:flex-col max-sm:items-center justify-center p-2 hover:bg-blue-300">
         <Image src="/icons/ticket/time.png" alt="시간권" width="24" height="24"></Image>
-        <span className="ms-3">시간권</span>
+        <span className="max-sm:ms-0 ms-3">시간권</span>
       </div>
-      <div className="flex grow flex-row justify-center p-2  hover:bg-teal-100">
+      <div className="flex grow flex-row max-sm:flex-col max-sm:items-center justify-center p-2  hover:bg-teal-100">
         <Image src="/icons/ticket/discount.png" alt="할인권" width="24" height="24"></Image>
-        <span className="ms-3">할인권</span>
+        <span className="max-sm:ms-0 ms-3">할인권</span>
       </div>
     </div>
   )
