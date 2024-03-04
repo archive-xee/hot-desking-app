@@ -1,37 +1,37 @@
 "use client"
 import { useEffect, useRef, useState } from "react"
 
-type ModalProps = {
+type DialogProps = {
   trigger: React.ReactNode
   title: string
   content: React.ReactNode
   actions?: React.ReactNode
 }
 
-export const Modal = (props: ModalProps) => {
+export const Dialog = (props: DialogProps) => {
   const { trigger, title, content, actions } = props
-  const [showModal, setShowModal] = useState(false)
+  const [showDialog, setShowDialog] = useState(false)
   const handleTriggerClicked = () => {
-    setShowModal(!showModal)
+    setShowDialog(!showDialog)
   }
   const handleCloseClicked = () => {
-    setShowModal(!showModal)
+    setShowDialog(!showDialog)
   }
-  const modalRef = useRef<HTMLDivElement>(null)
+  const dialogRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
-    const closeModal = (e: MouseEvent) => {
-      if (showModal && modalRef.current && !modalRef.current.contains(e.target as Node)) {
+    const closeDialog = (e: MouseEvent) => {
+      if (showDialog && dialogRef.current && !dialogRef.current.contains(e.target as Node)) {
         // 이벤트가 발생한 노드가 모달 컴포넌트 내부에 존재하지 않는다면 close
-        setShowModal(false)
+        setShowDialog(false)
       }
     }
 
-    document.addEventListener("mousedown", closeModal)
+    document.addEventListener("mousedown", closeDialog)
 
     return () => {
-      document.removeEventListener("mousedown", closeModal)
+      document.removeEventListener("mousedown", closeDialog)
     }
-  }, [showModal])
+  }, [showDialog])
 
   return (
     <div className="relative">
@@ -39,9 +39,9 @@ export const Modal = (props: ModalProps) => {
         {trigger}
       </div>
 
-      {showModal && (
+      {showDialog && (
         <div
-          ref={modalRef}
+          ref={dialogRef}
           aria-hidden="true"
           className="fixed left-1/2 top-1/2 flex w-full max-w-sm -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-lg border border-black-100  bg-white-300 "
         >
