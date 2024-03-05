@@ -9,7 +9,7 @@
 // const CHECKOUT_USER_SEAT = gql`
 //  mutation CheckoutUserSeat($usingTicketId: String!, $seatType: String!, $seatNumber: String!) {
 //    User(usingTicketId: null)
-//    Seat(ticketId: null ) 
+//    Seat(ticketId: null )
 //   }
 // `
 
@@ -22,17 +22,14 @@ export default function CheckoutPage() {
       <p>3. User.usingTicketId가 있는지 null인지 물어봄</p>
       <p>4-1. usingTicketId 있다? → 사용중인 좌석을 없애는 mutate 보내고, 이후 퇴실완료라는 다이얼로그</p>
       <p>4-2. usingTicketId가 없다? → 사용중인 자리가 없기에 퇴실할수 없음이라는 다이얼로그</p>
-
-      <div className="border">query GetSeatTicketId($seatType: String!, $seatNumber: String!) [
-     Seat(seatType: $seatType, seatNumber: $seatNumber ) [
-       ticketId
-     ]
-    ]
-</div>
-      <div className="border">mutation CheckoutUserSeat($usingTicketId: String!, $seatType: String!, $seatNumber: String!) [
-         User(usingTicketId: null)
-         Seat(ticketId: null ) 
-      ]</div>
+      <div className="border">
+        query GetSeatTicketId($seatType: String!, $seatNumber: String!) [ Seat(seatType: $seatType, seatNumber:
+        $seatNumber ) [ ticketId ] ]
+      </div>
+      <div className="border">
+        mutation CheckoutUserSeat($usingTicketId: String!, $seatType: String!, $seatNumber: String!) [
+        User(usingTicketId: null) Seat(ticketId: null ) ]
+      </div>
     </>
   )
 }

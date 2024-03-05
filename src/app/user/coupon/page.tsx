@@ -17,31 +17,43 @@ export default function UserCouponPage() {
   return (
     <>
       <UserCouponPageTitle />
-      <CouponRegistrationButton/>
-      <BottomSheetModal trigger={<StretchedCoupon
-        coupon={{
-          id: "1",
-          type: "timebonus",
-          bookable: "seat",
-          digit: 10,
-          issuedAt: 0,
-          expiresAt: 0,
+      <CouponRegistrationButton />
+      <BottomSheetModal
+        trigger={
+          <StretchedCoupon
+            coupon={{
+              id: "1",
+              type: "timebonus",
+              bookable: "seat",
+              digit: 10,
+              issuedAt: 0,
+              expiresAt: 0,
+            }}
+          ></StretchedCoupon>
+        }
+        buttonTitle="사용하기"
+        buttonAction={() => {
+          router.back()
         }}
-      ></StretchedCoupon>} buttonTitle="사용하기" buttonAction={() => {
-        router.back()
-      } }      ></BottomSheetModal>
-      <BottomSheetModal trigger={<StretchedCoupon
-        coupon={{
-          id: "1",
-          type: "discount",
-          bookable: "locker",
-          digit: 10,
-          issuedAt: 0,
-          expiresAt: 0,
+      ></BottomSheetModal>
+      <BottomSheetModal
+        trigger={
+          <StretchedCoupon
+            coupon={{
+              id: "1",
+              type: "discount",
+              bookable: "locker",
+              digit: 10,
+              issuedAt: 0,
+              expiresAt: 0,
+            }}
+          ></StretchedCoupon>
+        }
+        buttonTitle="사용하기"
+        buttonAction={() => {
+          router.back()
         }}
-      ></StretchedCoupon>} buttonTitle="사용하기" buttonAction={() => {
-        router.back()
-      } }      ></BottomSheetModal>
+      ></BottomSheetModal>
       <p>
         <br /> UserTimeBonusCoupon[ id, userId, bonusTime, CouponType, expiresAt ]의 리스트 + UserDiscountCoupon [ id,
         CouponType , discountPercentage, expiresAt]의 리스트
@@ -57,14 +69,15 @@ const UserCouponPageTitle = () => {
   return <h1 className="text-center text-xl font-bold">내 쿠폰 리스트</h1>
 }
 
-
 const CouponRegistrationButton = () => {
-  return   <Link href="/coupon">
-  <button
-    type="button"
-    className="w-full bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
-  >
-    쿠폰 등록하기
-  </button>
-</Link>
+  return (
+    <Link href="/coupon">
+      <button
+        type="button"
+        className="bg-white-100 hover:text-white-100 w-full rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
+      >
+        쿠폰 등록하기
+      </button>
+    </Link>
+  )
 }
