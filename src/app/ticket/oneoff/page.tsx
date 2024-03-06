@@ -37,10 +37,11 @@ export default function TicketPage() {
             }}
           ></StretchedTicket>
         }
-        buttonTitle="구매하기"
-        buttonAction={() => {
-          router.push("/payment/online")
-        }}
+        content={
+          <div className="flex flex-row justify-center">
+            <button className="bg-white-100 text-black-700 rounded-full px-10 py-2 font-bold">구매하기</button>
+          </div>
+        }
       ></BottomSheetModal>
       <p>
         <br /> Ticket[ id, ticketType, expiresAt ]의 리스트

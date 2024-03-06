@@ -31,28 +31,18 @@ export default function UserCouponPage() {
             }}
           ></StretchedCoupon>
         }
-        buttonTitle="사용하기"
-        buttonAction={() => {
-          router.back()
-        }}
-      ></BottomSheetModal>
-      <BottomSheetModal
-        trigger={
-          <StretchedCoupon
-            coupon={{
-              id: "1",
-              type: "discount",
-              bookable: "locker",
-              digit: 10,
-              issuedAt: 0,
-              expiresAt: 0,
-            }}
-          ></StretchedCoupon>
+        content={
+          <div className="flex flex-row justify-center">
+            <button
+              onClick={() => {
+                router.back()
+              }}
+              className="bg-white-100 text-black-700 rounded-full px-10 py-2 font-bold"
+            >
+              사용하기
+            </button>
+          </div>
         }
-        buttonTitle="사용하기"
-        buttonAction={() => {
-          router.back()
-        }}
       ></BottomSheetModal>
       <p>
         <br /> UserTimeBonusCoupon[ id, userId, bonusTime, CouponType, expiresAt ]의 리스트 + UserDiscountCoupon [ id,
