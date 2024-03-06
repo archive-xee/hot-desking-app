@@ -39,7 +39,17 @@ export default function TicketPage() {
         }
         content={
           <div className="flex flex-row justify-center">
-            <button className="bg-white-100 text-black-700 rounded-full px-10 py-2 font-bold">구매하기</button>
+            <Link
+              href={{
+                pathname: "/payment/online",
+                query: {
+                  // 티켓타입, 티켓이름 정도
+                  ticketId: "1",
+                },
+              }}
+            >
+              <button className="bg-white-100 text-black-700 rounded-full px-10 py-2 font-bold">구매하기</button>
+            </Link>
           </div>
         }
       ></BottomSheetModal>
