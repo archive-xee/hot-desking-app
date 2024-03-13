@@ -4,7 +4,6 @@
 import Image from "next/image"
 import Link from "next/link"
 // import { useSearchParams } from "next/navigation"
-import { useRouter } from "next/navigation"
 import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
 import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 
@@ -17,7 +16,6 @@ import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 //   }
 // `
 export default function TicketPage() {
-  const router = useRouter()
   return (
     <>
       <OneoffTicketPageTitle />
@@ -48,7 +46,7 @@ export default function TicketPage() {
                 },
               }}
             >
-              <button className="bg-white-100 text-black-700 rounded-full px-10 py-2 font-bold">구매하기</button>
+              <button className="rounded-full bg-white-100 px-10 py-2 font-bold text-black-700">구매하기</button>
             </Link>
           </div>
         }
@@ -71,7 +69,7 @@ const OneoffTicketPageTitle = () => {
 
 const OneoffTicketTypeTab = () => {
   return (
-    <div className="bg-white-300 flex flex-row">
+    <div className="flex flex-row bg-white-300">
       <div className="flex grow flex-row justify-center p-2 hover:bg-yellow-300 max-sm:flex-col  max-sm:items-center">
         <Image src="/icons/ticket/period.png" alt="기간권" width="24" height="24"></Image>
         <span className="ms-3 max-sm:ms-0">기간권</span>
@@ -97,7 +95,7 @@ const CouponApplicationButton = () => {
     <Link href="/user/coupon">
       <button
         type="button"
-        className="bg-white-100 hover:text-white-100 w-full rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
+        className="w-full rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
       >
         쿠폰 적용
       </button>
