@@ -39,14 +39,14 @@ const BottomSheetModal = (props: BottomSheetModalProps) => {
       </div>
 
       <div
-        className={`fixed inset-0 flex items-end justify-center bg-black p-4 transition-transform ${
+        className={`bg-black fixed inset-0 flex items-end justify-center p-4 transition-transform ${
           showBottomSheetModal ? "translate-y-0" : "translate-y-full"
         }`}
       >
         <div
           ref={bottomSheetModalRef}
           aria-hidden="true"
-          className="bg-black-700 text-white-300 fixed bottom-0 left-0 flex w-full flex-col overflow-hidden   rounded-t-lg py-4"
+          className="fixed bottom-0 left-0 flex w-full flex-col overflow-hidden rounded-t-lg bg-black-700   py-4 text-white-300"
         >
           <div className="flex flex-col gap-6 px-4 py-2">{content}</div>
         </div>

@@ -10,7 +10,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={PRETENDARD_FONT.className}>
       <body className="text-black-700">
         <ApolloWrapper>
-          <div className="bg-white-100 container mx-auto h-lvh">
+          <div className="container mx-auto h-lvh bg-white-100">
             <main>
               <Header />
               <div className="container px-4 py-2">

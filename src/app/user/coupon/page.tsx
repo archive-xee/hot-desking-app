@@ -37,7 +37,7 @@ export default function UserCouponPage() {
               onClick={() => {
                 router.back()
               }}
-              className="bg-white-100 text-black-700 rounded-full px-10 py-2 font-bold"
+              className="rounded-full bg-white-100 px-10 py-2 font-bold text-black-700"
             >
               사용하기
             </button>
@@ -64,7 +64,7 @@ const CouponRegistrationButton = () => {
     <Link href="/coupon">
       <button
         type="button"
-        className="bg-white-100 hover:text-white-100 w-full rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
+        className="w-full rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
       >
         쿠폰 등록하기
       </button>
