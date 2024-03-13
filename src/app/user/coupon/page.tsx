@@ -4,6 +4,7 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import StretchedCoupon from "@/components/molecules/Coupon/StretchedCoupon"
+import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 
 // const GET_USER_COUPON_LIST = gql`
 //   query GetUserCouponList($userId: string) {
@@ -16,43 +17,33 @@ export default function UserCouponPage() {
   return (
     <>
       <UserCouponPageTitle />
-      <StretchedCoupon
-        coupon={{
-          id: "1",
-          type: "timebonus",
-          bookable: "seat",
-          digit: 10,
-          issuedAt: 0,
-          expiresAt: 0,
-        }}
-      ></StretchedCoupon>
-      <StretchedCoupon
-        coupon={{
-          id: "2",
-          type: "discount",
-          bookable: "locker",
-          digit: 10,
-          issuedAt: 0,
-          expiresAt: 0,
-        }}
-      ></StretchedCoupon>
-      <div className="flex flex-row gap-2">
-        <Link href="/coupon">
-          <button
-            type="button"
-            className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
-          >
-            등록하기
-          </button>
-        </Link>
-        <button
-          onClick={() => router.back()}
-          type="button"
-          className="bg-white-100 hover:text-white-100 rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
-        >
-          사용하기
-        </button>
-      </div>
+      <CouponRegistrationButton />
+      <BottomSheetModal
+        trigger={
+          <StretchedCoupon
+            coupon={{
+              id: "1",
+              type: "timebonus",
+              bookable: "seat",
+              digit: 10,
+              issuedAt: 0,
+              expiresAt: 0,
+            }}
+          ></StretchedCoupon>
+        }
+        content={
+          <div className="flex flex-row justify-center">
+            <button
+              onClick={() => {
+                router.back()
+              }}
+              className="bg-white-100 text-black-700 rounded-full px-10 py-2 font-bold"
+            >
+              사용하기
+            </button>
+          </div>
+        }
+      ></BottomSheetModal>
       <p>
         <br /> UserTimeBonusCoupon[ id, userId, bonusTime, CouponType, expiresAt ]의 리스트 + UserDiscountCoupon [ id,
         CouponType , discountPercentage, expiresAt]의 리스트
@@ -66,4 +57,17 @@ export default function UserCouponPage() {
 
 const UserCouponPageTitle = () => {
   return <h1 className="text-center text-xl font-bold">내 쿠폰 리스트</h1>
+}
+
+const CouponRegistrationButton = () => {
+  return (
+    <Link href="/coupon">
+      <button
+        type="button"
+        className="bg-white-100 hover:text-white-100 w-full rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
+      >
+        쿠폰 등록하기
+      </button>
+    </Link>
+  )
 }

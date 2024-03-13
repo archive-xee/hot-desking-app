@@ -1,37 +1,37 @@
 "use client"
 import { useEffect, useRef, useState } from "react"
 
-type ModalProps = {
+type DialogProps = {
   trigger: React.ReactNode
   title: string
   content: React.ReactNode
   actions?: React.ReactNode
 }
 
-export const Modal = (props: ModalProps) => {
+export const Dialog = (props: DialogProps) => {
   const { trigger, title, content, actions } = props
-  const [showModal, setShowModal] = useState(false)
+  const [showDialog, setShowDialog] = useState(false)
   const handleTriggerClicked = () => {
-    setShowModal(!showModal)
+    setShowDialog(!showDialog)
   }
   const handleCloseClicked = () => {
-    setShowModal(!showModal)
+    setShowDialog(!showDialog)
   }
-  const modalRef = useRef<HTMLDivElement>(null)
+  const dialogRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
-    const closeModal = (e: MouseEvent) => {
-      if (showModal && modalRef.current && !modalRef.current.contains(e.target as Node)) {
+    const closeDialog = (e: MouseEvent) => {
+      if (showDialog && dialogRef.current && !dialogRef.current.contains(e.target as Node)) {
         // 이벤트가 발생한 노드가 모달 컴포넌트 내부에 존재하지 않는다면 close
-        setShowModal(false)
+        setShowDialog(false)
       }
     }
 
-    document.addEventListener("mousedown", closeModal)
+    document.addEventListener("mousedown", closeDialog)
 
     return () => {
-      document.removeEventListener("mousedown", closeModal)
+      document.removeEventListener("mousedown", closeDialog)
     }
-  }, [showModal])
+  }, [showDialog])
 
   return (
     <div className="relative">
@@ -39,17 +39,17 @@ export const Modal = (props: ModalProps) => {
         {trigger}
       </div>
 
-      {showModal && (
+      {showDialog && (
         <div
-          ref={modalRef}
+          ref={dialogRef}
           aria-hidden="true"
-          className="fixed left-1/2 top-1/2 flex w-full max-w-sm -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-lg border border-black-100  bg-white-300 "
+          className="border-black-100 bg-white-300 fixed left-1/2 top-1/2 flex w-full max-w-sm -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-lg  border "
         >
-          <div className="relative flex flex-row justify-center bg-white-500 py-2">
+          <div className="bg-white-500 relative flex flex-row justify-center py-2">
             <h2 className="font-bold">{title}</h2>
             <div
               onClick={handleCloseClicked}
-              className=" absolute  bottom-1.5 right-5 rounded-lg border border-red-700 bg-white-100 px-2  py-1 text-sm font-medium text-red-700 hover:bg-red-300 hover:text-white-100 "
+              className=" bg-white-100  hover:text-white-100 absolute bottom-1.5 right-5 rounded-lg border border-red-700  px-2 py-1 text-sm font-medium text-red-700 hover:bg-red-300 "
             >
               ✖
             </div>
