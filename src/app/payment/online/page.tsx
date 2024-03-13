@@ -3,6 +3,8 @@
 // import { gql } from "@apollo/client"
 import Link from "next/link"
 import Script from "next/script"
+import { v4 as uuidv4 } from "uuid"
+import { executeAuthPaymentPopup } from "@/lib/nicepay"
 // import { useSearchParams } from "next/navigation"
 // import { useState, useEffect } from "react"
 
@@ -13,6 +15,7 @@ import Script from "next/script"
 //     }
 //   }
 // `
+
 export default function PaymentOnlinePage() {
   // 티켓 아이디 or 티켓name만 넘기면 사실은 됨
   // const searchParams = useSearchParams()
@@ -35,11 +38,11 @@ export default function PaymentOnlinePage() {
             onChange={({ target: { checked } }) => {
               hasConsent = !checked
             }}
-            className="bg-white-100 text-black-700 size-4 rounded"
+            className="size-4 rounded bg-white-100 text-black-700"
           />
           <label
             htmlFor="billing-consent-checkbox"
-            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            className="text-gray-900 dark:text-gray-300 ms-2 text-sm font-medium"
           >
             예약 결제
           </label>
@@ -48,15 +51,22 @@ export default function PaymentOnlinePage() {
           <Link href="/card/register">
             <button
               type="button"
-              className=" bg-white-100 hover:text-white-100 inline-block rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
+              className=" inline-block rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
             >
               카드등록
             </button>
           </Link>
           <button
             type="button"
-            onClick={() => {}}
-            className=" bg-white-100 hover:text-white-100 inline-block rounded-lg border border-blue-700 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 "
+            onClick={() => {
+              executeAuthPaymentPopup({
+                orderId: uuidv4(),
+                ticketName: "온라인 일회권",
+                price: 1000,
+                paymentMethod: "cardAndEasyPay",
+              })
+            }}
+            className=" inline-block rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
           >
             결제하기
           </button>
