@@ -31,7 +31,7 @@ export default function LockerViewPage() {
         <br /> ticketId: string | null
       </p>
       <div className="border">query GetTicketId($lockerId: String!) [ locker(id: $lockerId) [ ticketId ] ]</div>
-      <Link href="/user/ticket/locker">
+      <Link href="/user/ticket/use/locker">
         <button
           type="submit"
           className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
