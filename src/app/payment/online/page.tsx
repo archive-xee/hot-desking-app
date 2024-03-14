@@ -4,7 +4,9 @@
 import Link from "next/link"
 import Script from "next/script"
 import { v4 as uuidv4 } from "uuid"
+import CardWithDeleteForm from "@/components/molecules/CardWithDeleteForm"
 import { executeAuthPaymentPopup } from "@/lib/nicepay"
+import { card1 } from "@/models/card"
 // import { useSearchParams } from "next/navigation"
 // import { useState, useEffect } from "react"
 
@@ -30,23 +32,21 @@ export default function PaymentOnlinePage() {
     <>
       <div className="flex flex-col items-center">
         일회권 온라인 결제
-        <UserCardList />
-        <div className="flex items-center">
+        <div>
           <input
-            id="billing-consent-checkbox"
+            id="payment-registered-card"
             type="checkbox"
-            onChange={({ target: { checked } }) => {
-              hasConsent = !checked
-            }}
+            // onChange={({ target: { checked } }) => {}}
             className="size-4 rounded bg-white-100 text-black-700"
           />
           <label
-            htmlFor="billing-consent-checkbox"
+            htmlFor="payment-registered-card"
             className="text-gray-900 dark:text-gray-300 ms-2 text-sm font-medium"
           >
-            예약 결제
+            등록된 카드로 결제
           </label>
         </div>
+        <UserCardList />
         <div>
           <Link href="/card/register">
             <button
@@ -56,21 +56,35 @@ export default function PaymentOnlinePage() {
               카드등록
             </button>
           </Link>
-          <button
-            type="button"
-            onClick={() => {
-              executeAuthPaymentPopup({
-                orderId: uuidv4(),
-                ticketName: "온라인 일회권",
-                price: 1000,
-                paymentMethod: "cardAndEasyPay",
-              })
-            }}
-            className=" inline-block rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
-          >
-            결제하기
-          </button>
         </div>
+        <div>
+          <input
+            id="payment-registered-card"
+            type="checkbox"
+            // onChange={({ target: { checked } }) => {}}
+            className="size-4 rounded bg-white-100 text-black-700"
+          />
+          <label
+            htmlFor="payment-registered-card"
+            className="text-gray-900 dark:text-gray-300 ms-2 text-sm font-medium"
+          >
+            앱카드 결제
+          </label>
+        </div>
+        <button
+          type="button"
+          onClick={() => {
+            executeAuthPaymentPopup({
+              orderId: uuidv4(),
+              ticketName: "온라인 일회권",
+              price: 1000,
+              paymentMethod: "cardAndEasyPay",
+            })
+          }}
+          className=" inline-block rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+        >
+          결제하기
+        </button>
       </div>
       portone 결제 요청 이후 /user/ticket/oneoff으로 리디렉션
       <div className="border"> query GetUserCardList($userId: string) [ User(userId: $userId) [ card ] ]</div>
@@ -82,17 +96,9 @@ export default function PaymentOnlinePage() {
 const UserCardList = () => {
   return (
     <div className="flex flex-col">
-      <div>카드일번</div>
-      <div>카드일번</div>
-      <div>카드일번</div>
-      {/*
-  필요한 것
-
-  카드번호
-  유효기간(년/월) 
-  생년월일(6자리) 
-  비밀번호 앞 2자리 
- */}
+      <CardWithDeleteForm card={card1}></CardWithDeleteForm>
+      <CardWithDeleteForm card={card1}></CardWithDeleteForm>
+      <CardWithDeleteForm card={card1}></CardWithDeleteForm>
     </div>
   )
 }
