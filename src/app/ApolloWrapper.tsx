@@ -8,7 +8,7 @@ import {
   SSRMultipartLink,
 } from "@apollo/experimental-nextjs-app-support/ssr"
 
-const APOLLO_ROUTER_URL = "https://main--spacex-l4uc6p.apollographos.net/graphql"
+const APOLLO_ROUTER_URL = "http://api.ultspace.com/graphql"
 
 function makeClient() {
   const httpLink = new HttpLink({
