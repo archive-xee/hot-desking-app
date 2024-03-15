@@ -2,7 +2,6 @@
 
 // import { gql } from "@apollo/client"
 import Link from "next/link"
-import Script from "next/script"
 import CardWithDeleteForm from "@/components/molecules/CardWithDeleteForm"
 import { card1 } from "@/models/card"
 // import { useSearchParams } from "next/navigation"
@@ -59,7 +58,6 @@ export default function PaymentOnlinePage() {
       </div>
       결제 응답에 따라 성공하면 사용페이지로, 실패하면 실패 페이지로 리디렉션
       <div className="border"> query GetUserCardList($userId: string) [ User(userId: $userId) [ card ] ]</div>
-      <Script src="https://pay.nicepay.co.kr/v1/js/" />
     </>
   )
 }
