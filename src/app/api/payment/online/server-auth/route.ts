@@ -1,22 +1,31 @@
-import { CLIENT_KEY_SERVER_AUTH, PAYMENT_APPROVAL_SENDING_ENDPOINT } from "@/constant/nicepay"
+import request, { gql } from "graphql-request"
+import { APOLLO_ROUTER_URL } from "@/constant/graphql"
+
+const PAYMENT_APPROVAL_SENDING_MUTATION = gql`
+  mutation SendPaymentApproval($tid: String!, $amount: Float!) {
+    serverAuth(input: { tid: $tid, amount: $amount }) {
+      resultCode
+    }
+  }
+`
+
+type PaymentApprovalSendingResponse = {
+  serverAuth: {
+    resultCode: string
+  }
+}
 
 export async function POST(req: Request) {
   const response: FormData = await req.formData()
-  const tid = response.get("tid")
-  const amount = response.get("amount")
+  const tid = response.get("tid")?.toString()
+  const amount = Number(response.get("amount"))
 
-  const res = await fetch(PAYMENT_APPROVAL_SENDING_ENDPOINT, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      clientId: CLIENT_KEY_SERVER_AUTH,
-      tid: tid,
-      amount: amount,
-    }),
+  const data: PaymentApprovalSendingResponse = await request(APOLLO_ROUTER_URL, PAYMENT_APPROVAL_SENDING_MUTATION, {
+    tid,
+    amount,
   })
-  const result = await res.json()
 
-  return Response.json({ result })
+  const resultCode = data.serverAuth.resultCode
+
+  return Response.json({ resultCode })
 }
