@@ -39,7 +39,7 @@ export default function TicketPage() {
           <div className="flex flex-row justify-center">
             <Link
               href={{
-                pathname: "/payment/online",
+                pathname: "/payment/online/oneoff",
                 query: {
                   // 티켓타입, 티켓이름 정도
                   ticketId: "1",
