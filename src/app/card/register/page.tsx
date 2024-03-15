@@ -1,7 +1,6 @@
 "use client"
 
 import { gql, useMutation } from "@apollo/client"
-import Link from "next/link"
 import { FormEvent } from "react"
 
 const REGISTER_USER_CARD = gql`
@@ -56,9 +55,6 @@ export default function CardRegisterPage() {
         mutation RegisterUserCard($userId: string, $card: Card) [ registerUserCard($userId: string, $card: Card) [ User
         [ Card ] ] ]
       </div>
-      <Link href="/payment/online">
-        <button>등록하기</button>
-      </Link>
     </>
   )
 }
