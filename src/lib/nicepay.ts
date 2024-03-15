@@ -1,4 +1,4 @@
-import { CLIENT_KEY_SERVER_AUTH, AUTH_PAYMENT_POPUP_RESULT_ENDPOINT } from "@/constant/nicepay"
+import { AUTH_PAYMENT_POPUP_RESULT_ENDPOINT, CLIENT_KEY_SERVER_AUTH } from "@/constant/nicepay"
 
 // 이후에 order 객체로
 export type AuthPaymentProps = {
