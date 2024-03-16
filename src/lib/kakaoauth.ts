@@ -4,6 +4,7 @@ import {
   KAKAO_AUTH_RESTAPI_KEY,
   KAKAO_TOKEN_REQUEST_URL,
   KAKAO_AUTH_CLIENT_SECRET_KEY,
+  KAKAO_USER_INFO_REQUEST_URL,
 } from "@/constant/kakaoauth"
 
 export default class KakaoOAuth {
@@ -33,6 +34,18 @@ export default class KakaoOAuth {
         code: authorizationCode,
         client_secret: KAKAO_AUTH_CLIENT_SECRET_KEY,
       }),
+    })
+    return res.json()
+  }
+
+  static async requestUserInfo(accessToken: string) {
+    // 모든 동의된 정보 받기
+    const res = await fetch(KAKAO_USER_INFO_REQUEST_URL, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `Bearer ${accessToken}`,
+      },
     })
     return res.json()
   }
