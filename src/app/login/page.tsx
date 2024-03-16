@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import Script from "next/script"
-import { KAKAO_AUTH_JAVASCRIPT_KEY } from "@/constant/kakaoauth"
+import KakaoOAuth from "@/lib/kakaoauth"
 
 export default function LoginPage() {
   return (
@@ -62,7 +62,7 @@ const LoginForm = () => {
         <button
           type="submit"
           className="rounded-lg border border-blue-700 bg-white-100 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
-          onClick={() => {}}
+          onClick={KakaoOAuth.requestAuthorizationCode}
         >
           <Image src="/kakao/90x45.png" width={90} height={45} alt="카카오 로그인"></Image>
         </button>
@@ -71,10 +71,7 @@ const LoginForm = () => {
         src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.0/kakao.min.js"
         integrity="sha384-l+xbElFSnPZ2rOaPrU//2FF5B4LB8FiX5q4fXYTlfcG4PGpMkE1vcL7kNXI6Cci0"
         crossOrigin="anonymous"
-        onLoad={() => {
-          const { Kakao } = window
-          Kakao.init(KAKAO_AUTH_JAVASCRIPT_KEY)
-        }}
+        onLoad={KakaoOAuth.initialize}
       ></Script>
       <Script></Script>
     </div>
