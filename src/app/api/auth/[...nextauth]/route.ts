@@ -32,6 +32,7 @@ declare module "next-auth" {
 
   // useSession 리턴값
   interface Session extends DefaultSession {
+    userId: string
     accessToken: string
   }
 }
@@ -60,7 +61,7 @@ export const authOptions: NextAuthOptions = {
     // called wehn /api/auth/signin, /api/auth/session, getSession(), getServerSession(), useSession()
     async jwt({ token, account, profile }) {
       if (account) {
-        token.accessToken = account.access_token // token 객체에 다시 담아서
+        token.accessToken = account.access_token // token 객체에 다시 담아서 session callback에서 반환
         token.id = profile!.id
       }
       return token
@@ -68,6 +69,7 @@ export const authOptions: NextAuthOptions = {
     // Send properties to the client, like an access_token from a provider.
     async session({ session, token }) {
       session.accessToken = token.accessToken as string
+      session.userId = token.id as string
       return session
     },
   },
