@@ -26,7 +26,7 @@ export default function Header() {
             로그아웃
           </Link>
         ) : (
-          <Link href="/api/auth/signin" className="hover:underline">
+          <Link href="/auth/signin" className="hover:underline">
             로그인
           </Link>
         )}

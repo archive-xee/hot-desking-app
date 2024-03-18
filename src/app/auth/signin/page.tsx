@@ -1,3 +1,8 @@
+"use client"
+
+import Image from "next/image"
+import { signIn } from "next-auth/react"
+
 export default function LoginPage() {
   return (
     <>
@@ -53,6 +58,13 @@ const LoginForm = () => {
             </button>
           </div>
         </form>
+        <button
+          type="submit"
+          className="rounded-lg border border-blue-700 bg-white-100 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+          onClick={() => signIn("kakao")}
+        >
+          <Image src="/kakao/90x45.png" width={90} height={45} alt="카카오 로그인"></Image>
+        </button>
       </div>
     </div>
   )
