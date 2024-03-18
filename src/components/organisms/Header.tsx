@@ -3,8 +3,7 @@ import Link from "next/link"
 import { useSession } from "next-auth/react"
 
 export default function Header() {
-  const { data: session } = useSession()
-
+  const { data: accessToken } = useSession()
   return (
     <div className="container flex flex-row items-center bg-white-300 px-2">
       <Link className="inline-block" href="/">
@@ -22,7 +21,7 @@ export default function Header() {
         <Link href="/user/ticket/board" className="hover:underline">
           내 이용권
         </Link>
-        {session ? (
+        {accessToken ? (
           <Link href="/api/auth/signout" className="hover:underline">
             로그아웃
           </Link>
