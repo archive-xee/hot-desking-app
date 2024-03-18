@@ -1,36 +1,40 @@
-import NextAuth, { NextAuthOptions } from "next-auth"
+import NextAuth, { DefaultSession, NextAuthOptions } from "next-auth"
+import { ProviderType } from "next-auth/providers"
 import KakaoProvider from "next-auth/providers/kakao"
 import { KAKAO_AUTH_JAVASCRIPT_KEY, NEXTAUTH_KAKAO_CLIENT_SECRET, NEXTAUTH_SECRET } from "@/constant/kakaoauth"
 
 declare module "next-auth" {
-  /**
-   * The shape of the user object returned in the OAuth providers' `profile` callback,
-   * or the second parameter of the `session` callback, when using a database.
-   */
   interface User {
-    name: string
+    id: string // 최초 Provider로 로그인했을때 그 Provider의 id
+    name: string | undefined
+    email: string | undefined
+    image: string | undefined
   }
-  /**
-   * The shape of the account object returned in the OAuth providers' `account` callback,
-   * Usually contains information about the provider being used, like OAuth tokens (`access_token`, etc).
-   */
-  //   interface Account {}
 
-  /**
-   * Returned by `useSession`, `auth`, contains information about the active session.
-   */
-  interface Session {
+  interface Account {
+    // 인가 코드로 받는 토큰값 포함
+    provider: string
+    type: ProviderType
+    providerAccountId: string
+    access_token: string
+    token_type: "bearer"
+    refresh_token: string
+    expires_at: number
+    scope: string
+    refresh_token_expires_in: number
+  }
+
+  interface Profile {
+    id: number
+    connected_at: string
+    // kakao_account : 각 프로바이더에서 동의된 항목의 유저 정보
+  }
+
+  // useSession 리턴값
+  interface Session extends DefaultSession {
     accessToken: string
   }
 }
-
-// declare module "next-auth/jwt" {
-//   /** Returned by the `jwt` callback and `auth`, when using JWT sessions */
-//   interface JWT {
-//     /** OpenID ID Token */
-//     idToken?: string
-//   }
-// }
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -47,9 +51,21 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
-      return { ...token, ...user }
+    async signIn() {
+      return true
     },
+    async redirect({ baseUrl }) {
+      return baseUrl
+    },
+    // called wehn /api/auth/signin, /api/auth/session, getSession(), getServerSession(), useSession()
+    async jwt({ token, account, profile }) {
+      if (account) {
+        token.accessToken = account.access_token // token 객체에 다시 담아서
+        token.id = profile!.id
+      }
+      return token
+    },
+    // Send properties to the client, like an access_token from a provider.
     async session({ session, token }) {
       session.accessToken = token.accessToken as string
       return session
