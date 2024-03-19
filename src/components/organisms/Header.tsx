@@ -1,13 +1,12 @@
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+
 import { useSession } from "next-auth/react"
 
 export default function Header() {
   const pathname = usePathname()
-  console.log(pathname)
   const isAuthPage = pathname.indexOf("auth") > 0
-  console.log(isAuthPage)
   const { data: session } = useSession()
   return (
     <div className="container flex flex-row items-center bg-white-300 px-2">
