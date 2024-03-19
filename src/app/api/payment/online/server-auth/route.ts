@@ -1,15 +1,15 @@
 import request, { gql } from "graphql-request"
 import { APOLLO_ROUTER_URL } from "@/constant/graphql"
 
-const PAYMENT_APPROVAL_SENDING_MUTATION = gql`
-  mutation SendPaymentApproval($tid: String!, $amount: Float!) {
+const SEND_PAYMENT_APPROVAL_MUTATION = gql`
+  mutation SendPaymentApproval($tid: String!, $amount: String!) {
     serverAuth(input: { tid: $tid, amount: $amount }) {
       resultCode
     }
   }
 `
 
-type PaymentApprovalSendingResponse = {
+type SendPaymentApprovalResponse = {
   serverAuth: {
     resultCode: string
   }
@@ -20,7 +20,7 @@ export async function POST(req: Request) {
   const tid = response.get("tid")?.toString()
   const amount = Number(response.get("amount"))
 
-  const data: PaymentApprovalSendingResponse = await request(APOLLO_ROUTER_URL, PAYMENT_APPROVAL_SENDING_MUTATION, {
+  const data: SendPaymentApprovalResponse = await request(APOLLO_ROUTER_URL, SEND_PAYMENT_APPROVAL_MUTATION, {
     tid,
     amount,
   })
