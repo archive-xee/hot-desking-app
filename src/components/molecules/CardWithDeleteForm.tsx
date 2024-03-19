@@ -37,7 +37,7 @@ const CardWithDeleteForm = (props: { card: Card }) => {
         <p>123412******1234</p>
       </div>
       <form onSubmit={onSubmit}>
-        <input type="hidden" name="cardId" value={card.cardId} />
+        <input type="hidden" name="cardId" value={card.id} />
         <button
           type="submit"
           className="py-0text-sm rounded-lg border border-blue-700 bg-white-100 px-2  font-medium hover:bg-blue-300 hover:text-white-100"
