@@ -1,7 +1,9 @@
 import Image from "next/image"
 import Link from "next/link"
+import { useSession } from "next-auth/react"
 
 export default function Header() {
+  const { data: session } = useSession()
   return (
     <div className="container flex flex-row items-center bg-white-300 px-2">
       <Link className="inline-block" href="/">
@@ -16,15 +18,20 @@ export default function Header() {
       <h1 className="text-lg font-bold">궁극의 창작공간</h1>
       <div className="grow"></div>
       <div className="flex flex-row gap-2">
-        <Link href="/user/ticket/board" className="hover:underline">
-          내 이용권
-        </Link>
-        <Link href="/signup" className="hover:underline">
-          로그아웃
-        </Link>
-        <Link href="/signin" className="hover:underline">
-          로그인
-        </Link>
+        {session?.accessToken ? (
+          <>
+            <Link href="/user/ticket/board" className="hover:underline">
+              내 이용권
+            </Link>
+            <Link href="/api/auth/signout" className="hover:underline">
+              로그아웃
+            </Link>
+          </>
+        ) : (
+          <Link href="/auth/signin" className="hover:underline">
+            로그인
+          </Link>
+        )}
       </div>
     </div>
   )
