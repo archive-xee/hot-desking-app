@@ -18,13 +18,15 @@ export default function Header() {
       <h1 className="text-lg font-bold">궁극의 창작공간</h1>
       <div className="grow"></div>
       <div className="flex flex-row gap-2">
-        <Link href="/user/ticket/board" className="hover:underline">
-          내 이용권
-        </Link>
         {accessToken ? (
-          <Link href="/api/auth/signout" className="hover:underline">
-            로그아웃
-          </Link>
+          <>
+            <Link href="/user/ticket/board" className="hover:underline">
+              내 이용권
+            </Link>
+            <Link href="/api/auth/signout" className="hover:underline">
+              로그아웃
+            </Link>
+          </>
         ) : (
           <Link href="/auth/signin" className="hover:underline">
             로그인
