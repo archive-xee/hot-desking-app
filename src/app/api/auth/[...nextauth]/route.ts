@@ -1,7 +1,49 @@
+import request, { gql } from "graphql-request"
 import NextAuth, { DefaultSession, NextAuthOptions } from "next-auth"
 import { ProviderType } from "next-auth/providers"
 import KakaoProvider from "next-auth/providers/kakao"
+import { APOLLO_ROUTER_URL } from "@/constant/graphql"
 import { KAKAO_AUTH_JAVASCRIPT_KEY, NEXTAUTH_KAKAO_CLIENT_SECRET, NEXTAUTH_SECRET } from "@/constant/kakaoauth"
+
+const ADD_USER_MUTATION = gql`
+  mutation AddUser(
+    $id: String!
+    $name: String!
+    $phoneNumber: String!
+    $ageRange: String
+    $birthday: String
+    $birthdayType: String
+    $birthyear: String
+    $gender: String
+  ) {
+    addUser(
+      id: $id
+      name: $name
+      phoneNumber: $phoneNumber
+      ageRange: $ageRange
+      birthday: $birthday
+      birthdayType: $birthdayType
+      birthyear: $birthyear
+      gender: $gender
+    ) {
+      ageRange
+      birthday
+      birthyear
+      birthdayType
+    }
+  }
+`
+
+interface UserInfo {
+  id: string
+  name: string
+  phone_number: string
+  age_range: string | null
+  birthday: string | null
+  birthday_type: string | null
+  birthyear: string | null
+  gender: string | null
+}
 
 declare module "next-auth" {
   interface User {
@@ -27,6 +69,7 @@ declare module "next-auth" {
   interface Profile {
     id: number
     connected_at: string
+    kakao_account: UserInfo
     // kakao_account : 각 프로바이더에서 동의된 항목의 유저 정보
   }
 
@@ -52,7 +95,18 @@ const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn() {
+    async signIn({ profile }) {
+      const kakao_account = profile?.kakao_account
+      await request(APOLLO_ROUTER_URL, ADD_USER_MUTATION, {
+        id: profile?.id.toString(),
+        name: kakao_account?.name,
+        phoneNumber: kakao_account?.phone_number,
+        birthyear: kakao_account?.birthyear,
+        birthday: kakao_account?.birthday,
+        birthdayType: kakao_account?.birthday_type,
+        gender: kakao_account?.gender,
+      })
+
       return true
     },
     async redirect({ baseUrl }) {
@@ -62,14 +116,14 @@ const authOptions: NextAuthOptions = {
     async jwt({ token, account, profile }) {
       if (account) {
         token.accessToken = account.access_token // token 객체에 다시 담아서 session callback에서 반환
-        token.id = profile!.id
+        token.id = profile!.id.toString()
       }
       return token
     },
     // Send properties to the client, like an access_token from a provider.
     async session({ session, token }) {
       session.accessToken = token.accessToken as string
-      session.userId = token.id as string
+      session.userId = (token.id as number).toString()
       return session
     },
   },
