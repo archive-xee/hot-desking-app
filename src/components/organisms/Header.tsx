@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react"
 export default function Header() {
   const pathname = usePathname()
   const isAuthPage = pathname.indexOf("auth") > 0
-  const { data: session } = useSession()
+  const { data: session, status: authStatus } = useSession()
   return (
     <div className="container flex flex-row items-center bg-white-300 px-2">
       <Link className="inline-block" href="/">
@@ -24,6 +24,8 @@ export default function Header() {
       <div className="flex flex-row gap-2">
         {isAuthPage ? (
           <></>
+        ) : authStatus === "loading" ? (
+          <>로딩중</>
         ) : session?.accessToken ? (
           <>
             <Link href="/user/ticket/board" className="hover:underline">
