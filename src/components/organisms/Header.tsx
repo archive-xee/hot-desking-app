@@ -1,8 +1,13 @@
 import Image from "next/image"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { useSession } from "next-auth/react"
 
 export default function Header() {
+  const pathname = usePathname()
+  console.log(pathname)
+  const isAuthPage = pathname.indexOf("auth") > 0
+  console.log(isAuthPage)
   const { data: session } = useSession()
   return (
     <div className="container flex flex-row items-center bg-white-300 px-2">
@@ -18,7 +23,9 @@ export default function Header() {
       <h1 className="text-lg font-bold">궁극의 창작공간</h1>
       <div className="grow"></div>
       <div className="flex flex-row gap-2">
-        {session?.accessToken ? (
+        {isAuthPage ? (
+          <></>
+        ) : session?.accessToken ? (
           <>
             <Link href="/user/ticket/board" className="hover:underline">
               내 이용권
