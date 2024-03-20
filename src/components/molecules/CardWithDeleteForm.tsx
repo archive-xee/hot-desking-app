@@ -19,9 +19,8 @@ const CardWithDeleteForm = (props: { card: Card }) => {
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    const formData = new FormData(event.currentTarget)
-    const cardId = formData.get("cardId")
-    console.log(cardId)
+    // const formData = new FormData(event.currentTarget)
+    // const cardId = formData.get("cardId")
     // deleteUserCard({ variables: { cardId } })
   }
 
@@ -31,10 +30,10 @@ const CardWithDeleteForm = (props: { card: Card }) => {
 
   return (
     <div className="flex flex-row">
-      <div className="rounded-lg border border-black-300">신한</div>
+      <div className="rounded-lg border border-black-300">{card.cardCode}</div>
       <div>
-        <p>케이뱅크</p>
-        <p>123412******1234</p>
+        <p>{card.cardName}</p>
+        <p>{card.cardNum}</p>
       </div>
       <form onSubmit={onSubmit}>
         <input type="hidden" name="cardId" value={card.id} />

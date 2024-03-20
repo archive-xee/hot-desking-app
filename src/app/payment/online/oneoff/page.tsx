@@ -1,24 +1,14 @@
 "use client"
 
-// import { gql } from "@apollo/client"
 import Link from "next/link"
 import { redirect } from "next/navigation"
 import Script from "next/script"
 import { useSession } from "next-auth/react"
 import { v4 as uuidv4 } from "uuid"
-import CardWithDeleteForm from "@/components/molecules/CardWithDeleteForm"
+import UserCardList from "@/components/organisms/UserCardList"
 import { executeAuthPaymentPopup } from "@/lib/nicepay"
-import { card1 } from "@/models/card"
 // import { useSearchParams } from "next/navigation"
 // import { useState, useEffect } from "react"
-
-// const GET_USER_CARD_LIST = gql`
-//   query GetUserCardList($userId: string) {
-//     User(userId: $userId) {
-//       card
-//     }
-//   }
-// `
 
 export default function PaymentOnlinePage() {
   const { data: session, status: authStatus } = useSession()
@@ -27,9 +17,7 @@ export default function PaymentOnlinePage() {
   let hasConsent = false // eslint-disable-line
   // const [response, setResponse] = useState<PaymentResponse | undefined>(undefined)
 
-  // 티켓정보를 받을 것
-  // 정기권인지, 일회권인지에 따라 예약결제가 동의약관이 보일 것
-  // 유저가 예약결제에 동의했는지도 db에 들어가야 함
+  // 티켓id를 path에서 받을 것
   if (authStatus === "loading") return <>로딩중</>
   else if (authStatus === "unauthenticated") {
     redirect("/auth/signin")
@@ -38,7 +26,6 @@ export default function PaymentOnlinePage() {
       <>
         <div className="flex flex-col items-center">
           일회권 온라인 결제
-          {session?.userId}
           <div>
             <input
               id="payment-registered-card"
@@ -53,7 +40,7 @@ export default function PaymentOnlinePage() {
               등록된 카드로 결제
             </label>
           </div>
-          <UserCardList />
+          <UserCardList userId={session?.userId!} />
           <div>
             <Link href="/card/register">
               <button
@@ -94,18 +81,7 @@ export default function PaymentOnlinePage() {
           </button>
         </div>
         portone 결제 요청 이후 /user/ticket/oneoff으로 리디렉션
-        <div className="border"> query GetUserCardList($userId: string) [ User(userId: $userId) [ card ] ]</div>
         <Script src="https://pay.nicepay.co.kr/v1/js/" />
       </>
     )
-}
-
-const UserCardList = () => {
-  return (
-    <div className="flex flex-col">
-      <CardWithDeleteForm card={card1}></CardWithDeleteForm>
-      <CardWithDeleteForm card={card1}></CardWithDeleteForm>
-      <CardWithDeleteForm card={card1}></CardWithDeleteForm>
-    </div>
-  )
 }
