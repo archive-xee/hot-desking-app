@@ -5,6 +5,21 @@ import KakaoProvider from "next-auth/providers/kakao"
 import { APOLLO_ROUTER_URL } from "@/constant/graphql"
 import { KAKAO_AUTH_JAVASCRIPT_KEY, NEXTAUTH_KAKAO_CLIENT_SECRET, NEXTAUTH_SECRET } from "@/constant/kakaoauth"
 
+const GET_USER_BY_ID = gql`
+  query GetUserById($userId: String!) {
+    userbyid(userId: $userId) {
+      id
+      name
+      phoneNumber
+      ageRange
+      birthday
+      birthdayType
+      birthyear
+      gender
+    }
+  }
+`
+
 const ADD_USER_MUTATION = gql`
   mutation AddUser(
     $id: String!
@@ -96,16 +111,24 @@ const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async signIn({ profile }) {
+      const userId = profile?.id.toString()
       const kakao_account = profile?.kakao_account
-      await request(APOLLO_ROUTER_URL, ADD_USER_MUTATION, {
-        id: profile?.id.toString(),
-        name: kakao_account?.name,
-        phoneNumber: kakao_account?.phone_number,
-        birthyear: kakao_account?.birthyear,
-        birthday: kakao_account?.birthday,
-        birthdayType: kakao_account?.birthday_type,
-        gender: kakao_account?.gender,
+
+      const user = await request(APOLLO_ROUTER_URL, GET_USER_BY_ID, {
+        userId,
       })
+
+      if (!user) {
+        await request(APOLLO_ROUTER_URL, ADD_USER_MUTATION, {
+          id: userId,
+          name: kakao_account?.name,
+          phoneNumber: kakao_account?.phone_number,
+          birthyear: kakao_account?.birthyear,
+          birthday: kakao_account?.birthday,
+          birthdayType: kakao_account?.birthday_type,
+          gender: kakao_account?.gender,
+        })
+      }
 
       return true
     },
