@@ -1,43 +1,21 @@
-"use client"
-
-import { gql, useQuery } from "@apollo/client"
-import CardWithDeleteForm from "../molecules/CardWithDeleteForm"
+import { redirect } from "next/navigation"
+import { getServerSession } from "next-auth"
+import { getUserCardList } from "@/actions/nicepay"
+import CardWithDeleteForm from "@/components/molecules/CardWithDeleteForm"
+import { authOptions } from "@/lib/authjs"
 import { Card } from "@/models/card"
 
-const GET_USER_CARD_LIST = gql`
-  query GetUserCardList($userId: String!) {
-    userbyid(userId: $userId) {
-      cards {
-        authDate
-        cardCode
-        cardName
-        cardNum
-        orderId
-        id
-        representative
-        userId
-      }
-    }
-  }
-`
+export default async function UserCardList() {
+  const session = await getServerSession(authOptions)
+  const userId = session?.userId
+  if (!userId) redirect("/auth/signin")
+  const userCardList = await getUserCardList(userId)
 
-export default function UserCardList(props: { userId: string }) {
-    const { userId } = props
-    const { loading, error, data } = useQuery(GET_USER_CARD_LIST, {
-        variables: { userId },
-    })
-
-    // 분기에 따라 다이얼로그 만들면 됩니다
-    if (loading) return "Submitting..."
-    else if (error) return `Submission error! ${error.message}`
-    else {
-        const userCards = data.userbyid.cards
-        return (
-            <div className="flex flex-col">
-                {userCards.map((usercard: Card) => (
-                    <CardWithDeleteForm key={usercard.id} card={usercard} />
-                ))}
-            </div>
-        )
-    }
+  return (
+    <div className="flex flex-col">
+      {userCardList.map((usercard: Card) => (
+        <CardWithDeleteForm key={usercard.id} card={usercard} />
+      ))}
+    </div>
+  )
 }
