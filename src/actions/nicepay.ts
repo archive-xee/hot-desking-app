@@ -97,3 +97,21 @@ export async function registerUserCard(userId: string, formData: FormData) {
   const resultCode = data.cardAuth.resultCode
   return resultCode
 }
+
+export async function deleteUserCard(formData: FormData) {
+  const DELETE_USER_CARD = gql`
+    mutation DeleteUserCard($cardId: String!) {
+      deleteUserCard(input: { cardId: $cardId }) {
+        resultCode
+      }
+    }
+  `
+
+  const cardId = formData.get("cardId")
+
+  const data: { cardAuth: { resultCode: string } } = await request(APOLLO_ROUTER_URL, DELETE_USER_CARD, {
+    cardId,
+  })
+  const resultCode = data.cardAuth.resultCode
+  return resultCode
+}

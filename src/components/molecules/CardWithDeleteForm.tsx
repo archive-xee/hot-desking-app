@@ -1,32 +1,8 @@
-"use client"
-
-// import { gql, useMutation } from "@apollo/client"
-import { FormEvent } from "react"
+import { deleteUserCard } from "@/actions/nicepay"
 import { Card } from "@/models/card"
 
-// userId 필요함
-// const DELETE_USER_CARD = gql`
-//   mutation DeleteUserCard($cardId: String!) {
-//     deleteUserCard(input: { cardId: $cardId }) {
-//       resultCode
-//     }
-//   }
-// `
-
-const CardWithDeleteForm = (props: { card: Card }) => {
-  // const [deleteUserCard, { data, loading, error }] = useMutation(DELETE_USER_CARD)
+export default async function CardWithDeleteForm(props: { card: Card }) {
   const { card } = props
-
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    // const formData = new FormData(event.currentTarget)
-    // const cardId = formData.get("cardId")
-    // deleteUserCard({ variables: { cardId } })
-  }
-
-  // if (loading) return "Submitting..."
-  // if (error) return `Submission error! ${error.message}`
-  // console.log("data", data?.cardAuth?.resultCode)
 
   return (
     <div className="flex flex-row">
@@ -35,7 +11,7 @@ const CardWithDeleteForm = (props: { card: Card }) => {
         <p>{card.cardName}</p>
         <p>{card.cardNum}</p>
       </div>
-      <form onSubmit={onSubmit}>
+      <form action={deleteUserCard}>
         <input type="hidden" name="cardId" value={card.id} />
         <button
           type="submit"
@@ -47,5 +23,3 @@ const CardWithDeleteForm = (props: { card: Card }) => {
     </div>
   )
 }
-
-export default CardWithDeleteForm
