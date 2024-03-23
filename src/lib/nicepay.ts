@@ -8,11 +8,14 @@ export type AuthPaymentProps = {
   paymentMethod: "cardAndEasyPay" | "samsungpayCard"
 }
 
+export type AuthPaymentResponse = {
+  errorMsg: string
+}
+
 // 인증결제(일회성결제)
 export const executeAuthPaymentPopup = async (props: AuthPaymentProps): Promise<void> => {
   const { orderId, ticketName, price, paymentMethod } = props
-  const payElem: any = window
-  const { AUTHNICE } = payElem
+  const { AUTHNICE } = window
   AUTHNICE.requestPay({
     clientId: CLIENT_KEY_SERVER_AUTH,
     method: paymentMethod,
@@ -20,6 +23,6 @@ export const executeAuthPaymentPopup = async (props: AuthPaymentProps): Promise<
     amount: price,
     goodsName: ticketName,
     returnUrl: AUTH_PAYMENT_POPUP_RESULT_ENDPOINT, //API를 호출할 Endpoint
-    fnError: (result: any) => alert("개발자확인용 : " + result.errorMsg + ""),
+    fnError: (result: AuthPaymentResponse) => alert(result.errorMsg),
   })
 }

@@ -18,7 +18,6 @@
   },
   "rules": {
     "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
-    "@typescript-eslint/no-explicit-any": "off",
     "tailwindcss/no-custom-classname": "off",
     "react/react-in-jsx-scope": "off",
     "import/order": [
