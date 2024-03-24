@@ -18,7 +18,6 @@ import useIsReactNativeWebview from "@/hooks/useIsReactNativeWebview"
 // `
 export default function TicketPage() {
   const isReactNativeWebview = useIsReactNativeWebview()
-
   return (
     <>
       <OneoffTicketPageTitle />
@@ -39,29 +38,15 @@ export default function TicketPage() {
           ></StretchedTicket>
         }
         content={
-          // 티켓아이디를 앱으로
           <div className="flex flex-row justify-center">
-            {isReactNativeWebview ? (
-              <button
-                className="rounded-full bg-white-100 px-10 py-2 font-bold text-black-700"
-                onClick={() => {
-                  window.ReactNativeWebView.postMessage(JSON.stringify("1"))
-                }}
-              >
-                구매하기
-              </button>
-            ) : (
-              <Link
-                href={{
-                  pathname: "/payment/online/oneoff",
-                  query: {
-                    ticketId: "1",
-                  },
-                }}
-              >
-                <button className="rounded-full bg-white-100 px-10 py-2 font-bold text-black-700">구매하기</button>
-              </Link>
-            )}
+            <button
+              className="rounded-full bg-white-100 px-10 py-2 font-bold text-black-700"
+              onClick={() => {
+                if (isReactNativeWebview) window.ReactNativeWebView.postMessage(JSON.stringify("1"))
+              }}
+            >
+              구매하기
+            </button>
           </div>
         }
       ></BottomSheetModal>

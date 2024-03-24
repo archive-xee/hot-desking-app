@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
 
 const useIsReactNativeWebview = () => {
-    const [isReactNativeWebview, setIsReactNativeWebView] = useState(false)
+  const [isReactNativeWebview, setIsReactNativeWebView] = useState(false)
 
-    useEffect(() => {
-        if (window.ReactNativeWebView) setIsReactNativeWebView(true)
-    }, [])
+  useEffect(() => {
+    if (window.ReactNativeWebView) setIsReactNativeWebView(true)
+  }, [])
 
-    return isReactNativeWebview
+  return isReactNativeWebview
 }
 
 export default useIsReactNativeWebview
