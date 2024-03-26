@@ -1,7 +1,6 @@
 "use client"
 
 // import { gql } from "@apollo/client"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 import StretchedCoupon from "@/components/molecules/Coupon/StretchedCoupon"
 import BottomSheetModal from "@/components/organisms/BottomSheetModal"
@@ -12,12 +11,12 @@ import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 //   }
 // `
 
+// 서버 컴포넌트/액션으로 뮤테이션 보내기
 export default function UserCouponPage() {
   const router = useRouter()
   return (
     <>
-      <UserCouponPageTitle />
-      <CouponRegistrationButton />
+      <UserCouponPageIntroduction />
       <BottomSheetModal
         trigger={
           <StretchedCoupon
@@ -35,6 +34,7 @@ export default function UserCouponPage() {
           <div className="flex flex-row justify-center">
             <button
               onClick={() => {
+                // 쿠폰 적용을 결제페이지에서 해야 할듯
                 router.back()
               }}
               className="rounded-full bg-white-100 px-10 py-2 font-bold text-black-700"
@@ -44,30 +44,16 @@ export default function UserCouponPage() {
           </div>
         }
       ></BottomSheetModal>
-      <p>
-        <br /> UserTimeBonusCoupon[ id, userId, bonusTime, CouponType, expiresAt ]의 리스트 + UserDiscountCoupon [ id,
-        CouponType , discountPercentage, expiresAt]의 리스트
-        <br /> 사용하기 위해 쿠폰을 눌렀을 때는 모달에 프로퍼티로 보내겠음
-      </p>
-      userJwt와 userId를 어떻게 연결할지는 생각해보겠음
       <div className="border"> query GetUserCouponList($userId: string) [ UserCoupon(userId: $userId) ]</div>
     </>
   )
 }
 
-const UserCouponPageTitle = () => {
-  return <h1 className="text-center text-xl font-bold">내 쿠폰 리스트</h1>
-}
-
-const CouponRegistrationButton = () => {
+const UserCouponPageIntroduction = () => {
   return (
-    <Link href="/coupon">
-      <button
-        type="button"
-        className="w-full rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
-      >
-        쿠폰 등록하기
-      </button>
-    </Link>
+    <div className="flex flex-col">
+      <h1 className="text-center text-xl font-bold">내 쿠폰 리스트</h1>
+      <h3 className="text-center">쿠폰을 등록하려면 실물쿠폰의 QR코드를 촬영해주세요.</h3>
+    </div>
   )
 }

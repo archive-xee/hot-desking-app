@@ -1,7 +1,7 @@
-"use client"
-
+import { headers } from "next/headers"
+import Link from "next/link"
+import StretchedCoupon from "@/components/molecules/Coupon/StretchedCoupon"
 // import { gql } from "@apollo/client"
-import { useRouter } from "next/navigation"
 
 // const REGISTER_USER_COUPON = gql`
 //   mutation RegisterUserCoupon($userId: string, $couponId: couponId) {
@@ -11,21 +11,22 @@ import { useRouter } from "next/navigation"
 //   }
 // `
 
-export default function CouponPage() {
+// 이 페이지는 쿠폰을 찍었을때만 오는 페이지
+// 서버 컴포넌트/액션으로 뮤테이션 보내기
+
+export default function CouponRegisterPage() {
+  const headersList = headers()
+  const pathname = headersList.get("x-pathname")!
+  const couponId = pathname.split("/")[2]
+
   return (
     <>
+      couponId: {couponId}
       <CouponPageTitle />
-      <CouponRegisterForm />
-      <p>
-        <br /> QR코드 찍으면 QR객체의 string을 받아올 거고
-        <br /> string은 Coupon객체의 CouponType, issuedAt, expiresAt을 서버에서 알아서 잘 섞어서 만든 uuid
-        <br /> 다시 말하면 QR객체의 string은 Coupon 객체의 PR key임
-        <br /> 쿠폰등록 버튼을 누르면 DiscountCoupon, TimebonusCoupon 중 PR Key가 string과 맞는 객체가
-        <br /> UserDiscountCoupon, USerTimebonusCoupon가 되어 User에게 할당될 것임
-      </p>
+      <CouponForm />
       <div className="border">
         mutation RegisterUserCoupon($userId: string, $couponId: couponId) [ registerUserCoupon(userId: $userId,
-        couponId: couponId) [ UserCoupon # 주석 UserDiscountCoupon, USerTimebonusCoupon ] ]
+        couponId: couponId) [ resultCode ] ]
       </div>
     </>
   )
@@ -35,37 +36,34 @@ const CouponPageTitle = () => {
   return <h1 className="text-center text-xl font-bold">쿠폰 등록하기</h1>
 }
 
-const CouponRegisterForm = () => {
-  const router = useRouter()
-
+const CouponForm = () => {
   return (
-    <div className="container mx-auto max-w-screen-sm  overflow-hidden  rounded-lg border border-black-100">
+    <div className="container mx-auto max-w-screen-sm overflow-hidden  rounded-lg border border-black-100">
       <div className="bg-white-500 py-2 text-center">
-        {/* 키오스크였을 때 */}
-        <p>QR코드 인식기에 QR코드를 가까이 해주세요.</p>
-        {/* 모바일웹일 때 */}
-        {/* <p>쿠폰의 QR코드를 촬영해주세요.</p> */}
+        <p>등록될 쿠폰입니다.</p>
       </div>
-      <div className="px-2 py-6">
+      <div className="px-4 py-6">
+        <StretchedCoupon
+          coupon={{
+            id: "1",
+            type: "timebonus",
+            bookable: "seat",
+            digit: 10,
+            issuedAt: 0,
+            expiresAt: 0,
+          }}
+        ></StretchedCoupon>
+        <div className="my-12"></div>
         <form>
           <div className="flex flex-row justify-center">
-            <input
-              type="qr"
-              id="qr"
-              className="w-full max-w-sm rounded-lg border  border-black-100 bg-white-300 p-2.5 text-sm"
-              placeholder="쿠폰 코드"
-              required
-            />
-          </div>
-          <div className="my-12"></div>
-          <div className="flex flex-row justify-center">
-            <button
-              onClick={() => router.back()}
-              type="submit"
-              className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
-            >
-              쿠폰 등록
-            </button>
+            <Link href="/user/coupon">
+              <button
+                type="submit"
+                className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+              >
+                쿠폰 등록
+              </button>
+            </Link>
           </div>
         </form>
       </div>
