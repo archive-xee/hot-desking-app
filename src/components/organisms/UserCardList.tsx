@@ -13,9 +13,11 @@ export default async function UserCardList() {
 
   return (
     <div className="flex flex-col">
-      {userCardList.map((usercard: Card) => (
-        <CardWithDeleteForm key={usercard.id} card={usercard} />
-      ))}
+      {userCardList ? (
+        userCardList.map((usercard: Card) => <CardWithDeleteForm key={usercard.id} card={usercard} />)
+      ) : (
+        <p>카드를 등록해주세요</p>
+      )}
     </div>
   )
 }
