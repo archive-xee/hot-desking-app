@@ -7,7 +7,7 @@ import { KAKAO_AUTH_JAVASCRIPT_KEY, NEXTAUTH_KAKAO_CLIENT_SECRET, NEXTAUTH_SECRE
 
 const GET_USER_BY_ID = gql`
   query GetUserById($userId: String!) {
-    userbyid(userId: $userId) {
+    user(userId: $userId) {
       id
       name
       phoneNumber
@@ -32,19 +32,18 @@ const ADD_USER_MUTATION = gql`
     $gender: String
   ) {
     addUser(
-      id: $id
-      name: $name
-      phoneNumber: $phoneNumber
-      ageRange: $ageRange
-      birthday: $birthday
-      birthdayType: $birthdayType
-      birthyear: $birthyear
-      gender: $gender
+      input: {
+        id: $id
+        name: $name
+        phoneNumber: $phoneNumber
+        ageRange: $ageRange
+        birthday: $birthday
+        birthdayType: $birthdayType
+        birthyear: $birthyear
+        gender: $gender
+      }
     ) {
-      ageRange
-      birthday
-      birthyear
-      birthdayType
+      resultCode
     }
   }
 `

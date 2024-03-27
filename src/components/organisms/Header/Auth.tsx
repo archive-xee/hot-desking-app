@@ -1,15 +1,11 @@
-import { headers } from "next/headers"
 import Image from "next/image"
 import Link from "next/link"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/authjs"
 
-export default async function Header() {
+export default async function AuthHeader() {
   const session = await getServerSession(authOptions)
   const userId = session?.userId
-  const headersList = headers()
-  const pathname = headersList.get("x-pathname")!
-  const isAuthPage = pathname.indexOf("auth") > 0
 
   return (
     <div className="container flex flex-row items-center bg-white-300 px-2">
@@ -25,9 +21,7 @@ export default async function Header() {
       <h1 className="text-lg font-bold">궁극의 창작공간</h1>
       <div className="grow"></div>
       <div className="flex flex-row gap-2">
-        {isAuthPage ? (
-          <></>
-        ) : userId ? (
+        {userId ? (
           <>
             <Link href="/user/ticket/board" className="hover:underline">
               내 이용권

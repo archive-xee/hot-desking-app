@@ -6,6 +6,7 @@ import Link from "next/link"
 // import { useSearchParams } from "next/navigation"
 import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
 import BottomSheetModal from "@/components/organisms/BottomSheetModal"
+import useIsReactNativeWebview from "@/hooks/useIsReactNativeWebview"
 
 // const GET_BILLING_TICKET_LIST = gql`
 //   query GetOneoffTicketList {
@@ -16,6 +17,7 @@ import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 //   }
 // `
 export default function TicketPage() {
+  const isReactNativeWebview = useIsReactNativeWebview()
   return (
     <>
       <OneoffTicketPageTitle />
@@ -37,17 +39,14 @@ export default function TicketPage() {
         }
         content={
           <div className="flex flex-row justify-center">
-            <Link
-              href={{
-                pathname: "/payment/online/oneoff",
-                query: {
-                  // 티켓타입, 티켓이름 정도
-                  ticketId: "1",
-                },
+            <button
+              className="rounded-full bg-white-100 px-10 py-2 font-bold text-black-700"
+              onClick={() => {
+                if (isReactNativeWebview) window.ReactNativeWebView.postMessage(JSON.stringify("1"))
               }}
             >
-              <button className="rounded-full bg-white-100 px-10 py-2 font-bold text-black-700">구매하기</button>
-            </Link>
+              구매하기
+            </button>
           </div>
         }
       ></BottomSheetModal>

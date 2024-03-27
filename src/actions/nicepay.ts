@@ -33,7 +33,7 @@ export async function getBillingKeyTerm() {
 export async function getUserCardList(userId: string) {
   const GET_USER_CARD_LIST = gql`
     query GetUserCardList($userId: String!) {
-      userbyid(userId: $userId) {
+      user(userId: $userId) {
         cards {
           authDate
           cardCode
@@ -48,10 +48,10 @@ export async function getUserCardList(userId: string) {
     }
   `
 
-  const data: { userbyid: { cards: Card[] } } = await request(APOLLO_ROUTER_URL, GET_USER_CARD_LIST, {
+  const data: { user: { cards: Card[] } } = await request(APOLLO_ROUTER_URL, GET_USER_CARD_LIST, {
     userId,
   })
-  const userCardList = data.userbyid.cards
+  const userCardList = data.user.cards
   return userCardList
 }
 
