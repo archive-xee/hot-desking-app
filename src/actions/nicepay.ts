@@ -17,12 +17,12 @@ export async function getBillingKeyTerm() {
     type: "eletorn" | "colletperson" | "sharinginfo" | "telcommun"
   }
 
-  type BillingKeyTermResponse = {
-    termsTitle: string
-    content: string
-  }
-
-  const data: { term: BillingKeyTermResponse } = await request(APOLLO_ROUTER_URL, GET_BILLING_KEY_TERM_QUERY, {
+  const data: {
+    term: {
+      termsTitle: string
+      content: string
+    }
+  } = await request(APOLLO_ROUTER_URL, GET_BILLING_KEY_TERM_QUERY, {
     type: "eletorn",
   } as BillingKeyTermRequest)
 
@@ -109,9 +109,9 @@ export async function deleteUserCard(formData: FormData) {
 
   const cardId = formData.get("cardId")
 
-  const data: { cardAuth: { resultCode: string } } = await request(APOLLO_ROUTER_URL, DELETE_USER_CARD, {
+  const data: { deleteUserCard: { resultCode: string } } = await request(APOLLO_ROUTER_URL, DELETE_USER_CARD, {
     cardId,
   })
-  const resultCode = data.cardAuth.resultCode
+  const resultCode = data.deleteUserCard.resultCode
   return resultCode
 }
