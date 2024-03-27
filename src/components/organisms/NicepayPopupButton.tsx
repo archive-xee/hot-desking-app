@@ -1,18 +1,21 @@
 "use client"
 
 import Script from "next/script"
-import { v4 as uuidv4 } from "uuid"
-import { executeAuthPaymentPopup } from "@/lib/nicepay"
+import { executeAuthPaymentPopup, sendOrder } from "@/lib/nicepay"
+import { Order } from "@/models/order"
 
 // todo: props로 order정보 받기
-export default function NicepayPopupButton() {
+export default function NicepayPopupButton(props: { order: Order }) {
+  const { order } = props
   return (
     <>
       <button
         type="button"
-        onClick={() => {
-          executeAuthPaymentPopup({
-            orderId: uuidv4(),
+        onClick={async () => {
+          console.log("order", order)
+          const orderId = await sendOrder(order)
+          await executeAuthPaymentPopup({
+            orderId,
             ticketName: "온라인 일회권",
             price: 1000,
             paymentMethod: "cardAndEasyPay",
