@@ -10,17 +10,25 @@
     "plugin:import/recommended",
     "plugin:import/typescript",
     "plugin:tailwindcss/recommended"
-  ],  
+  ],
   "settings": {
     "tailwindcss": {
       "config": "tailwind.config.js"
     }
   },
   "rules": {
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "tailwindcss/no-custom-classname": "off",
     "react/react-in-jsx-scope": "off",
-    "import/order": [2, { "alphabetize": { "order": "asc" } }],
+    "import/order": [
+      2,
+      {
+        "alphabetize": {
+          "order": "asc"
+        }
+      }
+    ],
     "prettier/prettier": [
       "error",
       {

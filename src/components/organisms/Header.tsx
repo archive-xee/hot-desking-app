@@ -1,14 +1,16 @@
+import { headers } from "next/headers"
 import Image from "next/image"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { useSession } from "next-auth/react"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/authjs"
 
-export default function Header() {
-  const pathname = usePathname()
-  console.log(pathname)
+export default async function Header() {
+  const session = await getServerSession(authOptions)
+  const userId = session?.userId
+  const headersList = headers()
+  const pathname = headersList.get("x-pathname")!
   const isAuthPage = pathname.indexOf("auth") > 0
-  console.log(isAuthPage)
-  const { data: session } = useSession()
+
   return (
     <div className="container flex flex-row items-center bg-white-300 px-2">
       <Link className="inline-block" href="/">
@@ -25,7 +27,7 @@ export default function Header() {
       <div className="flex flex-row gap-2">
         {isAuthPage ? (
           <></>
-        ) : session?.accessToken ? (
+        ) : userId ? (
           <>
             <Link href="/user/ticket/board" className="hover:underline">
               내 이용권

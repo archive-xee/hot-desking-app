@@ -1,28 +1,14 @@
-"use client"
-
-// import { gql } from "@apollo/client"
 import Link from "next/link"
-import CardWithDeleteForm from "@/components/molecules/CardWithDeleteForm"
-import { card1 } from "@/models/card"
+import BillingKeyTerm from "@/components/organisms/BillingKeyTerm"
+import UserCardList from "@/components/organisms/UserCardList"
 // import { useSearchParams } from "next/navigation"
-// import { useState, useEffect } from "react"
 
-// const GET_USER_CARD_LIST = gql`
-//   query GetUserCardList($userId: string) {
-//     User(userId: $userId) {
-//       card
-//     }
-//   }
-// `
-
-export default function PaymentOnlinePage() {
-  // 티켓 아이디 or 티켓name만 넘기면 사실은 됨
+export default function PaymentOnlineBillingPage() {
+  // 유저가 예약결제에 동의했는지도 db에 들어가야 함
   // const searchParams = useSearchParams()
   // const ticketId = searchParams.get("ticketId")
   let hasConsent = false // eslint-disable-line
-  // const [response, setResponse] = useState<PaymentResponse | undefined>(undefined)
-
-  // 티켓정보를 받을 것
+  // 티켓id를 path에서 받을 것
   // 정기권인지, 일회권인지에 따라 예약결제가 동의약관이 보일 것
   // 유저가 예약결제에 동의했는지도 db에 들어가야 함
   return (
@@ -40,7 +26,7 @@ export default function PaymentOnlinePage() {
             </button>
           </Link>
         </div>
-        <div>약관내용 (cheveron)</div>
+        <BillingKeyTerm />
         <div>
           <input
             id="payment-registered-card"
@@ -57,17 +43,6 @@ export default function PaymentOnlinePage() {
         </div>
       </div>
       결제 응답에 따라 성공하면 사용페이지로, 실패하면 실패 페이지로 리디렉션
-      <div className="border"> query GetUserCardList($userId: string) [ User(userId: $userId) [ card ] ]</div>
     </>
-  )
-}
-
-const UserCardList = () => {
-  return (
-    <div className="flex flex-col">
-      <CardWithDeleteForm card={card1}></CardWithDeleteForm>
-      <CardWithDeleteForm card={card1}></CardWithDeleteForm>
-      <CardWithDeleteForm card={card1}></CardWithDeleteForm>
-    </div>
   )
 }

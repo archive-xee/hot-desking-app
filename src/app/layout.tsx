@@ -1,7 +1,4 @@
-"use client"
-
 import localFont from "next/font/local"
-import { SessionProvider } from "next-auth/react"
 import { ApolloWrapper } from "./ApolloWrapper"
 import "@/app/globals.css"
 import Header from "@/components/organisms/Header"
@@ -12,18 +9,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={PRETENDARD_FONT.className}>
       <body className="text-black-700">
-        <SessionProvider>
-          <ApolloWrapper>
-            <div className="container mx-auto h-lvh bg-white-100">
-              <main>
-                <Header />
-                <div className="container px-4 py-2">
-                  <div className="m-auto flex max-w-screen-md flex-col gap-2 py-1">{children}</div>
-                </div>
-              </main>
-            </div>
-          </ApolloWrapper>
-        </SessionProvider>
+        <ApolloWrapper>
+          <div className="container mx-auto h-lvh bg-white-100">
+            <main>
+              <Header />
+              <div className="container px-4 py-2">
+                <div className="m-auto flex max-w-screen-md flex-col gap-2 py-1">{children}</div>
+              </div>
+            </main>
+          </div>
+        </ApolloWrapper>
       </body>
     </html>
   )
