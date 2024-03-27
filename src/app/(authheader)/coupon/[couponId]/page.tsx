@@ -1,4 +1,3 @@
-import { headers } from "next/headers"
 import Link from "next/link"
 import StretchedCoupon from "@/components/molecules/Coupon/StretchedCoupon"
 // import { gql } from "@apollo/client"
@@ -14,10 +13,8 @@ import StretchedCoupon from "@/components/molecules/Coupon/StretchedCoupon"
 // 이 페이지는 쿠폰을 찍었을때만 오는 페이지
 // 서버 컴포넌트/액션으로 뮤테이션 보내기
 
-export default function CouponRegisterPage() {
-  const headersList = headers()
-  const pathname = headersList.get("x-pathname")!
-  const couponId = pathname.split("/")[2]
+export default function CouponRegisterPage({ params }: { params: { couponId: string } }) {
+  const { couponId } = params
 
   return (
     <>
