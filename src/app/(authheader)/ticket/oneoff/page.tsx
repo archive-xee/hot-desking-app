@@ -1,64 +1,77 @@
 "use client"
-// import { gql } from "@apollo/client"
-// import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
+
+import { gql, TypedDocumentNode, useSuspenseQuery } from "@apollo/client"
 import Image from "next/image"
 import Link from "next/link"
-// import { useSearchParams } from "next/navigation"
+import { Suspense, useState } from "react"
+import LoadingSpinner from "@/components/molecules/LoadingSpinner"
 import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
 import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 
-// const GET_BILLING_TICKET_LIST = gql`
-//   query GetOneoffTicketList {
-//     OneoffTicket {
-//       TicketType
-//       remaining
-//     }
-//   }
-// `
+// Data: List<OneoffTicket>
+// interface Variables {
+//   typeName: string
+// }
 
-export default function TicketPage() {
+// usedAt(UserTicket구별), portOneType구별(일회/정기권) 필요
+const GET_ONEOFF_TICKET_LIST: TypedDocumentNode = gql`
+  query GetOneoffTicketList($typeName: String!) {
+    ticket(typeName: $typeName) {
+      id
+      expiresAt
+      issuedAt
+      ticketType {
+        type
+        bookableType {
+          name
+          type
+        }
+      }
+    }
+  }
+`
+// price, remaining Query에 없음
+//  id: "1",
+//  type: "oneday",
+//  bookable: "locker",
+//  price: 10000,
+//  period: 86400,
+//  issuedAt: 1706946429,
+//  expiresAt: 1707551229,
+
+export default function OneoffTicketPurchasePage() {
+  const ticketTypeList = ["시간권", "당일권", "기간권", "할인권"]
+  const ticketTypeColorList = ["hover:bg-yellow-300", "hover:bg-purple-100", "hover:bg-blue-300", "hover:bg-teal-100"]
+  const ticketTypeIconList = ["period", "oneday", "time", "discount"]
+  const [ticketType, setTicketType] = useState("시간권")
+
   return (
     <>
       <OneoffTicketPageTitle />
-      <OneoffTicketTypeTab />
-      <CouponApplicationButton />
-      <BottomSheetModal
-        trigger={
-          <StretchedTicket
-            ticket={{
-              id: "1",
-              type: "oneday",
-              bookable: "locker",
-              price: 10000,
-              period: 86400,
-              issuedAt: 1706946429,
-              expiresAt: 1707551229,
+      <div className="flex flex-row bg-white-300">
+        {[0, 1, 2, 3].map((index) => (
+          <div
+            key={index}
+            onClick={() => {
+              setTicketType(ticketTypeList[index])
             }}
-          ></StretchedTicket>
-        }
-        content={
-          <div className="flex flex-row justify-center">
-            <Link
-              href={{
-                pathname: "/payment/online/oneoff",
-                query: {
-                  ticketId: "1",
-                },
-              }}
-            >
-              <button className="rounded-full bg-white-100 px-10 py-2 font-bold text-black-700">구매하기</button>
-            </Link>
+            className={`flex grow flex-row justify-center p-2 ${ticketTypeColorList[index]} max-sm:flex-col max-sm:items-center`}
+          >
+            <Image
+              src={`/icons/ticket/${ticketTypeIconList[index]}.png`}
+              alt={ticketType}
+              width="24"
+              height="24"
+            ></Image>
+            <span className="ms-3 max-sm:ms-0">{ticketTypeList[index]}</span>
           </div>
-        }
-      ></BottomSheetModal>
-      <p>
-        <br /> Ticket[ id, ticketType, expiresAt ]의 리스트
-        <br /> 구매하기 위해 티켓을 눌렀을 때 나오는 모달에는
-        <br /> 선택된 티켓을 프로퍼티로 보내겠음
-        <br /> 일회성결제, 예약결제, 정기결제 3가지 옵션 보여줄 거임
-        <br /> 각 버튼을 누르면 각 결제타입에 맞는 Order객체를 서버에 보내겠음
-      </p>
-      <div className="border">query GetOneoffTicketList [ OneoffTicket [ TicketType remaining ] ]</div>
+        ))}
+      </div>
+      {/* 결제 페이지로 이동 */}
+      <CouponApplicationButton />
+      <Suspense fallback={<LoadingSpinner />}>
+        <OneoffTicketList ticketType={ticketType} />
+      </Suspense>
     </>
   )
 }
@@ -67,26 +80,35 @@ const OneoffTicketPageTitle = () => {
   return <h1 className="text-center text-xl font-bold">이용권 구매하기</h1>
 }
 
-const OneoffTicketTypeTab = () => {
+const OneoffTicketList = (props: { ticketType: string }) => {
+  const { ticketType } = props
+  const { data } = useSuspenseQuery(GET_ONEOFF_TICKET_LIST, {
+    variables: { typeName: ticketType },
+  })
+  const { ticket: oneoffTicketList } = data
   return (
-    <div className="flex flex-row bg-white-300">
-      <div className="flex grow flex-row justify-center p-2 hover:bg-yellow-300 max-sm:flex-col  max-sm:items-center">
-        <Image src="/icons/ticket/period.png" alt="기간권" width="24" height="24"></Image>
-        <span className="ms-3 max-sm:ms-0">기간권</span>
-      </div>
-      <div className="flex grow flex-row justify-center p-2 hover:bg-purple-100 max-sm:flex-col max-sm:items-center">
-        <Image src="/icons/ticket/oneday.png" alt="당일권" width="24" height="24"></Image>
-        <span className="ms-3 max-sm:ms-0">당일권</span>
-      </div>
-      <div className="flex grow flex-row justify-center p-2 hover:bg-blue-300 max-sm:flex-col max-sm:items-center">
-        <Image src="/icons/ticket/time.png" alt="시간권" width="24" height="24"></Image>
-        <span className="ms-3 max-sm:ms-0">시간권</span>
-      </div>
-      <div className="flex grow flex-row justify-center p-2 hover:bg-teal-100 max-sm:flex-col  max-sm:items-center">
-        <Image src="/icons/ticket/discount.png" alt="할인권" width="24" height="24"></Image>
-        <span className="ms-3 max-sm:ms-0">할인권</span>
-      </div>
-    </div>
+    <>
+      {oneoffTicketList.map((oneoffTicket: any, idx: number) => (
+        <BottomSheetModal
+          key={idx}
+          trigger={<StretchedTicket key={idx} ticket={oneoffTicket}></StretchedTicket>}
+          content={
+            <div className="flex flex-row justify-center">
+              <Link
+                href={{
+                  pathname: "/payment/online/oneoff",
+                  query: {
+                    ticketId: oneoffTicket.id,
+                  },
+                }}
+              >
+                <button className="rounded-full bg-white-100 px-10 py-2 font-bold text-black-700">구매하기</button>
+              </Link>
+            </div>
+          }
+        ></BottomSheetModal>
+      ))}
+    </>
   )
 }
 
