@@ -1,1 +1,1 @@
-export const APOLLO_ROUTER_URL = "http://api.ultspace.com/graphql"
+export const APOLLO_ROUTER_URL = process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!

@@ -3,7 +3,7 @@ import { DefaultSession, NextAuthOptions } from "next-auth"
 import { ProviderType } from "next-auth/providers"
 import KakaoProvider from "next-auth/providers/kakao"
 import { APOLLO_ROUTER_URL } from "@/constant/graphql"
-import { KAKAO_AUTH_JAVASCRIPT_KEY, NEXTAUTH_KAKAO_CLIENT_SECRET, NEXTAUTH_SECRET } from "@/constant/kakaoauth"
+import { KAKAO_AUTH_JAVASCRIPT_KEY, NEXTAUTH_KAKAO_CLIENT_SECRET_KEY, NEXTAUTH_SECRET_KEY } from "@/constant/kakaoauth"
 
 const GET_USER_BY_ID = gql`
   query GetUserById($userId: String!) {
@@ -97,13 +97,12 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   jwt: {
-    secret: NEXTAUTH_SECRET,
-    // secret: "process.env.NEXTAUTH_SECRET",
+    secret: NEXTAUTH_SECRET_KEY,
   },
   providers: [
     KakaoProvider({
       clientId: KAKAO_AUTH_JAVASCRIPT_KEY,
-      clientSecret: NEXTAUTH_KAKAO_CLIENT_SECRET,
+      clientSecret: NEXTAUTH_KAKAO_CLIENT_SECRET_KEY,
     }),
   ],
   callbacks: {

@@ -1,4 +1,4 @@
-import { AUTH_PAYMENT_POPUP_RESULT_ENDPOINT, CLIENT_KEY_SERVER_AUTH } from "@/constant/nicepay"
+import { AUTH_PAYMENT_POPUP_RESULT_ENDPOINT, NICEPAY_SERVER_AUTH_CLIENT_KEY } from "@/constant/nicepay"
 
 // 이후에 order 객체로
 export type AuthPaymentProps = {
@@ -17,7 +17,7 @@ export const executeAuthPaymentPopup = async (props: AuthPaymentProps): Promise<
   const { orderId, ticketName, price, paymentMethod } = props
   const { AUTHNICE } = window
   AUTHNICE.requestPay({
-    clientId: CLIENT_KEY_SERVER_AUTH,
+    clientId: NICEPAY_SERVER_AUTH_CLIENT_KEY,
     method: paymentMethod,
     orderId,
     amount: price,
