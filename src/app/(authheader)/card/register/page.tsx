@@ -1,13 +1,9 @@
-import { redirect } from "next/navigation"
-import { getServerSession } from "next-auth"
+import { checkAuthRedirect } from "@/actions/authjs"
 import { registerUserCard } from "@/actions/nicepay"
-import { authOptions } from "@/lib/authjs"
 
 export default async function CardRegisterPage() {
-  const session = await getServerSession(authOptions)
-  const userId = session?.userId
-  if (!userId) redirect("/auth/signin")
-  const registerUserCardWithUserId = await registerUserCard.bind(null, userId)
+  await checkAuthRedirect()
+  const registerUserCardWithUserId = await registerUserCard.bind(null, "userId")
 
   return (
     <>
