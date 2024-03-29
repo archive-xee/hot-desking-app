@@ -1,14 +1,10 @@
-import { redirect } from "next/navigation"
-import { getServerSession } from "next-auth"
+import { getUserIdAfterCheckAuthRedirect } from "@/actions/authjs"
 import { getUserCardList } from "@/actions/nicepay"
 import CardWithDeleteForm from "@/components/molecules/CardWithDeleteForm"
-import { authOptions } from "@/lib/authjs"
 import { Card } from "@/models/card"
 
 export default async function UserCardList() {
-  const session = await getServerSession(authOptions)
-  const userId = session?.userId
-  if (!userId) redirect("/auth/signin")
+  const userId = await getUserIdAfterCheckAuthRedirect()
   const userCardList = await getUserCardList(userId)
 
   return (

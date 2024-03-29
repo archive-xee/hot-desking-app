@@ -125,13 +125,9 @@ export const authOptions: NextAuthOptions = {
           gender: kakao_account?.gender,
         })
       }
-
       return true
     },
-    async redirect({ baseUrl }) {
-      return baseUrl
-    },
-    // called wehn /api/auth/signin, /api/auth/session, getSession(), getServerSession(), useSession()
+    // called when /api/auth/signin, /api/auth/session, getSession(), getServerSession(), useSession()
     async jwt({ token, account, profile }) {
       if (account) {
         token.accessToken = account.access_token // token 객체에 다시 담아서 session callback에서 반환

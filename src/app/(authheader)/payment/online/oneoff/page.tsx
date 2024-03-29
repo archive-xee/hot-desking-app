@@ -1,8 +1,11 @@
 import Link from "next/link"
 import NicepayPopupButton from "@/components/organisms/NicepayPopupButton"
 import UserCardList from "@/components/organisms/UserCardList"
+import { order1 } from "@/models/order"
 // import { useSearchParams } from "next/navigation"
 // import { useState, useEffect } from "react"
+
+// 여기도 Order정보 뿌려야 함
 
 export default function PaymentOnlineOneoffPage() {
   // const searchParams = useSearchParams()
@@ -52,7 +55,7 @@ export default function PaymentOnlineOneoffPage() {
             앱카드 결제
           </label>
         </div>
-        <NicepayPopupButton />
+        <NicepayPopupButton order={order1} />
       </div>
       portone 결제 요청 이후 /user/ticket/oneoff으로 리디렉션
     </>
