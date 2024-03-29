@@ -18,7 +18,7 @@ type SendPaymentApprovalResponse = {
 export async function POST(req: Request) {
   const response: FormData = await req.formData()
   const tid = response.get("tid")?.toString()
-  const amount = Number(response.get("amount"))
+  const amount = response.get("amount")?.toString()
 
   const data: SendPaymentApprovalResponse = await request(APOLLO_ROUTER_URL, SEND_PAYMENT_APPROVAL_MUTATION, {
     tid,
