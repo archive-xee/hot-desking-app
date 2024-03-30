@@ -43,7 +43,7 @@ export const Dialog = (props: DialogProps) => {
         <div
           ref={dialogRef}
           aria-hidden="true"
-          className="fixed left-1/2 top-1/2 flex size-full h-80  max-w-xl -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-lg border border-black-100  bg-white-300 "
+          className="fixed left-1/2 top-1/2 z-10 flex size-full h-80  max-w-xl -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-lg border border-black-100  bg-white-300 "
         >
           <div className="relative flex flex-row justify-center bg-white-500 py-2">
             <h2 className="font-bold">{title}</h2>
