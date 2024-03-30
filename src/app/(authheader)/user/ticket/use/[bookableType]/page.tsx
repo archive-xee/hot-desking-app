@@ -24,6 +24,7 @@ export default function UserSeatTicketPage() {
           <StretchedTicket
             ticket={{
               id: "1",
+              billingType: "oneoff",
               type: "time",
               bookable: "seat",
               price: 10000,

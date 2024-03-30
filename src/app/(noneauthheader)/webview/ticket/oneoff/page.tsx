@@ -29,6 +29,7 @@ export default function TicketPage() {
             ticket={{
               id: "1",
               type: "oneday",
+              billingType: "oneoff",
               bookable: "locker",
               price: 10000,
               period: 86400,

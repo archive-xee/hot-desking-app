@@ -26,6 +26,7 @@ export default function BillingTicketPage() {
           <CardTicket
             ticket={{
               id: "1",
+              billingType: "oneoff",
               type: "time",
               bookable: "seat",
               price: 10000,
