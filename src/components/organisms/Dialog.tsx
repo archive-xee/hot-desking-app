@@ -43,7 +43,7 @@ export const Dialog = (props: DialogProps) => {
         <div
           ref={dialogRef}
           aria-hidden="true"
-          className="fixed left-1/2 top-1/2 flex max-h-96 min-h-80 w-full max-w-sm -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-lg border border-black-100  bg-white-300 "
+          className="fixed left-1/2 top-1/2 flex size-full h-80  max-w-xl -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-lg border border-black-100  bg-white-300 "
         >
           <div className="relative flex flex-row justify-center bg-white-500 py-2">
             <h2 className="font-bold">{title}</h2>
@@ -54,9 +54,10 @@ export const Dialog = (props: DialogProps) => {
               ✖
             </div>
           </div>
-          <div className="flex w-full flex-col gap-6 px-4 py-2">
+          <div className="flex size-full flex-col p-4">
             <div className="overflow-y-auto">{content}</div>
-            <div className="flex flex-wrap justify-center gap-2">{actions}</div>
+            <div className="grow"></div>
+            <div className="flex flex-row justify-center gap-2">{actions}</div>
           </div>
         </div>
       )}
