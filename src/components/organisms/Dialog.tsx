@@ -54,9 +54,10 @@ export const Dialog = (props: DialogProps) => {
               ✖
             </div>
           </div>
-          <div className="flex size-full flex-col p-4">
+          <div className="flex size-full flex-col overflow-y-auto px-4 py-2">
             <div className="overflow-y-auto">{content}</div>
             <div className="grow"></div>
+            <div className="h-4"></div>
             <div className="flex flex-row justify-center gap-2">{actions}</div>
           </div>
         </div>
