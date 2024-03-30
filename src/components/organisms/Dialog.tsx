@@ -1,15 +1,18 @@
 "use client"
 import { useEffect, useRef, useState } from "react"
+import Button from "@/components/molecules/Button/Button"
 
 type DialogProps = {
   trigger: React.ReactNode
   title: string
   content: React.ReactNode
-  actions?: React.ReactNode
+  // actionName와 action은 같이 사용되어야 합니다
+  actionName?: string
+  action?: () => void
 }
 
 export const Dialog = (props: DialogProps) => {
-  const { trigger, title, content, actions } = props
+  const { trigger, title, content, actionName, action } = props
   const [showDialog, setShowDialog] = useState(false)
   const handleTriggerClicked = () => {
     setShowDialog(!showDialog)
@@ -58,7 +61,19 @@ export const Dialog = (props: DialogProps) => {
             <div className="overflow-y-auto">{content}</div>
             <div className="grow"></div>
             <div className="h-4"></div>
-            <div className="flex flex-row justify-center gap-2">{actions}</div>
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault()
+                action!()
+              }}
+            >
+              {/* 23/03/30 
+              onSubmit이라서 에러가 발생한다면 Button의 onClick으로도 가능*/}
+              <div className="flex flex-row justify-center gap-2">
+                <Button form={true}>{actionName}</Button>
+              </div>
+            </form>
           </div>
         </div>
       )}
