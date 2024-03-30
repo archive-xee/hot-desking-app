@@ -5,6 +5,7 @@
 // import Link from "next/link"
 // import { useSearchParams } from "next/navigation"
 import Link from "next/link"
+import BottomSheetButton from "@/components/molecules/BottomSheetButton"
 import CardTicket from "@/components/molecules/Ticket/CardTicket"
 import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 
@@ -47,7 +48,7 @@ export default function BillingTicketPage() {
                 },
               }}
             >
-              <button className="rounded-full bg-white-100 px-10 py-2 font-bold text-black-700">구매하기</button>
+              <BottomSheetButton>구매하기</BottomSheetButton>
             </Link>
           </div>
         }

@@ -4,6 +4,8 @@
 import Image from "next/image"
 import Link from "next/link"
 // import { useSearchParams } from "next/navigation"
+import BottomSheetButton from "@/components/molecules/BottomSheetButton"
+import Button from "@/components/molecules/Button"
 import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
 import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 import useIsReactNativeWebview from "@/hooks/useIsReactNativeWebview"
@@ -40,14 +42,13 @@ export default function TicketPage() {
         }
         content={
           <div className="flex flex-row justify-center">
-            <button
-              className="rounded-full bg-white-100 px-10 py-2 font-bold text-black-700"
+            <BottomSheetButton
               onClick={() => {
                 if (isReactNativeWebview) window.ReactNativeWebView.postMessage(JSON.stringify("1"))
               }}
             >
               구매하기
-            </button>
+            </BottomSheetButton>
           </div>
         }
       ></BottomSheetModal>
@@ -93,12 +94,7 @@ const OneoffTicketTypeTab = () => {
 const CouponApplicationButton = () => {
   return (
     <Link href="/user/coupon">
-      <button
-        type="button"
-        className="w-full rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
-      >
-        쿠폰 적용
-      </button>
+      <Button fullWidth={true}>쿠폰적용</Button>
     </Link>
   )
 }

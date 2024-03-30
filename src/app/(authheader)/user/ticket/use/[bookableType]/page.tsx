@@ -2,6 +2,7 @@
 
 // import { gql } from "@apollo/client"
 import Link from "next/link"
+import BottomSheetButton from "@/components/molecules/BottomSheetButton"
 import Button from "@/components/molecules/Button"
 import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
 import BottomSheetModal from "@/components/organisms/BottomSheetModal"
@@ -37,7 +38,7 @@ export default function UserSeatTicketPage() {
         }
         content={
           <div className="flex flex-row justify-center">
-            <button className="rounded-full bg-white-100 px-10 py-2 font-bold text-black-700">사용하기</button>
+            <BottomSheetButton>사용하기</BottomSheetButton>
           </div>
         }
       ></BottomSheetModal>
