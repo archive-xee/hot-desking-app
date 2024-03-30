@@ -1,5 +1,6 @@
 import { checkAuthRedirect } from "@/actions/authjs"
 import { registerUserCard } from "@/actions/nicepay"
+import Button from "@/components/molecules/Button"
 
 export default async function CardRegisterPage() {
   await checkAuthRedirect()
@@ -22,7 +23,7 @@ export default async function CardRegisterPage() {
 
         <label>카드 비밀번호 앞 2자리</label>
         <input type="text" name="cardPw" />
-        <button type="submit">카드 등록</button>
+        <Button form={true}>카드등록</Button>
       </form>
       <div className="border">
         mutation RegisterUserCard($userId: string, $card: Card) [ registerUserCard($userId: string, $card: Card) [ User

@@ -2,6 +2,7 @@
 
 // import { gql } from "@apollo/client"
 import Link from "next/link"
+import Button from "@/components/molecules/Button"
 import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
 import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 
@@ -43,20 +44,10 @@ export default function UserSeatTicketPage() {
 
       <div className="flex flex-row gap-2">
         <Link href="/ticket/oneoff">
-          <button
-            type="button"
-            className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
-          >
-            일회권 구매
-          </button>
+          <Button>일회권 구매</Button>
         </Link>
         <Link href="/ticket/billing">
-          <button
-            type="button"
-            className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
-          >
-            정기권 구매
-          </button>
+          <Button color="teal">정기권 구매</Button>
         </Link>
       </div>
       <div className="border">
