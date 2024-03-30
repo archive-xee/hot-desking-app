@@ -2,7 +2,7 @@
 
 // import { gql } from "@apollo/client"
 import { useRouter } from "next/navigation"
-import Button from "@/components/molecules/Button"
+import Button from "@/components/molecules/Button/Button"
 import StretchedCoupon from "@/components/molecules/Coupon/StretchedCoupon"
 import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 

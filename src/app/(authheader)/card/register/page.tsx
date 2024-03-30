@@ -1,6 +1,6 @@
 import { checkAuthRedirect } from "@/actions/authjs"
 import { registerUserCard } from "@/actions/nicepay"
-import Button from "@/components/molecules/Button"
+import Button from "@/components/molecules/Button/Button"
 
 export default async function CardRegisterPage() {
   await checkAuthRedirect()

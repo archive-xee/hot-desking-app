@@ -1,5 +1,5 @@
 import { deleteUserCard } from "@/actions/nicepay"
-import Button from "@/components/molecules/Button"
+import Button from "@/components/molecules/Button/Button"
 import { Card } from "@/models/card"
 
 export default async function CardWithDeleteForm(props: { card: Card }) {

@@ -1,5 +1,5 @@
 import Link from "next/link"
-import Button from "@/components/molecules/Button"
+import Button from "@/components/molecules/Button/Button"
 import BillingKeyTerm from "@/components/organisms/BillingKeyTerm"
 import UserCardList from "@/components/organisms/UserCardList"
 // import { useSearchParams } from "next/navigation"

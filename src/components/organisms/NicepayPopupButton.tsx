@@ -1,7 +1,7 @@
 "use client"
 
 import Script from "next/script"
-import Button from "@/components/molecules/Button"
+import Button from "@/components/molecules/Button/Button"
 import { executeAuthPaymentPopup, sendOrder } from "@/lib/nicepay"
 import { Order } from "@/models/order"
 // todo: props로 order정보 받기

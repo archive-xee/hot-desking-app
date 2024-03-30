@@ -1,5 +1,5 @@
 import Link from "next/link"
-import Button from "@/components/molecules/Button"
+import Button from "@/components/molecules/Button/Button"
 import StretchedCoupon from "@/components/molecules/Coupon/StretchedCoupon"
 // import { gql } from "@apollo/client"
 

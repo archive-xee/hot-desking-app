@@ -1,5 +1,5 @@
 import Link from "next/link"
-import Button from "@/components/molecules/Button"
+import Button from "@/components/molecules/Button/Button"
 import NicepayPopupButton from "@/components/organisms/NicepayPopupButton"
 import UserCardList from "@/components/organisms/UserCardList"
 import { order1 } from "@/models/order"

@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { useSearchParams } from "next/navigation"
 import { signIn } from "next-auth/react"
-import Button from "@/components/molecules/Button"
+import Button from "@/components/molecules/Button/Button"
 export default function KakaoLoginPage() {
   return (
     <>
