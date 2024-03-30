@@ -1,7 +1,8 @@
 import Link from "next/link"
 import { redirect } from "next/navigation"
 import { getUserIdAfterCheckAuthRedirect } from "@/actions/authjs"
-import { getBoookableOccupied, getUserTicketActivated } from "@/actions/booth"
+import { getBoookableOccupied } from "@/actions/booth"
+import { getActivatedUserTicket } from "@/actions/userticket"
 
 export default async function BookableStatusPage({ params }: { params: { seatId: string } }) {
   const { seatId } = params // QR코드에서 들어옴
@@ -10,8 +11,8 @@ export default async function BookableStatusPage({ params }: { params: { seatId:
   if (bookableOccupied) {
     return <p>이미 사용되고 있는 자리입니다</p> //3: 이미 사용되는 자리가 있음. redirect
   } else {
-    const userTicketActivated = await getUserTicketActivated(userId, bookable) // 3-2: 유저가 사용하고 있는 자리가 있는지 물어봄
-    if (userTicketActivated) {
+    const activatedUserTicket = await getActivatedUserTicket(userId, bookable) // 3-2: 유저가 사용하고 있는 자리가 있는지 물어봄
+    if (activatedUserTicket) {
       // bookable, type, number 필요함
       return (
         <>

@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { useSearchParams } from "next/navigation"
 import { signIn } from "next-auth/react"
+import Button from "@/components/molecules/Button/Button"
 export default function KakaoLoginPage() {
   return (
     <>
@@ -34,15 +35,13 @@ const KakaoLoginButtonSection = () => {
         <h1 className="text-center">궁극의 창작공간에서는 편하게 카카오톡 로그인을 지원해요!</h1>
         <div className="h-24"></div>
         <div className="flex justify-center">
-          <button
-            type="submit"
-            className="rounded-lg border border-blue-700 bg-white-100 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
+          <Button
             onClick={() => {
               signIn("kakao", { callbackUrl: redirectUrl })
             }}
           >
             <Image src="/kakao/90x45.png" width={90} height={45} alt="카카오 로그인"></Image>
-          </button>
+          </Button>
         </div>
       </div>
       <div className="h-6"></div>

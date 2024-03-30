@@ -55,27 +55,6 @@ export async function getBoookableOccupied(seatId: string) {
   return { bookable, bookableOccupied }
 }
 
-export async function getUserTicketActivated(userId: string, bookable: string) {
-  // bookable: 좌사대스(bookable), 쿼리엔 typeName으로 들어가있음
-  //!! 사용중인지 알아야하는게 있어야함
-  const GET_USERTICKET_ACTIVATED = gql`
-    query GetUserticketActivated($userId: String!, $bookable: String!) {
-      ticket(paid: true, userId: $userId, typeName: $bookable) {
-        ticketId
-      }
-    }
-  `
-
-  const data: { ticket: { ticketId: string } } = await request(APOLLO_ROUTER_URL, GET_USERTICKET_ACTIVATED, {
-    userId,
-    bookable,
-  })
-
-  const { ticketId } = data.ticket
-  const userTicketActivated = ticketId ? true : false
-  return userTicketActivated
-}
-
 export async function moveToNewBookable(userId: string, seatId: string) {
   // 아직 쿼리가 만들어지지 않음ㄴ
   console.log(userId, seatId)

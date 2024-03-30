@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Button from "@/components/molecules/Button/Button"
 import StretchedCoupon from "@/components/molecules/Coupon/StretchedCoupon"
 // import { gql } from "@apollo/client"
 
@@ -54,12 +55,7 @@ const CouponForm = () => {
         <form>
           <div className="flex flex-row justify-center">
             <Link href="/user/coupon">
-              <button
-                type="submit"
-                className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
-              >
-                쿠폰 등록
-              </button>
+              <Button form={true}>쿠폰등록</Button>
             </Link>
           </div>
         </form>

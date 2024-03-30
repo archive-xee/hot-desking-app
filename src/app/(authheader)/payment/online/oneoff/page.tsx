@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Button from "@/components/molecules/Button/Button"
 import NicepayPopupButton from "@/components/organisms/NicepayPopupButton"
 import UserCardList from "@/components/organisms/UserCardList"
 import { order1 } from "@/models/order"
@@ -33,12 +34,7 @@ export default function PaymentOnlineOneoffPage() {
         <UserCardList />
         <div>
           <Link href="/card/register">
-            <button
-              type="button"
-              className=" inline-block rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
-            >
-              카드등록
-            </button>
+            <Button>카드등록</Button>
           </Link>
         </div>
         <div>

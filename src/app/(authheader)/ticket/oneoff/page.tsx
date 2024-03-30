@@ -4,6 +4,8 @@ import { gql, TypedDocumentNode, useSuspenseQuery } from "@apollo/client"
 import Image from "next/image"
 import Link from "next/link"
 import { Suspense, useState } from "react"
+import BottomSheetButton from "@/components/molecules/Button/BottomSheetButton"
+import Button from "@/components/molecules/Button/Button"
 import LoadingSpinner from "@/components/molecules/LoadingSpinner"
 import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
 import BottomSheetModal from "@/components/organisms/BottomSheetModal"
@@ -102,7 +104,7 @@ const OneoffTicketList = (props: { ticketType: string }) => {
                   },
                 }}
               >
-                <button className="rounded-full bg-white-100 px-10 py-2 font-bold text-black-700">구매하기</button>
+                <BottomSheetButton>구매하기</BottomSheetButton>
               </Link>
             </div>
           }
@@ -115,12 +117,7 @@ const OneoffTicketList = (props: { ticketType: string }) => {
 const CouponApplicationButton = () => {
   return (
     <Link href="/user/coupon">
-      <button
-        type="button"
-        className="w-full rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
-      >
-        쿠폰 적용
-      </button>
+      <Button fullWidth={true}>쿠폰 적용</Button>
     </Link>
   )
 }

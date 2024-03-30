@@ -1,15 +1,18 @@
 "use client"
 import { useEffect, useRef, useState } from "react"
+import Button from "@/components/molecules/Button/Button"
 
 type DialogProps = {
   trigger: React.ReactNode
   title: string
   content: React.ReactNode
-  actions?: React.ReactNode
+  // actionName와 action은 같이 사용되어야 합니다
+  actionName?: string
+  action?: () => void
 }
 
 export const Dialog = (props: DialogProps) => {
-  const { trigger, title, content, actions } = props
+  const { trigger, title, content, actionName, action } = props
   const [showDialog, setShowDialog] = useState(false)
   const handleTriggerClicked = () => {
     setShowDialog(!showDialog)
@@ -43,7 +46,7 @@ export const Dialog = (props: DialogProps) => {
         <div
           ref={dialogRef}
           aria-hidden="true"
-          className="fixed left-1/2 top-1/2 flex max-h-96 min-h-80 w-full max-w-sm -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-lg border border-black-100  bg-white-300 "
+          className="fixed left-1/2 top-1/2 z-10 flex size-full h-80  max-w-xl -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-lg border border-black-100  bg-white-300 "
         >
           <div className="relative flex flex-row justify-center bg-white-500 py-2">
             <h2 className="font-bold">{title}</h2>
@@ -54,9 +57,23 @@ export const Dialog = (props: DialogProps) => {
               ✖
             </div>
           </div>
-          <div className="flex w-full flex-col gap-6 px-4 py-2">
+          <div className="flex size-full flex-col overflow-y-auto px-4 py-2">
             <div className="overflow-y-auto">{content}</div>
-            <div className="flex flex-wrap justify-center gap-2">{actions}</div>
+            <div className="grow"></div>
+            <div className="h-4"></div>
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault()
+                action!()
+              }}
+            >
+              {/* 23/03/30 
+              onSubmit이라서 에러가 발생한다면 Button의 onClick으로도 가능*/}
+              <div className="flex flex-row justify-center gap-2">
+                <Button form={true}>{actionName}</Button>
+              </div>
+            </form>
           </div>
         </div>
       )}

@@ -2,6 +2,7 @@
 
 // import { gql } from "@apollo/client"
 import { useRouter } from "next/navigation"
+import Button from "@/components/molecules/Button/Button"
 import StretchedCoupon from "@/components/molecules/Coupon/StretchedCoupon"
 import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 
@@ -32,15 +33,7 @@ export default function UserCouponPage() {
         }
         content={
           <div className="flex flex-row justify-center">
-            <button
-              onClick={() => {
-                // 쿠폰 적용을 결제페이지에서 해야 할듯
-                router.back()
-              }}
-              className="rounded-full bg-white-100 px-10 py-2 font-bold text-black-700"
-            >
-              사용하기
-            </button>
+            <Button onClick={() => router.back()}>사용하기</Button>
           </div>
         }
       ></BottomSheetModal>

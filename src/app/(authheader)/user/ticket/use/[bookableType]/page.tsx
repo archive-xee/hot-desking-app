@@ -2,6 +2,8 @@
 
 // import { gql } from "@apollo/client"
 import Link from "next/link"
+import BottomSheetButton from "@/components/molecules/Button/BottomSheetButton"
+import Button from "@/components/molecules/Button/Button"
 import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
 import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 
@@ -24,6 +26,7 @@ export default function UserSeatTicketPage() {
           <StretchedTicket
             ticket={{
               id: "1",
+              billingType: "oneoff",
               type: "time",
               bookable: "seat",
               price: 10000,
@@ -35,27 +38,17 @@ export default function UserSeatTicketPage() {
         }
         content={
           <div className="flex flex-row justify-center">
-            <button className="rounded-full bg-white-100 px-10 py-2 font-bold text-black-700">사용하기</button>
+            <BottomSheetButton>사용하기</BottomSheetButton>
           </div>
         }
       ></BottomSheetModal>
 
       <div className="flex flex-row gap-2">
         <Link href="/ticket/oneoff">
-          <button
-            type="button"
-            className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
-          >
-            일회권 구매
-          </button>
+          <Button>일회권 구매</Button>
         </Link>
         <Link href="/ticket/billing">
-          <button
-            type="button"
-            className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
-          >
-            정기권 구매
-          </button>
+          <Button color="teal">정기권 구매</Button>
         </Link>
       </div>
       <div className="border">

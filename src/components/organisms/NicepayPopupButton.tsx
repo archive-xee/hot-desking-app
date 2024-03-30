@@ -1,16 +1,15 @@
 "use client"
 
 import Script from "next/script"
+import Button from "@/components/molecules/Button/Button"
 import { executeAuthPaymentPopup, sendOrder } from "@/lib/nicepay"
 import { Order } from "@/models/order"
-
 // todo: props로 order정보 받기
 export default function NicepayPopupButton(props: { order: Order }) {
   const { order } = props
   return (
     <>
-      <button
-        type="button"
+      <Button
         onClick={async () => {
           console.log("order", order)
           const orderId = await sendOrder(order)
@@ -21,10 +20,9 @@ export default function NicepayPopupButton(props: { order: Order }) {
             paymentMethod: "cardAndEasyPay",
           })
         }}
-        className=" inline-block rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
       >
         결제하기
-      </button>
+      </Button>
       <Script src="https://pay.nicepay.co.kr/v1/js/" />
     </>
   )

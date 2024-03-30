@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Button from "@/components/molecules/Button/Button"
 
 // 모든 현황을 다 받는 페이지 (쿼리스트링으로 구별하지 않음)
 // 서버액션
@@ -11,12 +12,7 @@ export default function BoothStatusPage() {
       </p>
       <div className="border">query GetTicketId($lockerId: String!) [ locker(id: $lockerId) [ ticketId ] ]</div>
       <Link href="/user/ticket/use/locker">
-        <button
-          type="submit"
-          className="rounded-lg border border-blue-700 bg-white-100 px-5 py-2.5 text-sm font-medium hover:bg-blue-300 hover:text-white-100 "
-        >
-          티켓 사용
-        </button>
+        <Button>티켓사용</Button>
       </Link>
     </>
   )

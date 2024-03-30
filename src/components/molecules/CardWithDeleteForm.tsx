@@ -1,4 +1,5 @@
 import { deleteUserCard } from "@/actions/nicepay"
+import Button from "@/components/molecules/Button/Button"
 import { Card } from "@/models/card"
 
 export default async function CardWithDeleteForm(props: { card: Card }) {
@@ -13,12 +14,7 @@ export default async function CardWithDeleteForm(props: { card: Card }) {
       </div>
       <form action={deleteUserCard}>
         <input type="hidden" name="cardId" value={card.id} />
-        <button
-          type="submit"
-          className="py-0text-sm rounded-lg border border-blue-700 bg-white-100 px-2  font-medium hover:bg-blue-300 hover:text-white-100"
-        >
-          삭제
-        </button>
+        <Button form={true}>삭제</Button>
       </form>
     </div>
   )
