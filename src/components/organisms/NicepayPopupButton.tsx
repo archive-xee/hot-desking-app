@@ -21,7 +21,7 @@ export default function NicepayPopupButton(props: { order: Order }) {
           })
         }}
       >
-        결제하기
+        앱카드결제
       </Button>
       <Script src="https://pay.nicepay.co.kr/v1/js/" />
     </>
