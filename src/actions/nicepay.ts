@@ -80,7 +80,11 @@ export async function registerUserCard(userId: string, formData: FormData) {
     }
   `
 
-  const cardNo = formData.get("cardNo")
+  const cardNo0 = formData.get("cardNo0")?.toString()!
+  const cardNo1 = formData.get("cardNo1")?.toString()!
+  const cardNo2 = formData.get("cardNo2")?.toString()!
+  const cardNo3 = formData.get("cardNo3")?.toString()!
+  const cardNo = cardNo0 + cardNo1 + cardNo2 + cardNo3
   const expYear = formData.get("expYear")
   const expMonth = formData.get("expMonth")
   const idNo = formData.get("idNo")
