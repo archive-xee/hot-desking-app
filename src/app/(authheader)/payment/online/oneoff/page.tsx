@@ -1,5 +1,6 @@
 import Link from "next/link"
 import Button from "@/components/molecules/Button/Button"
+import Title from "@/components/molecules/Title"
 import NicepayPopupButton from "@/components/organisms/NicepayPopupButton"
 import UserCardList from "@/components/organisms/UserCardList"
 import { order1 } from "@/models/order"
@@ -14,46 +15,16 @@ export default function PaymentOnlineOneoffPage() {
   // 티켓id를 path에서 받을 것
 
   return (
-    <>
-      <div className="flex flex-col items-center">
-        일회권 온라인 결제
-        <div>
-          <input
-            id="payment-registered-card"
-            type="checkbox"
-            // onChange={({ target: { checked } }) => {}}
-            className="size-4 rounded bg-white-100 text-black-700"
-          />
-          <label
-            htmlFor="payment-registered-card"
-            className="text-gray-900 dark:text-gray-300 ms-2 text-sm font-medium"
-          >
-            등록된 카드로 결제
-          </label>
-        </div>
-        <UserCardList />
-        <div>
-          <Link href="/card/register">
-            <Button>카드등록</Button>
-          </Link>
-        </div>
-        <div>
-          <input
-            id="payment-registered-card"
-            type="checkbox"
-            // onChange={({ target: { checked } }) => {}}
-            className="size-4 rounded bg-white-100 text-black-700"
-          />
-          <label
-            htmlFor="payment-registered-card"
-            className="text-gray-900 dark:text-gray-300 ms-2 text-sm font-medium"
-          >
-            앱카드 결제
-          </label>
-        </div>
+    <div className="flex flex-col gap-2">
+      <Title text="일회권 온라인 결제" />
+      <UserCardList />
+      <div className="flex flex-row justify-end gap-1">
+        <Link href="/card/register">
+          <Button>카드 등록</Button>
+        </Link>
         <NicepayPopupButton order={order1} />
       </div>
-      portone 결제 요청 이후 /user/ticket/oneoff으로 리디렉션
-    </>
+      결제이후 /user/ticket/use/(bookableType)으로 리디렉션 결제실패시에는 실패 페이지로
+    </div>
   )
 }
