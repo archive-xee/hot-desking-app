@@ -42,7 +42,7 @@ export default function BillingTicketPage() {
           <div className="flex flex-row justify-center">
             <Link
               href={{
-                pathname: "/payment/online/billing",
+                pathname: "/payment/online/billing/term",
                 query: {
                   // 티켓타입, 티켓이름 정도
                   ticketId: "1",
