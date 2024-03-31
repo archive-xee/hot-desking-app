@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Button from "@/components/molecules/Button/Button"
 import StretchedCoupon from "@/components/molecules/Coupon/StretchedCoupon"
+import Title from "@/components/molecules/Title"
 // import { gql } from "@apollo/client"
 
 // const REGISTER_USER_COUPON = gql`
@@ -20,7 +21,7 @@ export default function CouponRegisterPage({ params }: { params: { couponId: str
   return (
     <>
       couponId: {couponId}
-      <CouponPageTitle />
+      <Title text="쿠폰 등록하기" />
       <CouponForm />
       <div className="border">
         mutation RegisterUserCoupon($userId: string, $couponId: couponId) [ registerUserCoupon(userId: $userId,
@@ -28,10 +29,6 @@ export default function CouponRegisterPage({ params }: { params: { couponId: str
       </div>
     </>
   )
-}
-
-const CouponPageTitle = () => {
-  return <h1 className="text-center text-xl font-bold">쿠폰 등록하기</h1>
 }
 
 const CouponForm = () => {

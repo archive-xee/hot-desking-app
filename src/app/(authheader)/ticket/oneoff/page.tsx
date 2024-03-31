@@ -8,6 +8,7 @@ import BottomSheetButton from "@/components/molecules/Button/BottomSheetButton"
 import Button from "@/components/molecules/Button/Button"
 import LoadingSpinner from "@/components/molecules/LoadingSpinner"
 import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
+import Title from "@/components/molecules/Title"
 import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 
 // Data: List<OneoffTicket>
@@ -49,7 +50,7 @@ export default function OneoffTicketPurchasePage() {
 
   return (
     <>
-      <OneoffTicketPageTitle />
+      <Title text="이용권 구매하기" />
       <div className="flex flex-row bg-white-300">
         {[0, 1, 2, 3].map((index) => (
           <div
@@ -76,10 +77,6 @@ export default function OneoffTicketPurchasePage() {
       </Suspense>
     </>
   )
-}
-
-const OneoffTicketPageTitle = () => {
-  return <h1 className="text-center text-xl font-bold">이용권 구매하기</h1>
 }
 
 const OneoffTicketList = (props: { ticketType: string }) => {

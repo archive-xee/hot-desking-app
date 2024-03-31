@@ -7,6 +7,7 @@
 import Link from "next/link"
 import BottomSheetButton from "@/components/molecules/Button/BottomSheetButton"
 import CardTicket from "@/components/molecules/Ticket/CardTicket"
+import Title from "@/components/molecules/Title"
 import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 
 // const GET_BILLING_TICKET_LIST = gql`
@@ -21,7 +22,7 @@ import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 export default function BillingTicketPage() {
   return (
     <>
-      <BillingTicketPageTitle />
+      <Title text="정기권 구매하기" />
       <BottomSheetModal
         trigger={
           <CardTicket
@@ -63,8 +64,4 @@ export default function BillingTicketPage() {
       <div className="border">query GetBillingTicketList [ BillingTicket [ TicketType remaining ] ]</div>
     </>
   )
-}
-
-const BillingTicketPageTitle = () => {
-  return <h1 className="text-center text-xl font-bold">정기권 구매하기</h1>
 }

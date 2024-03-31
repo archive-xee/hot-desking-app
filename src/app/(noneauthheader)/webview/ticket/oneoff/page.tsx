@@ -7,6 +7,7 @@ import Link from "next/link"
 import BottomSheetButton from "@/components/molecules/Button/BottomSheetButton"
 import Button from "@/components/molecules/Button/Button"
 import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
+import Title from "@/components/molecules/Title"
 import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 import useIsReactNativeWebview from "@/hooks/useIsReactNativeWebview"
 
@@ -22,7 +23,7 @@ export default function TicketPage() {
   const isReactNativeWebview = useIsReactNativeWebview()
   return (
     <>
-      <OneoffTicketPageTitle />
+      <Title text="이용권 구매하기" />
       <OneoffTicketTypeTab />
       <CouponApplicationButton />
       <BottomSheetModal
@@ -62,10 +63,6 @@ export default function TicketPage() {
       <div className="border">query GetOneoffTicketList [ OneoffTicket [ TicketType remaining ] ]</div>
     </>
   )
-}
-
-const OneoffTicketPageTitle = () => {
-  return <h1 className="text-center text-xl font-bold">이용권 구매하기</h1>
 }
 
 const OneoffTicketTypeTab = () => {
