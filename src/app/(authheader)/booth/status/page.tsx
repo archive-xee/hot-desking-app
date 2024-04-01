@@ -2,7 +2,7 @@ import Link from "next/link"
 import Button from "@/components/molecules/Button/Button"
 
 // 모든 현황을 다 받는 페이지 (쿼리스트링으로 구별하지 않음)
-// 서버액션
+// @서버 서버액션 중 bookable, type, number가 들어와야 함
 export default function BoothStatusPage() {
   return (
     <>

@@ -31,7 +31,7 @@ export async function getActivatedUserTicket(userId: string, bookable?: string) 
       }
     }
   `
-  // 뭘 가져올것인지 정하자
+  // @클라 04/01 뭘 가져올것인지 정하자
   const data: { ticket: { ticketId: string } } = await request(APOLLO_ROUTER_URL, GET_ACTIVATED_USERTICKET, {
     userId,
     bookable,
@@ -39,5 +39,6 @@ export async function getActivatedUserTicket(userId: string, bookable?: string) 
 
   const { ticketId } = data.ticket
   const userTicketActivated = ticketId ? true : false
+  // @클라 04/01 ticket객체를 가져와야 함
   return userTicketActivated
 }

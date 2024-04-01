@@ -29,6 +29,8 @@ export default async function UserCard(props: { card: Card }) {
           actionName="결제하기"
           action={deleteUserCardByCardId}
           // @서버 03/31 빌링키 관련 뮤테이션 아직 만들어지지 않았음
+          // @서버 빌링키 관련 뮤테이션이 addOrder인지 확인
+
           // @클라 03/31 actions/billing.ts에 추가 예정
         ></Dialog>
         <Dialog

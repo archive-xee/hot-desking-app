@@ -9,7 +9,7 @@ export default async function BookableStatusPage({ params }: { params: { seatId:
   const userId = await getUserIdAfterCheckAuthRedirect() // 1: 로그인을 먼저 물어볼 것
   const { bookable, bookableOccupied } = await getBoookableOccupied(seatId) // 2: 자리의 ticketId이 있는지 물어봄(사용중인지)
   if (bookableOccupied) {
-    return <p>이미 사용되고 있는 자리입니다</p> //3: 이미 사용되는 자리가 있음. redirect
+    return <p>이미 사용되고 있는 자리입니다</p> // @클라 3: 이미 사용되는 자리가 있음 띄우고 redirect
   } else {
     const activatedUserTicket = await getActivatedUserTicket(userId, bookable) // 3-2: 유저가 사용하고 있는 자리가 있는지 물어봄
     if (activatedUserTicket) {
