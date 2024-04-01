@@ -4,8 +4,8 @@
 import { useRouter } from "next/navigation"
 import Button from "@/components/molecules/Button/Button"
 import StretchedCoupon from "@/components/molecules/Coupon/StretchedCoupon"
-import Title from "@/components/molecules/Title"
 import SubTitle from "@/components/molecules/Title/SubTitle"
+import Title from "@/components/molecules/Title/Title"
 import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 
 // const GET_USER_COUPON_LIST = gql`

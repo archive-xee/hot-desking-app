@@ -1,8 +1,8 @@
 import Link from "next/link"
 import Button from "@/components/molecules/Button/Button"
 import StretchedCoupon from "@/components/molecules/Coupon/StretchedCoupon"
-import Title from "@/components/molecules/Title"
 import SubTitle from "@/components/molecules/Title/SubTitle"
+import Title from "@/components/molecules/Title/Title"
 // import { gql } from "@apollo/client"
 
 // const REGISTER_USER_COUPON = gql`

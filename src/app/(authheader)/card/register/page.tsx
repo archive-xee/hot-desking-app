@@ -1,5 +1,5 @@
 import { getUserIdAfterCheckAuthRedirect } from "@/actions/authjs"
-import Title from "@/components/molecules/Title"
+import Title from "@/components/molecules/Title/Title"
 import CardForm from "@/components/organisms/Card/CardForm"
 
 export default async function CardRegisterPage() {

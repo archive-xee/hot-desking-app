@@ -3,8 +3,8 @@
 import Image from "next/image"
 import { useSearchParams } from "next/navigation"
 import { signIn } from "next-auth/react"
-import Title from "@/components/molecules/Title"
 import SubTitle from "@/components/molecules/Title/SubTitle"
+import Title from "@/components/molecules/Title/Title"
 export default function KakaoLoginPage() {
   return (
     <>

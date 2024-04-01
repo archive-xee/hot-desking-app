@@ -7,7 +7,7 @@
 import Link from "next/link"
 import BottomSheetButton from "@/components/molecules/Button/BottomSheetButton"
 import CardTicket from "@/components/molecules/Ticket/CardTicket"
-import Title from "@/components/molecules/Title"
+import Title from "@/components/molecules/Title/Title"
 import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 
 // const GET_BILLING_TICKET_LIST = gql`

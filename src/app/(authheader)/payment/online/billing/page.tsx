@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Button from "@/components/molecules/Button/Button"
-import Title from "@/components/molecules/Title"
+import Title from "@/components/molecules/Title/Title"
 import UserCardList from "@/components/organisms/UserCardList"
 // import { useSearchParams } from "next/navigation"
 

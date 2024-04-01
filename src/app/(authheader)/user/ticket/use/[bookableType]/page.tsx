@@ -5,7 +5,7 @@ import Link from "next/link"
 import BottomSheetButton from "@/components/molecules/Button/BottomSheetButton"
 import Button from "@/components/molecules/Button/Button"
 import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
-import Title from "@/components/molecules/Title"
+import Title from "@/components/molecules/Title/Title"
 import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 
 // const GET_USER_COUPON_LIST = gql`

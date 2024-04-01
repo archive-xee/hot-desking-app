@@ -1,5 +1,5 @@
 import { getUserIdAfterCheckAuthRedirect } from "@/actions/authjs"
-import Title from "@/components/molecules/Title"
+import Title from "@/components/molecules/Title/Title"
 // import { getAllUserTicket } from "@/actions/userticket"
 import AccordionUserTicket from "@/components/organisms/AccordionUserTicket"
 
