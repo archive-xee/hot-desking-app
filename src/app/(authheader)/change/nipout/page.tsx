@@ -1,27 +1,16 @@
-// const NIPPOUT_USER_SEAT = gql`
-//   mutation NipoutUserSeat($usingTicketId: String!, $oldSeatType: String!, $oldSeatNumber: String!,  $newSeatType: String!, $newSeatNumber: String!) {
-//     Seat(oldSeatType: $oldSeatType, oldSeatNumber: $oldSeatNumber ) {
-//       null
-//     }
-//     Seat(newTicketId: $usingTicketId, newSeatType: $newSeatType, newSeatNumber: $newSeatNumber ) {
-//       newTicketId
-//     }
-//   }
-// `
+import { getUserIdAfterCheckAuthRedirect } from "@/actions/authjs"
+// import { nipoutTicket } from "@/actions/booth"
+import { getActivatedUserTicket } from "@/actions/userticket"
 
-export default function NipoutPage() {
-  return (
-    <>
-      외출 페이지는 시간권일때만
-      <p>1. 로그인 상태를 먼저 물어볼 것</p>
-      <p>2. 로그인 완료</p>
-      <p>3. User.usingTicketId가 있는지 null인지 물어봄</p>
-      <p>
-        4-1. usingTicketId 있다? → 사용중인 좌석의 시간을 최대 30분을 늘리는 없애는 mutate 보내고, 이후 외출 IOT 끊음
-      </p>
-      <p>4-2. usingTicketId가 없다? → 사용중인 자리가 없기에 외출할수 없음이라는 다이얼로그</p>
-      <div className="border">mutation NipoutUserSeat()</div>
-      <div className="border">mutation IOT 전력 끊는 모델 뮤테이션 @김윤성</div>
-    </>
-  )
+export default async function NipoutPage() {
+  const userId = await getUserIdAfterCheckAuthRedirect() // 1: 로그인을 먼저 물어볼 것
+  const activatedUserTicket = await getActivatedUserTicket(userId) // 2: 유저가 사용하고 있는 티켓 중 좌석(좌석티켓)만 외출 가능
+  // @서버 getActivatedUserTicket()의 ticket모델에 bookable파라미터가 없어서 추가해야 함
+  if (activatedUserTicket) {
+    // await nipoutTicket(userId, activatedUserTicket.id)
+    return <p>30분동안 외출 가능하고, 전원은 연결되지 않습니다</p> // @클라 4: 리디렉션페이지로 수정
+    // 결과 실패하면... return <p>"30분동안 외출 가능하고, 전원은 연결되지 않습니다"</p> // @클라 4: 리디렉션페이지로 수정
+  } else {
+    return <p>현재 사용중인 좌석이 없어 외출할수 없습니다.</p> // @클라 4: 리디렉션페이지로 수정
+  }
 }

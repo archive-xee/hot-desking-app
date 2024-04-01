@@ -56,17 +56,39 @@ export async function getBoookableOccupied(seatId: string) {
 }
 
 export async function moveToNewBookable(userId: string, seatId: string) {
-  // 아직 쿼리가 만들어지지 않음ㄴ
+  // @서버 03/29 아직 쿼리가 만들어지지 않음
   console.log(userId, seatId)
-  // const GET_USERTICKET_ACTIVATED = gql`
-  //   query GetUserticketActivated($userId: String!, $bookable: String!) {
+  // const MOVE_TO_NEW_BOOKABLE = gql`
+  //   query MoveToNewBookable($userId: String!, $bookable: String!) {
   //     ticket(paid: true, userId: $userId, typeName: $bookable) {
   //       ticketId
   //     }
   //   }
   // `
 
-  // const data: { ticket: { ticketId: string } } = await request(APOLLO_ROUTER_URL, GET_USERTICKET_ACTIVATED, {
+  // const data: { ticket: { ticketId: string } } = await request(APOLLO_ROUTER_URL, MOVE_TO_NEW_BOOKABLE, {
+  //   userId,
+  //   bookable,
+  // })
+
+  // const { ticketId } = data.ticket
+  // const userTicketActivated = ticketId ? true : false
+  // return userTicketActivated
+  return true
+}
+
+export async function nipoutTicket(userId: string, ticketId: string) {
+  // 아직 쿼리가 만들어지지 않음
+  console.log(userId, ticketId)
+  // const NIPOUT_BOOKABLE = gql`
+  //   query NipoutBookable($userId: String!, $bookable: String!) {
+  //     ticket(paid: true, userId: $userId, typeName: $bookable) {
+  //       ticketId
+  //     }
+  //   }
+  // `
+
+  // const data: { ticket: { ticketId: string } } = await request(APOLLO_ROUTER_URL, NIPOUT_BOOKABLE, {
   //   userId,
   //   bookable,
   // })
