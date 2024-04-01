@@ -27,18 +27,18 @@ export async function getActivatedUserTicket(userId: string, bookable?: string) 
   const GET_ACTIVATED_USERTICKET = gql`
     query GetActivatedUserticketActivated($userId: String!, $bookable: String) {
       ticket(paid: true, userId: $userId, typeName: $bookable) {
-        ticketId
+        id
       }
     }
   `
   // @클라 04/01 뭘 가져올것인지 정하자
-  const data: { ticket: { ticketId: string } } = await request(APOLLO_ROUTER_URL, GET_ACTIVATED_USERTICKET, {
+  const data: { ticket: { id: string } } = await request(APOLLO_ROUTER_URL, GET_ACTIVATED_USERTICKET, {
     userId,
     bookable,
   })
 
-  const { ticketId } = data.ticket
-  const userTicketActivated = ticketId ? true : false
+  const { id } = data.ticket
+  const userTicketActivated = id ? true : false
   // @클라 04/01 ticket객체를 가져와야 함
   return userTicketActivated
 }
