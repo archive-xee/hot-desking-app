@@ -7,7 +7,6 @@ export async function getBillingKeyTerm() {
   const GET_BILLING_KEY_TERM_QUERY = gql`
     query GetBillingKeyTerm($type: TermsType!) {
       term(type: $type) {
-        termsTitle
         content
       }
     }

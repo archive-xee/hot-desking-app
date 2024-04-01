@@ -1,14 +1,22 @@
 import { getBillingKeyTerm } from "@/actions/nicepay"
-import SubTitle from "@/components/molecules/Title/SubTitle"
 
 export default async function BillingKeyTerm() {
   const billingKeyTerm = await getBillingKeyTerm()
-  const { termsTitle, content } = billingKeyTerm
-  console.log(content)
+  const { content } = billingKeyTerm
   return (
     <div>
-      <SubTitle text={termsTitle} />
-      <p>{content}</p>
+      {content.split(/(제\d+조|\d+\.\s)/).map((item, index) => {
+        if (index % 2 === 0) {
+          return item
+        } else {
+          return (
+            <span key={index}>
+              <br />
+              {item}
+            </span>
+          )
+        }
+      })}
     </div>
   )
 }
