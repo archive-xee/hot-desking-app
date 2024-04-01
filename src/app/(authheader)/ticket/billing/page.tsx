@@ -6,8 +6,9 @@
 // import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import BottomSheetButton from "@/components/molecules/Button/BottomSheetButton"
+import BottomSheetModal from "@/components/molecules/Modal/BottomSheetModal"
 import CardTicket from "@/components/molecules/Ticket/CardTicket"
-import BottomSheetModal from "@/components/organisms/BottomSheetModal"
+import Title from "@/components/molecules/Title/Title"
 
 // const GET_BILLING_TICKET_LIST = gql`
 //   query GetBillingTicketList {
@@ -21,7 +22,7 @@ import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 export default function BillingTicketPage() {
   return (
     <>
-      <BillingTicketPageTitle />
+      <Title text="정기권 구매하기" />
       <BottomSheetModal
         trigger={
           <CardTicket
@@ -41,7 +42,7 @@ export default function BillingTicketPage() {
           <div className="flex flex-row justify-center">
             <Link
               href={{
-                pathname: "/payment/online/billing",
+                pathname: "/payment/online/billing/term",
                 query: {
                   // 티켓타입, 티켓이름 정도
                   ticketId: "1",
@@ -63,8 +64,4 @@ export default function BillingTicketPage() {
       <div className="border">query GetBillingTicketList [ BillingTicket [ TicketType remaining ] ]</div>
     </>
   )
-}
-
-const BillingTicketPageTitle = () => {
-  return <h1 className="text-center text-xl font-bold">정기권 구매하기</h1>
 }

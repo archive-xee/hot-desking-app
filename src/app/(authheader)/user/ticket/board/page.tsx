@@ -1,4 +1,5 @@
 import { getUserIdAfterCheckAuthRedirect } from "@/actions/authjs"
+import Title from "@/components/molecules/Title/Title"
 // import { getAllUserTicket } from "@/actions/userticket"
 import AccordionUserTicket from "@/components/organisms/AccordionUserTicket"
 
@@ -31,7 +32,7 @@ export default async function UserSeatTicketPage() {
   ]
   return (
     <>
-      <h1 className="text-center text-xl font-bold">내 이용권 현황/관리</h1>
+      <Title text="내 이용권 현황/관리" />
       {allUserTicket.map((userTicket: any) => (
         <AccordionUserTicket key={userTicket.id} ticket={userTicket} userId={userId}></AccordionUserTicket>
       ))}

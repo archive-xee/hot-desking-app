@@ -4,8 +4,9 @@
 import Link from "next/link"
 import BottomSheetButton from "@/components/molecules/Button/BottomSheetButton"
 import Button from "@/components/molecules/Button/Button"
+import BottomSheetModal from "@/components/molecules/Modal/BottomSheetModal"
 import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
-import BottomSheetModal from "@/components/organisms/BottomSheetModal"
+import Title from "@/components/molecules/Title/Title"
 
 // const GET_USER_COUPON_LIST = gql`
 //   query GetUserTicketList($userId: string) {
@@ -20,7 +21,7 @@ import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 export default function UserSeatTicketPage() {
   return (
     <>
-      <UserTicketPageTitle />
+      <Title text="이용권 사용하기" />
       <BottomSheetModal
         trigger={
           <StretchedTicket
@@ -64,8 +65,4 @@ export default function UserSeatTicketPage() {
       </div>
     </>
   )
-}
-
-const UserTicketPageTitle = () => {
-  return <h1 className="text-center text-xl font-bold">이용권 사용하기</h1>
 }

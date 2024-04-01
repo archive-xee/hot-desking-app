@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Dialog } from "./Dialog"
+import { Dialog } from "../molecules/Modal/Dialog"
 import Button from "@/components/molecules/Button/Button"
 import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
 import { refundUserTicket, unsubscribeUserTicket } from "@/gql/userticket"

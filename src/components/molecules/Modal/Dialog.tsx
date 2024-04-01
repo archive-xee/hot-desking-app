@@ -60,20 +60,24 @@ export const Dialog = (props: DialogProps) => {
           <div className="flex size-full flex-col overflow-y-auto px-4 py-2">
             <div className="overflow-y-auto">{content}</div>
             <div className="grow"></div>
-            <div className="h-4"></div>
+            <div className="h-2"></div>
 
-            <form
-              onSubmit={(e) => {
-                e.preventDefault()
-                action!()
-              }}
-            >
-              {/* 23/03/30 
+            {action ? (
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault()
+                  action()
+                }}
+              >
+                {/* @클라 03/30 
               onSubmit이라서 에러가 발생한다면 Button의 onClick으로도 가능*/}
-              <div className="flex flex-row justify-center gap-2">
-                <Button form={true}>{actionName}</Button>
-              </div>
-            </form>
+                <div className="mt-2 flex flex-row justify-center gap-2">
+                  <Button form={true}>{actionName}</Button>
+                </div>
+              </form>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       )}

@@ -7,7 +7,6 @@ export async function getBillingKeyTerm() {
   const GET_BILLING_KEY_TERM_QUERY = gql`
     query GetBillingKeyTerm($type: TermsType!) {
       term(type: $type) {
-        termsTitle
         content
       }
     }
@@ -80,7 +79,11 @@ export async function registerUserCard(userId: string, formData: FormData) {
     }
   `
 
-  const cardNo = formData.get("cardNo")
+  const cardNo0 = formData.get("cardNo0")?.toString()!
+  const cardNo1 = formData.get("cardNo1")?.toString()!
+  const cardNo2 = formData.get("cardNo2")?.toString()!
+  const cardNo3 = formData.get("cardNo3")?.toString()!
+  const cardNo = cardNo0 + cardNo1 + cardNo2 + cardNo3
   const expYear = formData.get("expYear")
   const expMonth = formData.get("expMonth")
   const idNo = formData.get("idNo")
@@ -98,20 +101,21 @@ export async function registerUserCard(userId: string, formData: FormData) {
   return resultCode
 }
 
-export async function deleteUserCard(formData: FormData) {
-  const DELETE_USER_CARD = gql`
+export async function deleteCardByCardId(cardId: string) {
+  const DELETE_USER_CARD_BY_CARD_ID = gql`
     mutation DeleteUserCard($cardId: String!) {
-      deleteUserCard(input: { cardId: $cardId }) {
-        resultCode
-      }
+      deleteCardByCardId(cardId: $cardId)
     }
   `
-
-  const cardId = formData.get("cardId")
-
-  const data: { deleteUserCard: { resultCode: string } } = await request(APOLLO_ROUTER_URL, DELETE_USER_CARD, {
-    cardId,
-  })
-  const resultCode = data.deleteUserCard.resultCode
+  // @서버 03/31 input있었는데 없어짐
+  // @서버 03/31 resultCode 받아와야하는데 없음
+  const data: { deleteCardByCardId: { resultCode: string } } = await request(
+    APOLLO_ROUTER_URL,
+    DELETE_USER_CARD_BY_CARD_ID,
+    {
+      cardId,
+    },
+  )
+  const resultCode = data.deleteCardByCardId.resultCode
   return resultCode
 }
