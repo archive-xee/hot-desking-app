@@ -1,7 +1,7 @@
 import { deleteCardByCardId } from "@/actions/nicepay"
 import Button from "@/components/molecules/Button/Button"
 import SubTitle from "@/components/molecules/Title/SubTitle"
-import { Dialog } from "@/components/organisms/Dialog"
+import { Dialog } from "@/components/molecules/Modal/Dialog"
 import { Card } from "@/models/card"
 import { formatCardNumber } from "@/utils/format"
 

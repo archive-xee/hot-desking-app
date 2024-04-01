@@ -9,7 +9,7 @@ import Button from "@/components/molecules/Button/Button"
 import LoadingSpinner from "@/components/molecules/LoadingSpinner"
 import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
 import Title from "@/components/molecules/Title/Title"
-import BottomSheetModal from "@/components/organisms/BottomSheetModal"
+import BottomSheetModal from "@/components/molecules/Modal/BottomSheetModal"
 
 // Data: List<OneoffTicket>
 // interface Variables {

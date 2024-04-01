@@ -6,7 +6,7 @@ import Button from "@/components/molecules/Button/Button"
 import StretchedCoupon from "@/components/molecules/Coupon/StretchedCoupon"
 import SubTitle from "@/components/molecules/Title/SubTitle"
 import Title from "@/components/molecules/Title/Title"
-import BottomSheetModal from "@/components/organisms/BottomSheetModal"
+import BottomSheetModal from "@/components/molecules/Modal/BottomSheetModal"
 
 // const GET_USER_COUPON_LIST = gql`
 //   query GetUserCouponList($userId: string) {
