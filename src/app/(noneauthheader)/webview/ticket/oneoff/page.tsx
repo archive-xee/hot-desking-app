@@ -6,9 +6,9 @@ import Link from "next/link"
 // import { useSearchParams } from "next/navigation"
 import BottomSheetButton from "@/components/molecules/Button/BottomSheetButton"
 import Button from "@/components/molecules/Button/Button"
+import BottomSheetModal from "@/components/molecules/Modal/BottomSheetModal"
 import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
 import Title from "@/components/molecules/Title/Title"
-import BottomSheetModal from "@/components/molecules/Modal/BottomSheetModal"
 import useIsReactNativeWebview from "@/hooks/useIsReactNativeWebview"
 
 // const GET_BILLING_TICKET_LIST = gql`
