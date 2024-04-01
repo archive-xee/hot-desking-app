@@ -1,5 +1,6 @@
 import { deleteCardByCardId } from "@/actions/nicepay"
 import Button from "@/components/molecules/Button/Button"
+import SubTitle from "@/components/molecules/Title/SubTitle"
 import { Dialog } from "@/components/organisms/Dialog"
 import { Card } from "@/models/card"
 import { formatCardNumber } from "@/utils/format"
@@ -47,7 +48,7 @@ const PayWithCardDialogContent = (props: { card: Card }) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <p className="text-center">선택하신 카드</p>
+      <SubTitle text="선택하신 카드" />
       <p className="text-center font-bold">
         {card.cardName} {formatCardNumber(card.cardNum)}
       </p>

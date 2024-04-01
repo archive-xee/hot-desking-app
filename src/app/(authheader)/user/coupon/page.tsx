@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import Button from "@/components/molecules/Button/Button"
 import StretchedCoupon from "@/components/molecules/Coupon/StretchedCoupon"
 import Title from "@/components/molecules/Title"
+import SubTitle from "@/components/molecules/Title/SubTitle"
 import BottomSheetModal from "@/components/organisms/BottomSheetModal"
 
 // const GET_USER_COUPON_LIST = gql`
@@ -20,7 +21,7 @@ export default function UserCouponPage() {
   return (
     <>
       <Title text="내 쿠폰 리스트" />
-      <h3 className="text-center">쿠폰을 등록하려면 실물쿠폰의 QR코드를 촬영해주세요.</h3>
+      <SubTitle text="쿠폰을 등록하려면 실물쿠폰의 QR코드를 촬영해주세요." />
       <BottomSheetModal
         trigger={
           <StretchedCoupon

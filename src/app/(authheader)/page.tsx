@@ -49,9 +49,7 @@ const HomeNavButton = (props: NavButtonProps) => {
       <div className="flex size-20 items-center justify-center rounded-lg bg-blue-700 hover:bg-blue-500">
         <h3 className="font-medium  text-white-100">
           {props.label.split("\n").map((str, idx) => (
-            <p className="text-center" key={idx}>
-              {str}
-            </p>
+            <p key={idx}>{str}</p>
           ))}
         </h3>
       </div>
@@ -65,9 +63,7 @@ const HomeExternalLinkButton = (props: NavButtonProps) => {
       <div className="flex size-20 items-center justify-center rounded-lg bg-blue-700 hover:bg-blue-500">
         <h3 className="font-medium  text-white-100">
           {props.label.split("\n").map((str, idx) => (
-            <p className="text-center" key={idx}>
-              {str}
-            </p>
+            <p key={idx}>{str}</p>
           ))}
         </h3>
       </div>
