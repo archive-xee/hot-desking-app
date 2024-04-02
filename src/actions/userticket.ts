@@ -2,46 +2,79 @@
 import request, { gql } from "graphql-request"
 import { RedirectType, redirect } from "next/navigation"
 import { APOLLO_ROUTER_URL } from "@/constant/graphql"
+import { UserTicket } from "@/models/ticket"
 
 export async function getAllUserTicket(userId: string, bookable?: string) {
-  const GET_USERTICKET_ALL = gql`
+  const GET_ALL_USERTICKET = gql`
     query GetAllUserticket($userId: String!, $bookable: String) {
-      ticket(paid: true, userId: $userId, typeName: $bookable) {
-        ticketId
+      ticket(userId: $userId, typeName: $bookable) {
+        ticketType {
+          bookableType {
+            name
+            type
+          }
+          name
+          remaining
+          purchasePrice
+          expires
+          id
+          limit
+          type
+        }
+        expiresAt
+        endsAt
+        availableTime
+        id
+        refund
+        userId
       }
     }
   `
 
-  const data: { ticket: { ticketId: string } } = await request(APOLLO_ROUTER_URL, GET_USERTICKET_ALL, {
-    userId,
+  const data: { ticket: UserTicket[] } = await request(APOLLO_ROUTER_URL, GET_ALL_USERTICKET, {
+    userId: "12345", //@ 서버
     bookable,
   })
 
-  const { ticketId } = data.ticket
-  const allUserTicket = ticketId
+  const { ticket: allUserTicket } = data
   return allUserTicket
 }
 
 export async function getActivatedUserTicket(userId: string, bookable?: string) {
   // bookable: 좌사대스(bookable), 쿼리엔 typeName으로 들어가있음
-  //!! 사용중인지 알아야하는게 있어야함(activated!)
   const GET_ACTIVATED_USERTICKET = gql`
     query GetActivatedUserticketActivated($userId: String!, $bookable: String) {
-      ticket(paid: true, userId: $userId, typeName: $bookable) {
+      ticket(used: true, userId: $userId, typeName: $bookable) {
+        ticketType {
+          bookableType {
+            name
+            type
+          }
+          name
+          remaining
+          purchasePrice
+          expires
+          id
+          limit
+          type
+        }
+        expiresAt
+        endsAt
+        availableTime
         id
+        refund
+        userId
       }
     }
   `
-  // @클라 04/01 뭘 가져올것인지 정하자
-  const data: { ticket: { id: string } } = await request(APOLLO_ROUTER_URL, GET_ACTIVATED_USERTICKET, {
-    userId,
+  const data: { ticket: UserTicket[] } = await request(APOLLO_ROUTER_URL, GET_ACTIVATED_USERTICKET, {
+    userId: "12345",
     bookable,
   })
 
-  const { id } = data.ticket
-  const userTicketActivated = id ? true : false
-  // @클라 04/01 ticket객체를 가져와야 함
-  return userTicketActivated
+  const { ticket } = data
+  const activatedUserTicket = ticket[0]
+  return activatedUserTicket
 }
 export async function nipoutTicket(userId: string, ticketId: string) {
   // 아직 쿼리가 만들어지지 않음

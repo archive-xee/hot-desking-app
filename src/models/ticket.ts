@@ -9,6 +9,7 @@ export type UserTicket = {
   availableTime: string // 시간권일 경우 남은 시간 "82:48:30"
   id: string
   refund: number // 환불 받을 수 있는 금액
+  userId: string
 }
 
 // @서버 TicketType

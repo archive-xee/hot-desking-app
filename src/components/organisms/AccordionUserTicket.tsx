@@ -3,16 +3,16 @@
 import { useState } from "react"
 import { Dialog } from "../molecules/Modal/Dialog"
 import Button from "@/components/molecules/Button/Button"
-import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
+import CardTicket from "@/components/molecules/Ticket/CardTicket"
 import { refundUserTicket, unsubscribeUserTicket } from "@/gql/userticket"
-import type { Ticket } from "@/models/ticket"
+import type { UserTicket } from "@/models/ticket"
 
-const AccordionUserTicket = (props: { userId: string; ticket: Ticket }) => {
+const AccordionUserTicket = (props: { userId: string; userTicket: UserTicket }) => {
   const [hidden, setHidden] = useState(true)
   const hiddenClass = hidden ? "hidden" : ""
   const borderDirection = hidden ? "rounded-md" : "rounded-t-md "
   const chevronDirection = hidden ? "rotate-180" : ""
-  const { userId, ticket } = props
+  const { userId, userTicket } = props
 
   return (
     <div>
@@ -24,7 +24,7 @@ const AccordionUserTicket = (props: { userId: string; ticket: Ticket }) => {
         className={`flex w-full items-center gap-2 ${borderDirection} border px-2 py-1 focus:ring-1`}
       >
         <div className="w-full">
-          <StretchedTicket ticket={ticket}></StretchedTicket>
+          <CardTicket ticketFrame={userTicket.ticketType}></CardTicket>
         </div>
         <svg
           data-accordion-icon
@@ -47,16 +47,16 @@ const AccordionUserTicket = (props: { userId: string; ticket: Ticket }) => {
               title="환불하기"
               content={<RefundDialogContent />}
               actionName="환불하기"
-              action={() => refundUserTicket(userId, ticket.id)}
+              action={() => refundUserTicket(userId, userTicket.id)}
             ></Dialog>
-            {ticket.billingType === "billing" ? (
+            {userTicket.ticketType.type === "billing" ? (
               <Dialog
                 trigger={<Button color="red">구독취소</Button>}
                 title="구독취소"
                 content={<UnsubscribeDialogContent />}
                 actionName="구독취소"
                 action={
-                  () => unsubscribeUserTicket(userId, ticket.id)
+                  () => unsubscribeUserTicket(userId, userTicket.id)
                   // 여부에 따라서 결과 페이지로
                 }
               ></Dialog>

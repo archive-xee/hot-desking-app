@@ -25,7 +25,7 @@ export default function UserSeatTicketPage() {
       <BottomSheetModal
         trigger={
           <StretchedTicket
-            ticket={{
+            ticketFrame={{
               id: "1",
               billingType: "oneoff",
               type: "time",
