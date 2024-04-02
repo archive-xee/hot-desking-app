@@ -4,17 +4,16 @@ import type { CouponType, Coupon } from "@/models/coupon"
 
 const StretchedCoupon = (props: { coupon: Coupon }) => {
   const { coupon } = props
-  const bookableKorean = getBookableKorean(coupon.bookable)
   const ticketTypeKorean = getTicketTypeKorean(coupon.type)
 
-  const borderColors: { [key in BookableType]: string } = {
+  const borderColors: { [key in BookableType["type"]]: string } = {
     seat: "border-blue-100",
     meetingroom: "border-yellow-500",
     rentbox: "border-teal-100",
     locker: "border-purple-100",
   }
 
-  const bookableColors: { [key in BookableType]: string } = {
+  const bookableColors: { [key in BookableType["type"]]: string } = {
     seat: "bg-blue-700",
     meetingroom: "bg-yellow-700",
     rentbox: "bg-teal-500",
@@ -27,7 +26,7 @@ const StretchedCoupon = (props: { coupon: Coupon }) => {
         className={`flex ${bookableColors[coupon.bookable]} size-20 flex-col items-center justify-center gap-1 rounded-l-lg bg-black-300`}
       >
         <Image src={`/icons/bookable/${coupon.bookable}.png`} alt="이것도 해야겠네" width="24" height="24"></Image>
-        <p className="text-white-100">{bookableKorean}</p>
+        <p className="text-white-100">좌/사/대/스</p>
       </div>
       <div className="flex grow flex-row justify-between pl-2">
         <div className="flex flex-col justify-center">
@@ -46,19 +45,6 @@ const StretchedCoupon = (props: { coupon: Coupon }) => {
       </div>
     </div>
   )
-}
-
-const getBookableKorean = (type: BookableType): string => {
-  switch (type) {
-    case "seat":
-      return "좌석"
-    case "meetingroom":
-      return "미팅룸"
-    case "rentbox":
-      return "대여함"
-    default:
-      return "사물함"
-  }
 }
 
 const getTicketTypeKorean = (type: CouponType): string => {
