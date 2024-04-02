@@ -10,10 +10,10 @@ import OneoffTicketList from "@/components/organisms/Ticket/OneoffTicketList"
 
 // usedAt(UserTicket구별), portOneType구별(일회/정기권) 필요
 export default function OneoffTicketPurchasePage() {
-  const ticketTypeList = ["시간권", "당일권", "기간권", "할인권"]
+  const ticketTypeList = ["time", "oneday", "period", "discount"]
+  const ticketTypeNameList = ["시간권", "당일권", "기간권", "할인권"]
   const ticketTypeColorList = ["hover:bg-yellow-300", "hover:bg-purple-100", "hover:bg-blue-300", "hover:bg-teal-100"]
-  const ticketTypeIconList = ["period", "oneday", "time", "discount"]
-  const [ticketType, setTicketType] = useState("시간권")
+  const [ticketType, setTicketType] = useState("time")
 
   return (
     <>
@@ -27,20 +27,15 @@ export default function OneoffTicketPurchasePage() {
             }}
             className={`flex grow flex-row justify-center p-2 ${ticketTypeColorList[index]} max-sm:flex-col max-sm:items-center`}
           >
-            <Image
-              src={`/icons/ticket/${ticketTypeIconList[index]}.png`}
-              alt={ticketType}
-              width="24"
-              height="24"
-            ></Image>
-            <span className="ms-3 max-sm:ms-0">{ticketTypeList[index]}</span>
+            <Image src={`/icons/ticket/${ticketTypeList[index]}.png`} alt={ticketType} width="24" height="24"></Image>
+            <span className="ms-3 max-sm:ms-0">{ticketTypeNameList[index]}</span>
           </div>
         ))}
       </div>
       {/* 결제 페이지로 이동 */}
       <CouponApplicationButton />
       <Suspense fallback={<LoadingSpinner />}>
-        <OneoffTicketList ticketType={ticketType} />
+        <OneoffTicketList type={ticketType} />
       </Suspense>
     </>
   )
