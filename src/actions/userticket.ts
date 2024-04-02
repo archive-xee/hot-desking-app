@@ -1,5 +1,6 @@
 "use server"
 import request, { gql } from "graphql-request"
+import { RedirectType, redirect } from "next/navigation"
 import { APOLLO_ROUTER_URL } from "@/constant/graphql"
 
 export async function getAllUserTicket(userId: string, bookable?: string) {
@@ -82,5 +83,6 @@ export async function checkoutTicket(userId: string, ticketId: string) {
   // const { ticketId } = data.ticket
   // const userTicketActivated = ticketId ? true : false
   // return userTicketActivated
-  return true
+  const result = "success"
+  redirect(`${process.env.BASE_URL}/redirection/checkout/${result}`, RedirectType.replace)
 }
