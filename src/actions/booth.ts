@@ -1,6 +1,8 @@
 "use server"
 import request, { gql } from "graphql-request"
+import { RedirectType, redirect } from "next/navigation"
 import { APOLLO_ROUTER_URL } from "@/constant/graphql"
+import { Bookable } from "@/models/bookable"
 
 export async function getBoothStatus() {
   const GET_BOOTH_STATUS = gql`
@@ -26,38 +28,78 @@ export async function getBoothStatus() {
 }
 
 // 이것도 bookable, type, number에 따라서해야되니까 이것도 받아와줘야 함
-export async function getBoookableOccupied(seatId: string) {
+// @클라 변경예정
+export async function getBoookableById(id: string) {
   // seatId가 좌/사/대/스 중 무엇(bookable)인지 알아야 합니다.
   // 쿼리엔 아직 추가되지 않음
-  const GET_BOOKABLE_STATUS = gql`
-    query GetBookableStatus($seatId: String!) {
-      booking(seatId: $seatId) {
+  const GET_BOOKABLE_BY_ID = gql`
+    query GetBookableStatus($id: String!) {
+      booking(id: $id) {
+        id
+        seat {
+          number
+          type
+          name
+        }
         ticketId
-        bookable
+        userId
+        bookableType {
+          name
+          type
+        }
       }
     }
   `
 
-  // bookable
-  // type 도 추가
-  // number 도 추가
+  const data: { booking: Bookable[] } = await request(APOLLO_ROUTER_URL, GET_BOOKABLE_BY_ID, {
+    id,
+  })
 
-  const data: { booking: { ticketId: string; bookable: string } } = await request(
-    APOLLO_ROUTER_URL,
-    GET_BOOKABLE_STATUS,
-    {
-      seatId,
-    },
-  )
-
-  const { bookable, ticketId } = data.booking
-  const bookableOccupied = ticketId ? true : false
-  return { bookable, bookableOccupied }
+  const { booking: bookable } = data
+  return bookable[0]
 }
 
-export async function moveToNewBookable(userId: string, seatId: string) {
+export async function getUserActivatedBoookable(userId: string, types?: string[]) {
+  const GET_USER_ACTIVATED_BOOKABLE = gql`
+    query getUserActivatedBoookable($userId: String!) {
+      booking(used: true, userId: $userId) {
+        id
+        seat {
+          number
+          type
+          name
+        }
+        ticketId
+        userId
+        bookableType {
+          name
+          type
+        }
+      }
+    }
+  `
+
+  const data: { booking: Bookable[] } = await request(APOLLO_ROUTER_URL, GET_USER_ACTIVATED_BOOKABLE, {
+    userId: "12345",
+  })
+
+  const { booking } = data
+  let activatedBookableList: Bookable[] = []
+  if (types) {
+    types.forEach((type) => {
+      activatedBookableList = activatedBookableList.concat(
+        booking.filter((bookable: Bookable) => bookable.bookableType.type === type),
+      )
+    })
+  } else {
+    activatedBookableList = booking
+  }
+  return activatedBookableList
+}
+
+export async function moveToNewBookable(userId: string, id: string) {
   // @서버 03/29 아직 쿼리가 만들어지지 않음
-  console.log(userId, seatId)
+  console.log(userId, id)
   // const MOVE_TO_NEW_BOOKABLE = gql`
   //   query MoveToNewBookable($userId: String!, $bookable: String!) {
   //     ticket(paid: true, userId: $userId, typeName: $bookable) {
@@ -74,5 +116,6 @@ export async function moveToNewBookable(userId: string, seatId: string) {
   // const { ticketId } = data.ticket
   // const userTicketActivated = ticketId ? true : false
   // return userTicketActivated
-  return true
+  const result = "success"
+  redirect(`${process.env.BASE_URL}/redirection/move/${result}`, RedirectType.replace)
 }
