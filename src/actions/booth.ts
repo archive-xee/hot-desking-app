@@ -4,34 +4,33 @@ import { RedirectType, redirect } from "next/navigation"
 import { APOLLO_ROUTER_URL } from "@/constant/graphql"
 import { Bookable } from "@/models/bookable"
 
-export async function getBoothStatus() {
-  const GET_BOOTH_STATUS = gql`
-    query GetBoothStatus() {
+export async function getAllBookable() {
+  const GET_ALL_BOOTH = gql`
+    query getAllBookable {
       booking {
-        bookableTypeId
-        seatId
+        id
+        seat {
+          number
+          type
+          name
+        }
         ticketId
+        userId
+        bookableType {
+          name
+          type
+        }
       }
     }
   `
 
-  type BoothStatusResponse = {
-    bookableTypeId: string
-    seatId: string
-    ticketId: string
-  }
+  const data: { booking: Bookable[] } = await request(APOLLO_ROUTER_URL, GET_ALL_BOOTH)
 
-  const data: { booking: BoothStatusResponse } = await request(APOLLO_ROUTER_URL, GET_BOOTH_STATUS)
-
-  const booking = data.booking
-  return booking
+  const { booking: allBookableList } = data
+  return allBookableList
 }
 
-// 이것도 bookable, type, number에 따라서해야되니까 이것도 받아와줘야 함
-// @클라 변경예정
 export async function getBoookableById(id: string) {
-  // seatId가 좌/사/대/스 중 무엇(bookable)인지 알아야 합니다.
-  // 쿼리엔 아직 추가되지 않음
   const GET_BOOKABLE_BY_ID = gql`
     query GetBookableStatus($id: String!) {
       booking(id: $id) {

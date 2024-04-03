@@ -1,19 +1,60 @@
-import Link from "next/link"
-import Button from "@/components/molecules/Button/Button"
+import { getAllBookable } from "@/actions/booth"
+import { Bookable } from "@/models/bookable"
 
-// 모든 현황을 다 받는 페이지 (쿼리스트링으로 구별하지 않음)
-// @서버 서버액션 중 bookable, type, number가 들어와야 함
-export default function BoothStatusPage() {
+function getBoothStatus(bookables: Bookable[]): {
+  occupiedBoothStatus: Map<string, number[]>
+  vacantBoothStatus: Map<string, number[]>
+} {
+  const occupiedBoothStatus = new Map<string, number[]>()
+  const vacantBoothStatus = new Map<string, number[]>()
+
+  bookables.forEach((seat) => {
+    const typeName = seat.bookableType.name
+    const seatNumber = seat.seat.number
+    const seatName = seat.seat.name
+    const key = `${typeName} - ${seatName}`
+
+    if (seat.ticketId !== null) {
+      if (!occupiedBoothStatus.has(key)) {
+        occupiedBoothStatus.set(key, [])
+      }
+      occupiedBoothStatus.get(key)!.push(Number(seatNumber))
+    } else {
+      if (!vacantBoothStatus.has(key)) {
+        vacantBoothStatus.set(key, [])
+      }
+      vacantBoothStatus.get(key)!.push(Number(seatNumber))
+    }
+  })
+
+  return { occupiedBoothStatus, vacantBoothStatus }
+}
+
+export default async function BoothStatusPage() {
+  const allBookableList = await getAllBookable()
+  const { occupiedBoothStatus, vacantBoothStatus } = getBoothStatus(allBookableList)
   return (
-    <>
-      <p>
-        QR코드에서 id를 gql에 담아서 요청을 보내면 응답은 Seat 클래스의 아래 필드만
-        <br /> ticketId: string | null
-      </p>
-      <div className="border">query GetTicketId($lockerId: String!) [ locker(id: $lockerId) [ ticketId ] ]</div>
-      <Link href="/user/ticket/use/locker">
-        <Button>티켓사용</Button>
-      </Link>
-    </>
+    <div className="flex flex-col justify-center">
+      <div>
+        <p className="font-bold">사용 중</p>
+        {[...occupiedBoothStatus.entries()].map(([typeName, numbers]) =>
+          numbers.map((number) => (
+            <div key={typeName}>
+              {typeName}: {number}번
+            </div>
+          )),
+        )}
+      </div>
+      <div>
+        <p className="font-bold">사용 가능</p>
+        {[...vacantBoothStatus.entries()].map(([typeName, numbers]) =>
+          numbers.map((number) => (
+            <div key={typeName}>
+              {typeName}: {number}번
+            </div>
+          )),
+        )}
+      </div>
+    </div>
   )
 }
