@@ -76,8 +76,32 @@ export async function getActivatedUserTicket(userId: string, bookable?: string) 
   const activatedUserTicket = ticket[0]
   return activatedUserTicket
 }
-export async function nipoutTicket(userId: string, ticketId: string) {
-  // 아직 쿼리가 만들어지지 않음
+
+export async function useUserTicket(userId: string, ticketId: string) {
+  // @서버 아직 쿼리가 만들어지지 않음
+  console.log("에", userId, ticketId)
+  // const NIPOUT_BOOKABLE = gql`
+  //   query NipoutBookable($userId: String!, $bookable: String!) {
+  //     ticket(paid: true, userId: $userId, typeName: $bookable) {
+  //       ticketId
+  //     }
+  //   }
+  // `
+
+  // const data: { ticket: { ticketId: string } } = await request(APOLLO_ROUTER_URL, NIPOUT_BOOKABLE, {
+  //   userId,
+  //   bookable,
+  // })
+
+  // const { ticketId } = data.ticket
+  // const userTicketActivated = ticketId ? true : false
+  // return userTicketActivated
+  const result = "success"
+  redirect(`${process.env.BASE_URL}/redirection/useuserticket/${result}`, RedirectType.replace)
+}
+
+export async function nipoutUserTicket(userId: string, ticketId: string) {
+  // @서버 아직 쿼리가 만들어지지 않음
   console.log(userId, ticketId)
   // const NIPOUT_BOOKABLE = gql`
   //   query NipoutBookable($userId: String!, $bookable: String!) {
@@ -97,8 +121,9 @@ export async function nipoutTicket(userId: string, ticketId: string) {
   // return userTicketActivated
   return true
 }
-export async function checkoutTicket(userId: string, ticketId: string) {
-  // 아직 쿼리가 만들어지지 않음
+
+export async function checkoutUserTicket(userId: string, ticketId: string) {
+  // @서버 아직 쿼리가 만들어지지 않음
   console.log(userId, ticketId)
   // const CHECKOUT_TICKET = gql`
   //   query CheckoutTicket($userId: String!, $bookable: String!) {

@@ -21,7 +21,11 @@ const getMsgAndRedirectionPathAndName = (action: string, searchParams: ReadonlyU
       break
     case "move":
       successMsg = "자리 이동이 완료되었습니다."
-      failMsg = ""
+      break
+    case "useuserticket":
+      successMsg = "티켓 사용이 완료되었습니다."
+      redirectionPath = `/booth/status`
+      redirectionPathName = "현황 페이지"
       break
     case "oneoffOrder": {
       const bookableType = searchParams.get("bookableType")
