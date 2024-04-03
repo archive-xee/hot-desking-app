@@ -12,8 +12,9 @@ export type BookableType = {
 }
 
 export type SeatType = {
-  number: "1"
-  type: "normal"
+  number: string
+  type: string
+  name: string
 }
 
 // export class SeatModel extends Bookable {
