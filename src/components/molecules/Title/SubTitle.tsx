@@ -1,10 +1,12 @@
 type SubTitleProps = {
   text: string
+  bold?: boolean
 }
 
 function SubTitle(props: SubTitleProps) {
-  const { text } = props
-  return <h3 className="text-center">{text}</h3>
+  const { text, bold } = props
+  const fontBold = bold ? "font-bold" : ""
+  return <h3 className={`text-center ${fontBold}`}>{text}</h3>
 }
 
 export default SubTitle
