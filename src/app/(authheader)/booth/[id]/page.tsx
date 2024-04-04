@@ -3,6 +3,7 @@ import { getUserIdAfterCheckAuthRedirect } from "@/actions/authjs"
 import { getBoookableById, getUserActivatedBoookable } from "@/actions/booth"
 import BookableCard from "@/components/molecules/BookableCard"
 import Button from "@/components/molecules/Button/Button"
+import SubTitle from "@/components/molecules/Title/SubTitle"
 import { Bookable } from "@/models/bookable"
 
 export default async function BookablePage({ params }: { params: { id: string } }) {
@@ -10,7 +11,11 @@ export default async function BookablePage({ params }: { params: { id: string } 
   const userId = await getUserIdAfterCheckAuthRedirect()
   const currentBookable = await getBoookableById(id)
   if (currentBookable.ticketId) {
-    return <p>이미 사용되고 있는 자리입니다</p>
+    return (
+      <div className="flex flex-col items-center justify-center">
+        <SubTitle bold={true} text="이미 사용되고 있는 자리입니다." />
+      </div>
+    )
   } else {
     const userActivatedBookableList = await getUserActivatedBoookable(userId, [currentBookable.bookableType.type])
     if (userActivatedBookableList) {
@@ -37,13 +42,13 @@ export default async function BookablePage({ params }: { params: { id: string } 
       )
     } else {
       return (
-        <>
-          <p>현재 사용중인 좌석이 없습니다. 티켓을 사용하시면 좌석을 사용할 수 있습니다.</p>
-          <p>티켓을 사용하시겠습니까?</p>
+        <div className="flex flex-col items-center justify-center">
+          <SubTitle text="현재 사용중인 좌석이 없습니다. 티켓을 사용하시면 좌석을 사용할 수 있습니다." />
+          <SubTitle text="티켓을 사용하시겠습니까?" />
           <Link href={`${process.env.BASE_URL}/user/ticket/use/${currentBookable.bookableType.name}`}>
             <Button>티켓사용</Button>
           </Link>
-        </>
+        </div>
       )
     }
   }
