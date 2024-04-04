@@ -4,6 +4,8 @@ import Link from "next/link"
 import { ReadonlyURLSearchParams, useRouter, useSearchParams } from "next/navigation"
 import { useState, useEffect } from "react"
 import Button from "@/components/molecules/Button/Button"
+import SubTitle from "@/components/molecules/Title/SubTitle"
+import Title from "@/components/molecules/Title/Title"
 
 const getMsgAndRedirectionPathAndName = (action: string, searchParams: ReadonlyURLSearchParams) => {
   let successMsg = "올바른 접근이 아닙니다."
@@ -75,14 +77,15 @@ export default function RedirectionPage({ params }: { params: { slug: string } }
     <>
       {result === "success" ? (
         <div className="flex flex-col items-center justify-center">
-          <p>{successMsg}</p>
-          <p>
-            {redirectSeconds}초 후 {redirectionPathName!}로 자동으로 이동합니다.
-          </p>
+          <Title text="성공" />
+          <div className="h-2"></div>
+          <SubTitle bold={true} text={successMsg} />
+          <SubTitle text={`${redirectSeconds}초 후 ${redirectionPathName!}로 자동으로 이동합니다.`} />
         </div>
       ) : (
         <div className="flex flex-col items-center">
-          <p>{failMsg}</p>
+          <Title text="실패" />
+          <SubTitle bold={true} text={failMsg} />
           <Link href="/">
             <Button>홈으로 돌아기기</Button>
           </Link>
