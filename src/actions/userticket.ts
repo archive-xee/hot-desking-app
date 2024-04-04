@@ -27,54 +27,18 @@ export async function getAllUserTicket(userId: string, bookable?: string) {
         id
         refund
         userId
+        used
       }
     }
   `
 
   const data: { ticket: UserTicket[] } = await request(APOLLO_ROUTER_URL, GET_ALL_USERTICKET, {
-    userId: "12345", //@ 서버
+    userId,
     bookable,
   })
 
   const { ticket: allUserTicket } = data
   return allUserTicket
-}
-
-export async function getActivatedUserTicket(userId: string, bookable?: string) {
-  // bookable: 좌사대스(bookable), 쿼리엔 typeName으로 들어가있음
-  const GET_ACTIVATED_USERTICKET = gql`
-    query GetActivatedUserticketActivated($userId: String!, $bookable: String) {
-      ticket(used: true, userId: $userId, typeName: $bookable) {
-        ticketType {
-          bookableType {
-            name
-            type
-          }
-          name
-          remaining
-          purchasePrice
-          expires
-          id
-          limit
-          type
-        }
-        expiresAt
-        endsAt
-        availableTime
-        id
-        refund
-        userId
-      }
-    }
-  `
-  const data: { ticket: UserTicket[] } = await request(APOLLO_ROUTER_URL, GET_ACTIVATED_USERTICKET, {
-    userId: "12345",
-    bookable,
-  })
-
-  const { ticket } = data
-  const activatedUserTicket = ticket[0]
-  return activatedUserTicket
 }
 
 export async function useUserTicket(userId: string, ticketId: string) {

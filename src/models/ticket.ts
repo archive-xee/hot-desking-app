@@ -10,6 +10,7 @@ export type UserTicket = {
   id: string
   refund: number // 환불 받을 수 있는 금액
   userId: string
+  used: boolean
 }
 
 // @서버 TicketType
