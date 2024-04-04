@@ -113,5 +113,5 @@ export async function moveToNewBookable(userId: string, bookableId: string) {
 
   const resultCode = data.moveBooking.resultCode
   const result = resultCode === "0000" ? "success" : "fail"
-  redirect(`${process.env.BASE_URL}/redirection/move/${result}`, RedirectType.replace)
+  redirect(`/redirection/move/${result}`, RedirectType.replace)
 }

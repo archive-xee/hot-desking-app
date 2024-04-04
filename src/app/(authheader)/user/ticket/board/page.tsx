@@ -44,7 +44,7 @@ export default async function UserTicketManagePage() {
                   ["oneoff", "일회권"],
                   ["billing", "정기권"],
                 ].map(([ticketBillingType, ticketBillingName]) => (
-                  <Link key={ticketBillingType} href={`${process.env.BASE_URL}/ticket/${ticketBillingType}`}>
+                  <Link key={ticketBillingType} href={`/ticket/${ticketBillingType}`}>
                     <Button>{ticketBillingName}</Button>
                   </Link>
                 ))}

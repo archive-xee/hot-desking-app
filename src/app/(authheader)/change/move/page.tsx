@@ -16,7 +16,7 @@ export default async function BookableMovePage() {
   const [userActivatedBookable] = await getUserActivatedBoookable(userId, [currentBookable.bookableType.type])
   const moveToNewBookableByBookableId = moveToNewBookable.bind(null, userId, currentBookableId)
   if (currentBookableId === userActivatedBookable.id) {
-    redirect(`${process.env.BASE_URL}/redirection/default/fail`, RedirectType.replace)
+    redirect(`/redirection/default/fail`, RedirectType.replace)
   } else {
     return (
       <div className="flex flex-col gap-2">

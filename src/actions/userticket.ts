@@ -61,7 +61,7 @@ export async function useUserTicket(userId: string, ticketId: string) {
   // const userTicketActivated = ticketId ? true : false
   // return userTicketActivated
   const result = "success"
-  redirect(`${process.env.BASE_URL}/redirection/useuserticket/${result}`, RedirectType.replace)
+  redirect(`/redirection/useuserticket/${result}`, RedirectType.replace)
 }
 
 export async function nipoutUserTicket(userId: string, ticketId: string) {
@@ -80,7 +80,7 @@ export async function nipoutUserTicket(userId: string, ticketId: string) {
 
   const resultCode = data.outingBooking.resultCode
   const result = resultCode === "0000" ? "success" : "fail"
-  redirect(`${process.env.BASE_URL}/redirection/nipout/${result}`, RedirectType.replace)
+  redirect(`/redirection/nipout/${result}`, RedirectType.replace)
 }
 
 export async function checkoutUserTicket(userId: string, ticketId: string) {
@@ -98,5 +98,5 @@ export async function checkoutUserTicket(userId: string, ticketId: string) {
 
   const resultCode = data.leavingBooking.resultCode
   const result = resultCode === "0000" ? "success" : "fail"
-  redirect(`${process.env.BASE_URL}/redirection/checkout/${result}`, RedirectType.replace)
+  redirect(`/redirection/checkout/${result}`, RedirectType.replace)
 }

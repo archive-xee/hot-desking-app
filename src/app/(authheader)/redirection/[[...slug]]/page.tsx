@@ -31,7 +31,7 @@ const getMsgAndRedirectionPathAndName = (action: string, searchParams: ReadonlyU
     case "oneoffOrder": {
       const bookableType = searchParams.get("bookableType")
       successMsg = "일회권 구매가 완료되었습니다."
-      redirectionPath = `${process.env.BASE_URL}/user/ticket/use/${bookableType}`
+      redirectionPath = `/user/ticket/use/${bookableType}`
       redirectionPathName = "내 이용권 목록 페이지"
       break
     }

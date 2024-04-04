@@ -31,7 +31,7 @@ export default async function BookablePage({ params }: { params: { id: string } 
             <div className="flex flex-col items-center justify-center">
               <p>새로운 {currentBookable.bookableType.name}으로 이동하시겠습니까?</p>
               <BookableCard bookable={currentBookable} />
-              <Link href={`${process.env.BASE_URL}/change/move/?id=${id}`}>
+              <Link href={`/change/move/?id=${id}`}>
                 <Button> {currentBookable.bookableType.name}이동</Button>
               </Link>
             </div>
@@ -45,7 +45,7 @@ export default async function BookablePage({ params }: { params: { id: string } 
         <div className="flex flex-col items-center justify-center">
           <SubTitle text="현재 사용중인 좌석이 없습니다. 티켓을 사용하시면 좌석을 사용할 수 있습니다." />
           <SubTitle text="티켓을 사용하시겠습니까?" />
-          <Link href={`${process.env.BASE_URL}/user/ticket/use/${currentBookable.bookableType.name}`}>
+          <Link href={`/user/ticket/use/${currentBookable.bookableType.name}`}>
             <Button>티켓사용</Button>
           </Link>
         </div>
