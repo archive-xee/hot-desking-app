@@ -80,7 +80,7 @@ export async function getUserActivatedBoookable(userId: string, types?: string[]
   `
 
   const data: { booking: Bookable[] } = await request(APOLLO_ROUTER_URL, GET_USER_ACTIVATED_BOOKABLE, {
-    userId: "12345",
+    userId,
   })
 
   const { booking } = data
