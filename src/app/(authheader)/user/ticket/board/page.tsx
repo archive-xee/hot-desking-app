@@ -38,7 +38,7 @@ export default async function UserTicketManagePage() {
             ))
           ) : (
             <div className="flex flex-col gap-2">
-              <p>현재 보관중인 사용권이 없습니다. 아래 버튼을 누르시면 권종에 따라 구매하실 수 있습니다.</p>
+              <SubTitle text="현재 보관중인 사용권이 없습니다. 아래 버튼을 누르시면 권종에 따라 구매하실 수 있습니다." />
               <div className="flex flex-row justify-center gap-2">
                 {[
                   ["oneoff", "일회권"],

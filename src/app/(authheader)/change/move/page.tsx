@@ -37,7 +37,7 @@ export default async function BookableMovePage() {
             </div>
           </div>
         ) : (
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col items-center justify-center  gap-2">
             <p>현재 사용중인 좌석이 없어 이동할수 없습니다.</p>
             <Link href="/">
               <Button>홈으로 돌아기기</Button>

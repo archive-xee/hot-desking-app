@@ -13,7 +13,7 @@ export default async function BookablePage({ params }: { params: { id: string } 
   const [userActivatedBookable] = await getUserActivatedBoookable(userId, [currentBookable.bookableType.type])
   return (
     <div className="flex flex-col items-center justify-center">
-      <Title text="좌석 QR코드" />
+      <Title text={`${currentBookable.bookableType.name} QR코드`} />
       {currentBookable.ticketId ? (
         <SubTitle bold={true} text="이미 사용되고 있는 자리입니다." />
       ) : userActivatedBookable ? (
@@ -36,7 +36,9 @@ export default async function BookablePage({ params }: { params: { id: string } 
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center gap-2">
-          <SubTitle text="현재 좌석은 비어있습니다. 티켓을 사용하시면 좌석을 사용할 수 있습니다." />
+          <SubTitle
+            text={`현재 ${currentBookable.bookableType.name}은 비어있습니다. 티켓을 사용하시면 좌석을 사용할 수 있습니다.`}
+          />
           <SubTitle text="티켓을 사용하시겠습니까?" />
           <Link href={`/user/ticket/use/${currentBookable.bookableType.name}`}>
             <Button>티켓사용</Button>

@@ -83,7 +83,7 @@ export default function RedirectionPage({ params }: { params: { slug: string } }
           <SubTitle text={`${redirectSeconds}초 후 ${redirectionPathName!}로 자동으로 이동합니다.`} />
         </div>
       ) : (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center justify-center">
           <Title text="실패" />
           <SubTitle bold={true} text={failMsg} />
           <Link href="/">
