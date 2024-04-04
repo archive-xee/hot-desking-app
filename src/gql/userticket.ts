@@ -1,50 +1,45 @@
 import request, { gql } from "graphql-request"
 import { APOLLO_ROUTER_URL } from "@/constant/graphql"
 
-export async function refundUserTicket(userId: string, ticketId: string) {
+// @클라 04/04 클라이언트 컴포넌트에서 사용되기 때문에 next/navigation의 redirect 사용 불가
+// @클라 때문에 result값을 반환해서 컴포넌트에서 useRouter 사용
+export async function refundUserTicket(ticketId: string) {
+  // const router = useRouter()
   const REFUND_USER_TICKET = gql`
-    mutation RefundUserTicket($userId: String!, $ticketId: String!) {
-      refundUserTicket(input: { cardId: $cardId }) {
+    mutation RefundUserTicket($ticketId: String!) {
+      refundTicket(input: { ticketId: $ticketId }) {
         resultCode
       }
     }
   `
 
-  type BoothStatusResponse = {
-    bookableTypeId: string
-    seatId: string
-    ticketId: string
-  }
-
-  const data: { booking: BoothStatusResponse } = await request(APOLLO_ROUTER_URL, REFUND_USER_TICKET, {
-    userId,
+  const data: { refundTicket: { resultCode: string } } = await request(APOLLO_ROUTER_URL, REFUND_USER_TICKET, {
     ticketId,
   })
 
-  const booking = data.booking
-  return booking
+  const resultCode = data.refundTicket.resultCode
+  const result = resultCode === "0000" ? "success" : "fail"
+  return result
 }
 
-export async function unsubscribeUserTicket(userId: string, ticketId: string) {
+export async function unsubscribeUserTicket(ticketId: string) {
   const UNSUBSCIRE_USER_TICKET = gql`
-    mutation UnsubscribeUserTicket($cardId: String!, $ticketId: String!) {
-      unsubscribeUserTicket(input: { cardId: $cardId }) {
+    mutation UnsubscribeUserTicket($ticketId: String!) {
+      cancelSubscriptionTicket(input: { ticketId: $ticketId }) {
         resultCode
       }
     }
   `
 
-  type BoothStatusResponse = {
-    bookableTypeId: string
-    seatId: string
-    ticketId: string
-  }
+  const data: { cancelSubscriptionTicket: { resultCode: string } } = await request(
+    APOLLO_ROUTER_URL,
+    UNSUBSCIRE_USER_TICKET,
+    {
+      ticketId,
+    },
+  )
 
-  const data: { booking: BoothStatusResponse } = await request(APOLLO_ROUTER_URL, UNSUBSCIRE_USER_TICKET, {
-    userId,
-    ticketId,
-  })
-
-  const booking = data.booking
-  return booking
+  const resultCode = data.cancelSubscriptionTicket.resultCode
+  const result = resultCode === "0000" ? "success" : "fail"
+  return result
 }

@@ -1,18 +1,21 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { Dialog } from "../molecules/Modal/Dialog"
 import Button from "@/components/molecules/Button/Button"
+import { Dialog } from "@/components/molecules/Modal/Dialog"
 import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
 import { refundUserTicket, unsubscribeUserTicket } from "@/gql/userticket"
-import type { Ticket } from "@/models/ticket"
+import type { UserTicket } from "@/models/ticket"
+import { formatDatetimeString, formatLeftTimeString } from "@/utils/format"
 
-const AccordionUserTicket = (props: { userId: string; ticket: Ticket }) => {
+const AccordionUserTicket = (props: { userTicket: UserTicket }) => {
+  const router = useRouter()
   const [hidden, setHidden] = useState(true)
   const hiddenClass = hidden ? "hidden" : ""
   const borderDirection = hidden ? "rounded-md" : "rounded-t-md "
   const chevronDirection = hidden ? "rotate-180" : ""
-  const { userId, ticket } = props
+  const { userTicket } = props
 
   return (
     <div>
@@ -21,10 +24,10 @@ const AccordionUserTicket = (props: { userId: string; ticket: Ticket }) => {
           setHidden(!hidden)
         }}
         tabIndex={0}
-        className={`flex w-full items-center gap-2 ${borderDirection} border px-2 py-1 focus:ring-1`}
+        className={`flex w-full items-center gap-1 ${borderDirection} border p-1 focus:ring-1`}
       >
         <div className="w-full">
-          <StretchedTicket ticket={ticket}></StretchedTicket>
+          <StretchedTicket ticketFrame={userTicket.ticketType}></StretchedTicket>
         </div>
         <svg
           data-accordion-icon
@@ -39,26 +42,44 @@ const AccordionUserTicket = (props: { userId: string; ticket: Ticket }) => {
       <div className={hiddenClass}>
         <div className="flex flex-row justify-between gap-2 rounded-b-md border border-t-0 border-black-100 p-5">
           <div className="w-8/12 content-start">
-            세정보를 위한 쿼리를 또 보낸다기보다는 전 페이지에서 한번에 다 받아와서 하자!
+            <div>
+              <p className="font-bold">유효기간</p>
+              <p>{formatDatetimeString(userTicket.endsAt)}</p>
+            </div>
+            <div>
+              <p className="font-bold">만료기간</p>
+              <p>{formatDatetimeString(userTicket.expiresAt)}</p>
+            </div>
+            {!["period", "billing"].includes(userTicket.ticketType.type) ? (
+              <div>
+                <p className="font-bold">남은시간</p>
+                <p>{formatLeftTimeString(userTicket.availableTime)}</p>
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
           <div className="flex flex-col gap-2">
             <Dialog
               trigger={<Button color="teal">환불하기</Button>}
               title="환불하기"
-              content={<RefundDialogContent />}
+              content={<RefundDialogContent ticket={userTicket} />}
               actionName="환불하기"
-              action={() => refundUserTicket(userId, ticket.id)}
+              action={async () => {
+                const result = await refundUserTicket(userTicket.id)
+                router.replace(`/redirection/unsubscribe/${result}`)
+              }}
             ></Dialog>
-            {ticket.billingType === "billing" ? (
+            {userTicket.ticketType.type === "billing" ? (
               <Dialog
                 trigger={<Button color="red">구독취소</Button>}
                 title="구독취소"
-                content={<UnsubscribeDialogContent />}
+                content={<UnsubscribeDialogContent ticket={userTicket} />}
                 actionName="구독취소"
-                action={
-                  () => unsubscribeUserTicket(userId, ticket.id)
-                  // 여부에 따라서 결과 페이지로
-                }
+                action={async () => {
+                  const result = await unsubscribeUserTicket(userTicket.id)
+                  router.replace(`/redirection/unsubscribe/${result}`)
+                }}
               ></Dialog>
             ) : (
               <></>
@@ -70,25 +91,22 @@ const AccordionUserTicket = (props: { userId: string; ticket: Ticket }) => {
   )
 }
 
-const RefundDialogContent = () => {
-  // 티켓(일회권, 정기권 모두)에서 환불 요청 들어왔을 때 경과된 시간에 따라
-  // 환불받을수 있는 금액 필드 필요
+const RefundDialogContent = (props: { ticket: UserTicket }) => {
+  const { ticket } = props
   return (
     <div className="flex flex-col gap-2">
-      <p>환불받을 수 있는 금액은 8000원 입니다.</p>
+      <p>환불받을 수 있는 금액은 {ticket.refund}원 입니다.</p>
       <p>환불을 진행하시겠습니까?</p>
     </div>
   )
 }
 
-const UnsubscribeDialogContent = () => {
-  // 정기권 티켓일 때 구독취소 요청 들어왔을 때
-  // 다음 구독일자
-  // 현재구독기간의 만료일 필요함
+const UnsubscribeDialogContent = (props: { ticket: UserTicket }) => {
+  const { ticket } = props
   return (
     <div className="flex flex-col  gap-2">
-      <p>자동 구독을 취소하시면 다음 구독일인 24년 4월 20일부터 재구독이 되지 않습니다.</p>
-      <p>남은 구독기간(24년 4월 19일)까지는 변함없이 이용이 가능합니다.</p>
+      <p>자동 구독을 취소하시면 남은 구독기간({ticket.endsAt})까지는 변함없이 이용이 가능하나</p>
+      <p>그 이후부터는 재구독이 되지 않습니다.</p>
       <p>구독취소를 진행하시겠습니까?</p>
     </div>
   )

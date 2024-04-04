@@ -1,72 +1,11 @@
-import request, { gql } from "graphql-request"
 import { DefaultSession, NextAuthOptions } from "next-auth"
 import { ProviderType } from "next-auth/providers"
 import KakaoProvider from "next-auth/providers/kakao"
-import { APOLLO_ROUTER_URL } from "@/constant/graphql"
 import { KAKAO_AUTH_JAVASCRIPT_KEY, NEXTAUTH_KAKAO_CLIENT_SECRET_KEY, NEXTAUTH_SECRET_KEY } from "@/constant/kakaoauth"
-
-const GET_USER_BY_ID = gql`
-  query GetUserById($userId: String!) {
-    user(userId: $userId) {
-      id
-      name
-      phoneNumber
-      ageRange
-      birthday
-      birthdayType
-      birthyear
-      gender
-    }
-  }
-`
-
-const ADD_USER_MUTATION = gql`
-  mutation AddUser(
-    $id: String!
-    $name: String!
-    $phoneNumber: String!
-    $ageRange: String
-    $birthday: String
-    $birthdayType: String
-    $birthyear: String
-    $gender: String
-  ) {
-    addUser(
-      input: {
-        id: $id
-        name: $name
-        phoneNumber: $phoneNumber
-        ageRange: $ageRange
-        birthday: $birthday
-        birthdayType: $birthdayType
-        birthyear: $birthyear
-        gender: $gender
-      }
-    ) {
-      resultCode
-    }
-  }
-`
-
-interface UserInfo {
-  id: string
-  name: string
-  phone_number: string
-  age_range: string | null
-  birthday: string | null
-  birthday_type: string | null
-  birthyear: string | null
-  gender: string | null
-}
+import { addUser, getUser } from "@/gql/user"
+import { KakaoProfile, User } from "@/models/user"
 
 declare module "next-auth" {
-  interface User {
-    id: string // 최초 Provider로 로그인했을때 그 Provider의 id
-    name: string | undefined
-    email: string | undefined
-    image: string | undefined
-  }
-
   interface Account {
     // 인가 코드로 받는 토큰값 포함
     provider: string
@@ -83,8 +22,7 @@ declare module "next-auth" {
   interface Profile {
     id: number
     connected_at: string
-    kakao_account: UserInfo
-    // kakao_account : 각 프로바이더에서 동의된 항목의 유저 정보
+    kakao_account: KakaoProfile
   }
 
   interface Session extends DefaultSession {
@@ -107,15 +45,11 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async signIn({ profile }) {
-      const userId = profile?.id.toString()
+      const userId = profile?.id.toString()!
       const kakao_account = profile?.kakao_account
-
-      const user = await request(APOLLO_ROUTER_URL, GET_USER_BY_ID, {
-        userId,
-      })
-
+      const user = await getUser(userId)
       if (!user) {
-        await request(APOLLO_ROUTER_URL, ADD_USER_MUTATION, {
+        await addUser({
           id: userId,
           name: kakao_account?.name,
           phoneNumber: kakao_account?.phone_number,
@@ -123,7 +57,7 @@ export const authOptions: NextAuthOptions = {
           birthday: kakao_account?.birthday,
           birthdayType: kakao_account?.birthday_type,
           gender: kakao_account?.gender,
-        })
+        } as User)
       }
       return true
     },
