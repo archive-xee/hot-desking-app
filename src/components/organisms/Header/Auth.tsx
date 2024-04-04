@@ -26,9 +26,6 @@ export default async function AuthHeader() {
             <Link href="/user/ticket/board" className="hover:underline">
               내 이용권
             </Link>
-            <Link href="/api/auth/signout" className="hover:underline">
-              로그아웃
-            </Link>
           </>
         ) : (
           <Link href="/auth/signin" className="hover:underline">
