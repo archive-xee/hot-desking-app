@@ -23,16 +23,26 @@ const getMsgAndRedirectionPathAndName = (action: string, searchParams: ReadonlyU
       break
     case "useuserticket":
       successMsg = "티켓 사용이 완료되었습니다."
-      redirectionPath = `/booth/status`
+      redirectionPath = "/booth/status"
       redirectionPathName = "현황 페이지"
       break
     case "oneoffOrder": {
       const bookableType = searchParams.get("bookableType")
       successMsg = "일회권 구매가 완료되었습니다."
-      redirectionPath = `/user/ticket/use/${bookableType}`
+      redirectionPath = `${process.env.BASE_URL}/user/ticket/use/${bookableType}`
       redirectionPathName = "내 이용권 목록 페이지"
       break
     }
+    case "refund":
+      successMsg = "티켓 환불이 완료되었습니다."
+      redirectionPath = "/user/ticket/board"
+      redirectionPathName = "내 이용권 현황/관리 페이지"
+      break
+    case "unsubscribe":
+      successMsg = "구독 취소가 완료되었습니다."
+      redirectionPath = "/user/ticket/board"
+      redirectionPathName = "내 이용권 현황/관리 페이지"
+      break
     default:
       break
   }

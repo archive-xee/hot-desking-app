@@ -1,19 +1,21 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { Dialog } from "../molecules/Modal/Dialog"
 import Button from "@/components/molecules/Button/Button"
+import { Dialog } from "@/components/molecules/Modal/Dialog"
 import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
 import { refundUserTicket, unsubscribeUserTicket } from "@/gql/userticket"
 import type { UserTicket } from "@/models/ticket"
 import { formatDatetimeString, formatLeftTimeString } from "@/utils/format"
 
-const AccordionUserTicket = (props: { userId: string; userTicket: UserTicket }) => {
+const AccordionUserTicket = (props: { userTicket: UserTicket }) => {
+  const router = useRouter()
   const [hidden, setHidden] = useState(true)
   const hiddenClass = hidden ? "hidden" : ""
   const borderDirection = hidden ? "rounded-md" : "rounded-t-md "
   const chevronDirection = hidden ? "rotate-180" : ""
-  const { userId, userTicket } = props
+  const { userTicket } = props
 
   return (
     <div>
@@ -63,7 +65,10 @@ const AccordionUserTicket = (props: { userId: string; userTicket: UserTicket }) 
               title="환불하기"
               content={<RefundDialogContent ticket={userTicket} />}
               actionName="환불하기"
-              action={() => refundUserTicket(userId, userTicket.id)}
+              action={async () => {
+                const result = await refundUserTicket(userTicket.id)
+                router.replace(`/redirection/unsubscribe/${result}`)
+              }}
             ></Dialog>
             {userTicket.ticketType.type === "billing" ? (
               <Dialog
@@ -71,7 +76,10 @@ const AccordionUserTicket = (props: { userId: string; userTicket: UserTicket }) 
                 title="구독취소"
                 content={<UnsubscribeDialogContent ticket={userTicket} />}
                 actionName="구독취소"
-                action={() => unsubscribeUserTicket(userId, userTicket.id)}
+                action={async () => {
+                  const result = await unsubscribeUserTicket(userTicket.id)
+                  router.replace(`/redirection/unsubscribe/${result}`)
+                }}
               ></Dialog>
             ) : (
               <></>

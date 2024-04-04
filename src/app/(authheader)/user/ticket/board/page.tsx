@@ -20,11 +20,7 @@ export default async function UserTicketManagePage() {
         <div>
           {activatedTickets.length ? (
             activatedTickets.map((activatedTicket: UserTicket) => (
-              <AccordionUserTicket
-                key={activatedTicket.id}
-                userTicket={activatedTicket}
-                userId={userId}
-              ></AccordionUserTicket>
+              <AccordionUserTicket key={activatedTicket.id} userTicket={activatedTicket}></AccordionUserTicket>
             ))
           ) : (
             <div>
@@ -38,11 +34,7 @@ export default async function UserTicketManagePage() {
         <div className="flex flex-col gap-2">
           {archivedTickets.length ? (
             archivedTickets.map((archivedTicket: UserTicket) => (
-              <AccordionUserTicket
-                key={archivedTicket.id}
-                userTicket={archivedTicket}
-                userId={userId}
-              ></AccordionUserTicket>
+              <AccordionUserTicket key={archivedTicket.id} userTicket={archivedTicket}></AccordionUserTicket>
             ))
           ) : (
             <div className="flex flex-col gap-2">
