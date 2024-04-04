@@ -34,11 +34,11 @@ const StretchedTicket = (props: { ticketFrame: TicketFrame }) => {
         ></Image>
         <p className="text-white-100">{ticketFrame.bookableType.name}</p>
       </div>
-      <div className="flex grow flex-row justify-between pl-2">
+      <div className="flex grow flex-row justify-between pl-1">
         <div className="flex flex-col justify-center">
           <p className="font-bold">{ticketFrame.name}</p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-1">
           <div>
             <p className="font-bold">남은 수량</p>
             <p className="text-center">{ticketFrame.remaining}개</p>
