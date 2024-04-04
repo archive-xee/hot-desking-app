@@ -1,4 +1,5 @@
 "use server"
+
 import request, { gql } from "graphql-request"
 import { RedirectType, redirect } from "next/navigation"
 import { APOLLO_ROUTER_URL } from "@/constant/graphql"
@@ -96,25 +97,21 @@ export async function getUserActivatedBoookable(userId: string, types?: string[]
   return activatedBookableList
 }
 
-export async function moveToNewBookable(userId: string, id: string) {
-  // @서버 03/29 아직 쿼리가 만들어지지 않음
-  console.log(userId, id)
-  // const MOVE_TO_NEW_BOOKABLE = gql`
-  //   query MoveToNewBookable($userId: String!, $bookable: String!) {
-  //     ticket(paid: true, userId: $userId, typeName: $bookable) {
-  //       ticketId
-  //     }
-  //   }
-  // `
+export async function moveToNewBookable(userId: string, bookableId: string) {
+  const MOVE_TO_NEW_BOOKABLE = gql`
+    mutation MoveToNewBookable($userId: String!, $bookableId: String!) {
+      moveBooking(input: { userId: $userId, id: $bookableId }) {
+        resultCode
+      }
+    }
+  `
 
-  // const data: { ticket: { ticketId: string } } = await request(APOLLO_ROUTER_URL, MOVE_TO_NEW_BOOKABLE, {
-  //   userId,
-  //   bookable,
-  // })
+  const data: { moveBooking: { resultCode: string } } = await request(APOLLO_ROUTER_URL, MOVE_TO_NEW_BOOKABLE, {
+    userId,
+    bookableId,
+  })
 
-  // const { ticketId } = data.ticket
-  // const userTicketActivated = ticketId ? true : false
-  // return userTicketActivated
-  const result = "success"
+  const resultCode = data.moveBooking.resultCode
+  const result = resultCode === "0000" ? "success" : "fail"
   redirect(`${process.env.BASE_URL}/redirection/move/${result}`, RedirectType.replace)
 }

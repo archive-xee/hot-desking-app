@@ -7,7 +7,7 @@ import Button from "@/components/molecules/Button/Button"
 
 const getMsgAndRedirectionPathAndName = (action: string, searchParams: ReadonlyURLSearchParams) => {
   let successMsg = "올바른 접근이 아닙니다."
-  let failMsg = "알 수 없는 오류가 발생되었습니다. 관리자에게 문의해주세요."
+  const failMsg = "알 수 없는 오류가 발생되었습니다. 관리자에게 문의해주세요."
   let redirectionPath = "/"
   let redirectionPathName = "홈페이지"
 
@@ -17,7 +17,6 @@ const getMsgAndRedirectionPathAndName = (action: string, searchParams: ReadonlyU
       break
     case "nipout":
       successMsg = "30분동안 외출 가능하고, 전원은 연결되지 않습니다."
-      failMsg = "현재 사용중인 좌석이 없어 외출할수 없습니다."
       break
     case "move":
       successMsg = "자리 이동이 완료되었습니다."

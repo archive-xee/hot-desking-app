@@ -9,19 +9,19 @@ import { Bookable } from "@/models/bookable"
 export default async function BookableMovePage() {
   const userId = await getUserIdAfterCheckAuthRedirect()
   const urlObject = new URL(headers().get("x-url")!)
-  const id = urlObject.searchParams.get("id") ?? "bookableIdError"
-  const currentBookable = await getBoookableById(id)
+  const currentBookableId = urlObject.searchParams.get("id") ?? "bookableIdError"
+  const currentBookable = await getBoookableById(currentBookableId)
   const userActivatedBookableList = await getUserActivatedBoookable(userId, [currentBookable.bookableType.type])
   if (userActivatedBookableList) {
     return (
       <div className="flex flex-col items-center justify-center">
         <p>현재 이용중인 {currentBookable.bookableType.name}입니다.</p>
         {userActivatedBookableList.map((activatedBookable: Bookable) => {
-          const moveToNewBookableByTicketId = moveToNewBookable.bind(null, userId, activatedBookable.ticketId!)
+          const moveToNewBookableByBookableId = moveToNewBookable.bind(null, userId, currentBookableId)
           return (
             <div key={activatedBookable.id}>
               <BookableCard bookable={activatedBookable} />
-              <form action={moveToNewBookableByTicketId}>
+              <form action={moveToNewBookableByBookableId}>
                 <Button form={true}>이동</Button>
               </form>
             </div>

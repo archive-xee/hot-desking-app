@@ -101,46 +101,38 @@ export async function useUserTicket(userId: string, ticketId: string) {
 }
 
 export async function nipoutUserTicket(userId: string, ticketId: string) {
-  // @서버 아직 쿼리가 만들어지지 않음
-  console.log(userId, ticketId)
-  // const NIPOUT_BOOKABLE = gql`
-  //   query NipoutBookable($userId: String!, $bookable: String!) {
-  //     ticket(paid: true, userId: $userId, typeName: $bookable) {
-  //       ticketId
-  //     }
-  //   }
-  // `
+  const NIPOUT_BOOKABLE = gql`
+    mutation NipoutBookable($userId: String!, $ticketId: String!) {
+      outingBooking(input: { userId: $userId, id: $ticketId }) {
+        resultCode
+      }
+    }
+  `
 
-  // const data: { ticket: { ticketId: string } } = await request(APOLLO_ROUTER_URL, NIPOUT_BOOKABLE, {
-  //   userId,
-  //   bookable,
-  // })
+  const data: { outingBooking: { resultCode: string } } = await request(APOLLO_ROUTER_URL, NIPOUT_BOOKABLE, {
+    userId,
+    ticketId,
+  })
 
-  // const { ticketId } = data.ticket
-  // const userTicketActivated = ticketId ? true : false
-  // return userTicketActivated
-  return true
+  const resultCode = data.outingBooking.resultCode
+  const result = resultCode === "0000" ? "success" : "fail"
+  redirect(`${process.env.BASE_URL}/redirection/nipout/${result}`, RedirectType.replace)
 }
 
 export async function checkoutUserTicket(userId: string, ticketId: string) {
-  // @서버 아직 쿼리가 만들어지지 않음
-  console.log(userId, ticketId)
-  // const CHECKOUT_TICKET = gql`
-  //   query CheckoutTicket($userId: String!, $bookable: String!) {
-  //     ticket(paid: true, userId: $userId, typeName: $bookable) {
-  //       ticketId
-  //     }
-  //   }
-  // `
+  const CHECKOUT_BOOKABLE = gql`
+    mutation leavingBooking($userId: String!, $ticketId: String!) {
+      leavingBooking(input: { userId: $userId, ticketId: $ticketId }) {
+        resultCode
+      }
+    }
+  `
+  const data: { leavingBooking: { resultCode: string } } = await request(APOLLO_ROUTER_URL, CHECKOUT_BOOKABLE, {
+    userId,
+    ticketId,
+  })
 
-  // const data: { ticket: { ticketId: string } } = await request(APOLLO_ROUTER_URL, CHECKOUT_TICKET, {
-  //   userId,
-  //   bookable,
-  // })
-
-  // const { ticketId } = data.ticket
-  // const userTicketActivated = ticketId ? true : false
-  // return userTicketActivated
-  const result = "success"
+  const resultCode = data.leavingBooking.resultCode
+  const result = resultCode === "0000" ? "success" : "fail"
   redirect(`${process.env.BASE_URL}/redirection/checkout/${result}`, RedirectType.replace)
 }
