@@ -30,7 +30,7 @@ const StretchedCoupon = (props: { couponFrame: CouponFrame }) => {
             <h3 className="text-lg font-bold">{couponFrame.name}</h3>
           </div>
           <p className="text-sm">
-            <span className="mr-2 font-bold">등록 가능기간</span>
+            <span className="mr-2 font-bold">사용가능 기간</span>
             {couponFrame.expires}일 남음
           </p>
         </div>

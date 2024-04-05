@@ -18,7 +18,7 @@ export default async function UserCardList() {
           ))}
         </div>
       ) : (
-        <SubTitle text="카드를 등록해주세요" />
+        <SubTitle text="카드를 등록하시면 더 간편하게 결제하실 수 있습니다." />
       )}
       <UserCard key={card1.id} card={card1} />
       <UserCard key={card2.id} card={card2} />
