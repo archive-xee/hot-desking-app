@@ -21,6 +21,8 @@ export type TicketFrame = {
   purchasePrice: number // 5000
   expires: number // @서버 유효기간 7일. 일수로 받아오는 것
   id: string
+  number: number // 10
   limit: number // 10
+  typeName: string
   type: "oneday" | "period" | "time" | "discount" | "billing"
 }

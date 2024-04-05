@@ -12,8 +12,10 @@ export const GET_ALL_TICKET_FRAME: TypedDocumentNode = gql`
       purchasePrice
       expires
       id
+      number
       limit
       type
+      typeName
     }
   }
 `
