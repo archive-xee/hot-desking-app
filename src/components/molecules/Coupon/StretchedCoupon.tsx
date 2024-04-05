@@ -1,59 +1,42 @@
 import Image from "next/image"
-import { BookableType } from "@/models/bookable"
-import type { CouponType, Coupon } from "@/models/coupon"
+import type { CouponFrame } from "@/models/coupon"
 
-const StretchedCoupon = (props: { coupon: Coupon }) => {
-  const { coupon } = props
-  const ticketTypeKorean = getTicketTypeKorean(coupon.type)
+const StretchedCoupon = (props: { couponFrame: CouponFrame }) => {
+  const { couponFrame } = props
 
-  const borderColors: { [key in BookableType["type"]]: string } = {
-    seat: "border-blue-100",
-    meetingroom: "border-yellow-500",
-    rentbox: "border-teal-100",
-    locker: "border-purple-100",
+  const borderColors: { [key in CouponFrame["type"]]: string } = {
+    sale: "border-teal-100",
+    timebonus: "border-orange-100",
+    discount: "border-red-100",
   }
 
-  const bookableColors: { [key in BookableType["type"]]: string } = {
-    seat: "bg-blue-700",
-    meetingroom: "bg-yellow-700",
-    rentbox: "bg-teal-500",
-    locker: "bg-purple-700",
+  const bookableColors: { [key in CouponFrame["type"]]: string } = {
+    sale: "bg-teal-500",
+    timebonus: "bg-orange-700",
+    discount: "bg-red-700",
   }
 
   return (
-    <div className={`flex ${borderColors[coupon.bookable]} flex-row rounded-lg border border-solid bg-white-300`}>
+    <div className={`flex ${borderColors[couponFrame.type]} flex-row rounded-lg border border-solid bg-white-300`}>
       <div
-        className={`flex ${bookableColors[coupon.bookable]} size-20 flex-col items-center justify-center gap-1 rounded-l-lg bg-black-300`}
+        className={`flex ${bookableColors[couponFrame.type]} size-20 flex-col items-center justify-center gap-1 rounded-l-lg bg-black-300`}
       >
-        <Image src={`/icons/bookable/${coupon.bookable}.png`} alt="이것도 해야겠네" width="24" height="24"></Image>
-        <p className="text-white-100">좌/사/대/스</p>
+        <Image src={`/icons/coupon/${couponFrame.type}.png`} alt={couponFrame.statement} width="24" height="24"></Image>
+        <p className="text-white-100">{couponFrame.statement}</p>
       </div>
       <div className="flex grow flex-row justify-between pl-2">
         <div className="flex flex-col justify-center">
           <div className="flex flex-row items-center gap-2">
-            <h3 className="text-lg font-bold">
-              {coupon.digit}
-              {ticketTypeKorean}권
-            </h3>
-            <Image src={`/icons/coupon/${coupon.type}.png`} alt="이것도 해야겠네" width="24" height="24"></Image>
+            <h3 className="text-lg font-bold">{couponFrame.name}</h3>
           </div>
           <p className="text-sm">
-            <span className="mr-2 font-bold">유효기간</span>
-            2024-01-12 ~ 2024-04-11
+            <span className="mr-2 font-bold">등록 가능기간</span>
+            {couponFrame.expires}일 남음
           </p>
         </div>
       </div>
     </div>
   )
-}
-
-const getTicketTypeKorean = (type: CouponType): string => {
-  switch (type) {
-    case "discount":
-      return "% 할인"
-    default:
-      return "시간 추가"
-  }
 }
 
 export default StretchedCoupon
