@@ -28,6 +28,12 @@ const getMsgAndRedirectionPathAndName = (action: string, searchParams: ReadonlyU
       redirectionPath = "/booth/status"
       redirectionPathName = "현황 페이지"
       break
+    case "registercoupon":
+      successMsg = "쿠폰 등록이 완료되었습니다."
+      // 플로우에 따라서 달라질 것
+      redirectionPath = "/user/coupon"
+      redirectionPathName = "내 쿠폰 리스트 페이지"
+      break
     case "oneoffOrder": {
       const bookableType = searchParams.get("bookableType")
       successMsg = "일회권 구매가 완료되었습니다."
