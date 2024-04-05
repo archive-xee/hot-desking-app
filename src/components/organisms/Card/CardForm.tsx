@@ -66,28 +66,28 @@ function CardForm({ userId }: CardFormProps) {
         <div className="flex flex-col gap-2">
           <div className="flex flex-row justify-between gap-1">
             <label>카드번호</label>
-            <input name="cardNo0" type="numeric" maxLength={4} size={1} className={inputStyle} />
+            <input name="cardNo0" type="numeric" maxLength={4} className={`${inputStyle} w-1/6`} />
             <p>-</p>
-            <input name="cardNo1" type="numeric" maxLength={4} size={1} className={inputStyle} />
+            <input name="cardNo1" type="numeric" maxLength={4} className={`${inputStyle} w-1/6`} />
             <p>-</p>
-            <input name="cardNo2" type="numeric" maxLength={4} size={1} className={inputStyle} />
+            <input name="cardNo2" type="numeric" maxLength={4} className={`${inputStyle} w-1/6`} />
             <p>-</p>
-            <input name="cardNo3" type="numeric" maxLength={4} size={1} className={inputStyle} />
+            <input name="cardNo3" type="numeric" maxLength={4} className={`${inputStyle} w-1/6`} />
           </div>
           <div className="flex flex-row justify-start gap-1">
             <label>유효기간</label>
-            <input type="numeric" placeholder="YY" name="expYear" maxLength={2} size={1} className={inputStyle} />
+            <input type="numeric" placeholder="YY" name="expYear" maxLength={2} className={`${inputStyle} w-1/6`} />
             <label>/</label>
-            <input type="numeric" placeholder="MM" name="expMonth" maxLength={2} size={1} className={inputStyle} />
+            <input type="numeric" placeholder="MM" name="expMonth" maxLength={2} className={`${inputStyle} w-1/6`} />
             <div className="grow"></div>
           </div>
           <div className="flex flex-row justify-start gap-1">
             <label>생년월일</label>
-            <input type="numeric" placeholder="YYMMDD" name="idNo" maxLength={6} size={4} className={inputStyle} />
+            <input type="numeric" placeholder="YYMMDD" name="idNo" maxLength={6} className={`${inputStyle} w-2/6`} />
           </div>
           <div className="flex flex-row justify-start gap-1">
             <label>카드 비밀번호 앞 2자리</label>
-            <input type="numeric" placeholder="**" name="cardPw" maxLength={2} size={1} className={inputStyle} />
+            <input type="numeric" placeholder="**" name="cardPw" maxLength={2} className={`${inputStyle} w-1/6`} />
           </div>
           <div className="h-1"></div>
           <Button form={true}>카드등록</Button>
