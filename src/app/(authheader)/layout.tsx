@@ -12,6 +12,12 @@ export default function NoneAuthLayout({ children }: { children: React.ReactNode
         <Toaster
           position="bottom-center"
           toastOptions={{
+            success: {
+              iconTheme: {
+                primary: "#00756f",
+                secondary: "#009591",
+              },
+            },
             error: {
               iconTheme: {
                 primary: "#a50048",

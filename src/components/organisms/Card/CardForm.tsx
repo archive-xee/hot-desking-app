@@ -1,5 +1,6 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 import { z } from "zod"
 import { zfd } from "zod-form-data"
@@ -23,11 +24,12 @@ type CardFormProps = {
 }
 
 function CardForm({ userId }: CardFormProps) {
+  const router = useRouter()
   const clientAction = async (formData: FormData) => {
-    const result = CardSchema.safeParse(formData)
-    if (!result.success) {
+    const validatedResult = CardSchema.safeParse(formData)
+    if (!validatedResult.success) {
       let errorMsg = ""
-      result.error.issues.forEach((issue) => {
+      validatedResult.error.issues.forEach((issue) => {
         const errorTarget = issue.path[0]
         switch (errorTarget) {
           case "expYear":
@@ -53,8 +55,14 @@ function CardForm({ userId }: CardFormProps) {
     }
 
     const resultCode = await registerUserCard(userId, formData)
-    // 이것도 결과에 따라서...
-    console.log(resultCode)
+    if (resultCode === "0000") {
+      toast.success("카드 등록이 완료되었습니다.")
+      router.back()
+    } else {
+      toast.error(
+        "카드 등록이 실패했습니다. 카드 번호나 형식이 맞는지 다시 한번 확인해주시고, 계속 오류가 반복되면 관리자에게 문의해주세요.",
+      )
+    }
   }
 
   const inputStyle =
@@ -76,9 +84,9 @@ function CardForm({ userId }: CardFormProps) {
           </div>
           <div className="flex flex-row justify-start gap-1">
             <label>유효기간</label>
-            <input type="numeric" placeholder="YY" name="expYear" maxLength={2} className={`${inputStyle} w-1/6`} />
-            <label>/</label>
             <input type="numeric" placeholder="MM" name="expMonth" maxLength={2} className={`${inputStyle} w-1/6`} />
+            <label>/</label>
+            <input type="numeric" placeholder="YY" name="expYear" maxLength={2} className={`${inputStyle} w-1/6`} />
             <div className="grow"></div>
           </div>
           <div className="flex flex-row justify-start gap-1">
