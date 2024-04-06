@@ -32,16 +32,20 @@ export const executeAuthPaymentPopup = async (props: AuthPaymentProps): Promise<
 
 export const sendOrder = async (order: Order) => {
   const SEND_ORDER = gql`
-    mutation SendOrder($userId: String!, $cardId: String, $ticketId: String!, $couponId: String!) {
-      addOrder(input: { userId: $userId, cardId: $cardId, couponId: $couponId, ticketId: $ticketId })
+    mutation SendOrder($userId: String!, $cardId: String, $ticketId: String!, $couponId: String) {
+      addOrder(input: { userId: $userId, cardId: $cardId, couponId: $couponId, ticketId: $ticketId }) {
+        resultCode
+        resultMsg
+      }
     }
   `
 
-  const data: { addOrder: { resultCode: string } } = await request(APOLLO_ROUTER_URL, SEND_ORDER, {
+  const data: { addOrder: { resultCode: string; resultMsg: string } } = await request(APOLLO_ROUTER_URL, SEND_ORDER, {
     ...order,
   })
 
   // orderId, price, ticketName 받아와야 함
-  const resultCode = data.addOrder.resultCode
+  const { resultCode, resultMsg } = data.addOrder
+  console.log(resultCode, resultMsg)
   return resultCode
 }
