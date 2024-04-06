@@ -37,7 +37,7 @@ export default async function ApplicableUserCouponPage() {
               trigger={<StretchedUserCoupon userCoupon={userCoupon}></StretchedUserCoupon>}
               content={
                 <div className="flex flex-row justify-center">
-                  <Link href={`/payment/online/oneoff?ticketId=${selectedTicketId}&couponId=${userCoupon.id}`}>
+                  <Link href={`/order?ticketId=${selectedTicketId}&couponId=${userCoupon.id}`}>
                     <BottomSheetButton>사용하기</BottomSheetButton>
                   </Link>
                 </div>

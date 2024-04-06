@@ -5,7 +5,7 @@ import SubTitle from "@/components/molecules/Title/SubTitle"
 import { Card } from "@/models/card"
 import { formatCardNumber } from "@/utils/format"
 
-export default async function UserCard(props: { card: Card }) {
+export default async function UserCard(props: { card: Card; ticketId: string; couponId: string | null }) {
   const { card } = props
   const isRepresentative = card.representative === "0"
   const color = isRepresentative ? "bg-blue-300" : "bg-blue-100"
