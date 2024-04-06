@@ -1,5 +1,5 @@
 import { getUserIdAfterCheckAuthRedirect } from "@/actions/authjs"
-import { getUserCardList } from "@/actions/nicepay"
+import { getUserCardList } from "@/actions/payment"
 import SubTitle from "@/components/molecules/Title/SubTitle"
 import UserCard from "@/components/organisms/Card/UserCard"
 import { Card, card1, card2, card3 } from "@/models/card"

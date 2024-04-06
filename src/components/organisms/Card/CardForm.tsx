@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 import { z } from "zod"
 import { zfd } from "zod-form-data"
-import { registerUserCard } from "@/actions/nicepay"
+import { registerUserCard } from "@/actions/payment"
 import Button from "@/components/molecules/Button/Button"
 
 const CardSchema = zfd.formData({
