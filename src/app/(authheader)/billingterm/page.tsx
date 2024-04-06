@@ -26,7 +26,7 @@ function BillingTermPage() {
           actionName="동의하고 결제하러 가기"
           action={async () => {
             "use server" // @클라 04/01 functions cannot be passed directly to client components 워크어라운드
-            redirect(`/payment/online/billing?tickedId=${ticketId}`)
+            redirect(`/payment?ticketId=${ticketId}`)
           }}
         ></Dialog>
       </div>
