@@ -9,19 +9,17 @@ import NicepayPopupButton from "@/components/organisms/NicepayPopupButton"
 import OrderCard from "@/components/organisms/OrderCard"
 import { order1 } from "@/models/order"
 
-// 여기도 Order정보 뿌려야 함
-
 export default async function PaymentOnlineOneoffPage() {
   const urlObject = new URL(headers().get("x-url")!)
   const selectedTicketId = urlObject.searchParams.get("ticketId") ?? "ticketIdError"
+  const selectedCouponId = urlObject.searchParams.get("couponId")
 
   return (
     <div className="flex flex-col gap-2">
       <Title text="일회권 온라인 결제" />
-      <SubTitle text="해당 티켓에 쓸 수 있는 쿠폰 선택하기" />
       <BorderCardContainer>
         <SubTitle bold={true} text="현재 결제 정보" />
-        <OrderCard ticketId={selectedTicketId} couponId={"12345"} />
+        <OrderCard ticketId={selectedTicketId} couponId={selectedCouponId} />
       </BorderCardContainer>
       <BorderCardContainer>
         <SubTitle bold={true} text="내 카드 목록" />

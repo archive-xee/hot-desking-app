@@ -31,6 +31,34 @@ export async function getAllUserCoupon(userId: string) {
   return userCouponList
 }
 
+export async function getApplicableUserCouponByTicketId(userId: string, ticketId: string) {
+  const GET_ALL_USERCOUPON = gql`
+    query GetAllUserCoupon($userId: String!, $ticketId: String!) {
+      coupon(used: false, userId: $userId, targetId: $ticketId) {
+        expiresAt
+        id
+        issuedAt
+        userId
+        type {
+          expires
+          statement
+          name
+          number
+          type
+        }
+      }
+    }
+  `
+
+  const data: { coupon: UserCoupon[] } = await request(APOLLO_ROUTER_URL, GET_ALL_USERCOUPON, {
+    userId,
+    ticketId,
+  })
+  console.log("appl", data)
+  const { coupon: userCouponList } = data
+  return userCouponList
+}
+
 export async function registerUserCoupon(userId: string, couponId: string) {
   const REGISTER_USERCOUPON = gql`
     mutation RegisterUserCoupon($userId: String!, $couponId: String!) {
