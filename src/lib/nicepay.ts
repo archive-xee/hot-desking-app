@@ -32,7 +32,7 @@ export const executeAuthPaymentPopup = async (props: AuthPaymentProps): Promise<
 
 export const sendOrder = async (order: Order) => {
   const SEND_ORDER = gql`
-    mutation SendOrder($userId: String!, $cardId: String!, $ticketId: String!, $couponId: String!) {
+    mutation SendOrder($userId: String!, $cardId: String, $ticketId: String!, $couponId: String!) {
       addOrder(input: { userId: $userId, cardId: $cardId, couponId: $couponId, ticketId: $ticketId })
     }
   `

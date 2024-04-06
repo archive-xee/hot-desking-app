@@ -1,6 +1,6 @@
 export type Order = {
   userId: string
-  cardId: string
+  cardId: string | null
   ticketId: string
   couponId: string | null
 }
