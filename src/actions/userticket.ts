@@ -43,7 +43,7 @@ export async function getAllUserTicket(userId: string) {
 export async function getAllUserTicketByBookable(userId: string, bookable: string) {
   const GET_ALL_USERTICKET_BY_BOOKABLE = gql`
     query GetAllUserticket($userId: String!, $bookable: String!) {
-      ticket(userId: $userId, typeName: $bookable) {
+      ticket(userId: $userId, bookableType: $bookable) {
         ticketType {
           bookableType {
             name
