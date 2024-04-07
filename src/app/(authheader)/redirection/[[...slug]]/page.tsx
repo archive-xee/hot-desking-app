@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
 import Button from "@/components/molecules/Button/Button"
 import SubTitle from "@/components/molecules/Title/SubTitle"
@@ -64,11 +64,7 @@ const getMsgAndRedirectionPathAndName = (action: string) => {
 export default function RedirectionPage({ params }: { params: { slug: string } }) {
   const { slug } = params
   const [action, result] = slug
-  const searchParams = useSearchParams()
-  const [successMsg, failMsg, redirectionPath, redirectionPathName] = getMsgAndRedirectionPathAndName(
-    action,
-    searchParams,
-  )
+  const [successMsg, failMsg, redirectionPath, redirectionPathName] = getMsgAndRedirectionPathAndName(action)
 
   const router = useRouter()
   const [redirectSeconds, setRedirectSeconds] = useState(10)
