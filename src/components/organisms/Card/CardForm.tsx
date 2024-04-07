@@ -1,9 +1,10 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 import { z } from "zod"
 import { zfd } from "zod-form-data"
-import { registerUserCard } from "@/actions/nicepay"
+import { registerUserCard } from "@/actions/payment"
 import Button from "@/components/molecules/Button/Button"
 
 const CardSchema = zfd.formData({
@@ -23,11 +24,12 @@ type CardFormProps = {
 }
 
 function CardForm({ userId }: CardFormProps) {
+  const router = useRouter()
   const clientAction = async (formData: FormData) => {
-    const result = CardSchema.safeParse(formData)
-    if (!result.success) {
+    const validatedResult = CardSchema.safeParse(formData)
+    if (!validatedResult.success) {
       let errorMsg = ""
-      result.error.issues.forEach((issue) => {
+      validatedResult.error.issues.forEach((issue) => {
         const errorTarget = issue.path[0]
         switch (errorTarget) {
           case "expYear":
@@ -53,8 +55,14 @@ function CardForm({ userId }: CardFormProps) {
     }
 
     const resultCode = await registerUserCard(userId, formData)
-    // 이것도 결과에 따라서...
-    console.log(resultCode)
+    if (resultCode === "0000") {
+      toast.success("카드 등록이 완료되었습니다.")
+      router.back()
+    } else {
+      toast.error(
+        "카드 등록이 실패했습니다. 카드 번호나 형식이 맞는지 다시 한번 확인해주시고, 계속 오류가 반복되면 관리자에게 문의해주세요.",
+      )
+    }
   }
 
   const inputStyle =
@@ -66,28 +74,28 @@ function CardForm({ userId }: CardFormProps) {
         <div className="flex flex-col gap-2">
           <div className="flex flex-row justify-between gap-1">
             <label>카드번호</label>
-            <input name="cardNo0" type="numeric" maxLength={4} size={1} className={inputStyle} />
+            <input name="cardNo0" type="numeric" maxLength={4} className={`${inputStyle} w-1/6`} />
             <p>-</p>
-            <input name="cardNo1" type="numeric" maxLength={4} size={1} className={inputStyle} />
+            <input name="cardNo1" type="numeric" maxLength={4} className={`${inputStyle} w-1/6`} />
             <p>-</p>
-            <input name="cardNo2" type="numeric" maxLength={4} size={1} className={inputStyle} />
+            <input name="cardNo2" type="numeric" maxLength={4} className={`${inputStyle} w-1/6`} />
             <p>-</p>
-            <input name="cardNo3" type="numeric" maxLength={4} size={1} className={inputStyle} />
+            <input name="cardNo3" type="numeric" maxLength={4} className={`${inputStyle} w-1/6`} />
           </div>
           <div className="flex flex-row justify-start gap-1">
             <label>유효기간</label>
-            <input type="numeric" placeholder="YY" name="expYear" maxLength={2} size={1} className={inputStyle} />
+            <input type="numeric" placeholder="MM" name="expMonth" maxLength={2} className={`${inputStyle} w-1/6`} />
             <label>/</label>
-            <input type="numeric" placeholder="MM" name="expMonth" maxLength={2} size={1} className={inputStyle} />
+            <input type="numeric" placeholder="YY" name="expYear" maxLength={2} className={`${inputStyle} w-1/6`} />
             <div className="grow"></div>
           </div>
           <div className="flex flex-row justify-start gap-1">
             <label>생년월일</label>
-            <input type="numeric" placeholder="YYMMDD" name="idNo" maxLength={6} size={4} className={inputStyle} />
+            <input type="numeric" placeholder="YYMMDD" name="idNo" maxLength={6} className={`${inputStyle} w-2/6`} />
           </div>
           <div className="flex flex-row justify-start gap-1">
             <label>카드 비밀번호 앞 2자리</label>
-            <input type="numeric" placeholder="**" name="cardPw" maxLength={2} size={1} className={inputStyle} />
+            <input type="numeric" placeholder="**" name="cardPw" maxLength={2} className={`${inputStyle} w-1/6`} />
           </div>
           <div className="h-1"></div>
           <Button form={true}>카드등록</Button>

@@ -1,15 +1,15 @@
 "use client"
 
 import Link from "next/link"
-import { ReadonlyURLSearchParams, useRouter, useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
 import Button from "@/components/molecules/Button/Button"
 import SubTitle from "@/components/molecules/Title/SubTitle"
 import Title from "@/components/molecules/Title/Title"
 
-const getMsgAndRedirectionPathAndName = (action: string, searchParams: ReadonlyURLSearchParams) => {
+const getMsgAndRedirectionPathAndName = (action: string) => {
   let successMsg = "올바른 접근이 아닙니다."
-  const failMsg = "알 수 없는 오류가 발생되었습니다. 관리자에게 문의해주세요."
+  let failMsg = "알 수 없는 오류가 발생되었습니다. 관리자에게 문의해주세요."
   let redirectionPath = "/"
   let redirectionPathName = "홈페이지"
 
@@ -20,6 +20,11 @@ const getMsgAndRedirectionPathAndName = (action: string, searchParams: ReadonlyU
     case "nipout":
       successMsg = "30분동안 외출 가능하고, 전원은 연결되지 않습니다."
       break
+    case "nicepay":
+      failMsg = "결제정보를 서버에서 받아오는데 문제가 있습니다. 관리자에게 문의해주세요."
+      redirectionPath = "/ticket/oneoff"
+      redirectionPathName = "일회용 이용권 구매 페이지"
+      break
     case "move":
       successMsg = "자리 이동이 완료되었습니다."
       break
@@ -28,10 +33,15 @@ const getMsgAndRedirectionPathAndName = (action: string, searchParams: ReadonlyU
       redirectionPath = "/booth/status"
       redirectionPathName = "현황 페이지"
       break
-    case "oneoffOrder": {
-      const bookableType = searchParams.get("bookableType")
+    case "registercoupon":
+      successMsg = "쿠폰 등록이 완료되었습니다."
+      // 플로우에 따라서 달라질 것
+      redirectionPath = "/user/coupon"
+      redirectionPathName = "내 쿠폰 리스트 페이지"
+      break
+    case "payment": {
       successMsg = "일회권 구매가 완료되었습니다."
-      redirectionPath = `/user/ticket/use/${bookableType}`
+      redirectionPath = `/user/ticket/board`
       redirectionPathName = "내 이용권 목록 페이지"
       break
     }
@@ -54,11 +64,7 @@ const getMsgAndRedirectionPathAndName = (action: string, searchParams: ReadonlyU
 export default function RedirectionPage({ params }: { params: { slug: string } }) {
   const { slug } = params
   const [action, result] = slug
-  const searchParams = useSearchParams()
-  const [successMsg, failMsg, redirectionPath, redirectionPathName] = getMsgAndRedirectionPathAndName(
-    action,
-    searchParams,
-  )
+  const [successMsg, failMsg, redirectionPath, redirectionPathName] = getMsgAndRedirectionPathAndName(action)
 
   const router = useRouter()
   const [redirectSeconds, setRedirectSeconds] = useState(10)

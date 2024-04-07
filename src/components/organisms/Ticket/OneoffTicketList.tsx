@@ -34,7 +34,7 @@ const OneoffTicketList = (props: { type: string }) => {
               ) : (
                 <Link
                   href={{
-                    pathname: "/payment/online/oneoff",
+                    pathname: "/order",
                     query: {
                       ticketId: oneoffTicket.id,
                     },

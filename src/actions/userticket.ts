@@ -4,10 +4,10 @@ import { RedirectType, redirect } from "next/navigation"
 import { APOLLO_ROUTER_URL } from "@/constant/graphql"
 import { UserTicket } from "@/models/ticket"
 
-export async function getAllUserTicket(userId: string, bookable?: string) {
+export async function getAllUserTicket(userId: string) {
   const GET_ALL_USERTICKET = gql`
-    query GetAllUserticket($userId: String!, $bookable: String) {
-      ticket(userId: $userId, typeName: $bookable) {
+    query GetAllUserticket($userId: String!) {
+      ticket(userId: $userId) {
         ticketType {
           bookableType {
             name
@@ -34,33 +34,69 @@ export async function getAllUserTicket(userId: string, bookable?: string) {
 
   const data: { ticket: UserTicket[] } = await request(APOLLO_ROUTER_URL, GET_ALL_USERTICKET, {
     userId,
-    bookable,
   })
 
   const { ticket: allUserTicket } = data
   return allUserTicket
 }
 
-export async function useUserTicket(userId: string, ticketId: string) {
-  // @서버 아직 쿼리가 만들어지지 않음
-  console.log("에", userId, ticketId)
-  // const NIPOUT_BOOKABLE = gql`
-  //   query NipoutBookable($userId: String!, $bookable: String!) {
-  //     ticket(paid: true, userId: $userId, typeName: $bookable) {
-  //       ticketId
-  //     }
-  //   }
-  // `
+export async function getAllUserTicketByBookable(userId: string, bookable: string) {
+  const GET_ALL_USERTICKET_BY_BOOKABLE = gql`
+    query GetAllUserticket($userId: String!, $bookable: String!) {
+      ticket(userId: $userId, typeName: $bookable) {
+        ticketType {
+          bookableType {
+            name
+            type
+          }
+          name
+          remaining
+          purchasePrice
+          expires
+          id
+          limit
+          type
+        }
+        expiresAt
+        endsAt
+        availableTime
+        id
+        refund
+        userId
+        used
+      }
+    }
+  `
 
-  // const data: { ticket: { ticketId: string } } = await request(APOLLO_ROUTER_URL, NIPOUT_BOOKABLE, {
-  //   userId,
-  //   bookable,
-  // })
+  const data: { ticket: UserTicket[] } = await request(APOLLO_ROUTER_URL, GET_ALL_USERTICKET_BY_BOOKABLE, {
+    userId,
+    bookable,
+  })
 
-  // const { ticketId } = data.ticket
-  // const userTicketActivated = ticketId ? true : false
-  // return userTicketActivated
-  const result = "success"
+  const { ticket: allUserTicketByBookable } = data
+  return allUserTicketByBookable
+}
+
+export async function enterBookableByUserTicket(userId: string, ticketId: string) {
+  const ENTER_BOOKABLE_BY_USER_TICKET = gql`
+    mutation EnteringBooking($userId: String!, $ticketId: String!) {
+      enteringBooking(input: { userId: $userId, id: $ticketId }) {
+        resultCode
+      }
+    }
+  `
+
+  const data: { enteringBooking: { resultCode: string } } = await request(
+    APOLLO_ROUTER_URL,
+    ENTER_BOOKABLE_BY_USER_TICKET,
+    {
+      userId,
+      ticketId,
+    },
+  )
+
+  const resultCode = data.enteringBooking.resultCode
+  const result = resultCode === "0000" ? "success" : "fail"
   redirect(`/redirection/useuserticket/${result}`, RedirectType.replace)
 }
 

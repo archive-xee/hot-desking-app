@@ -1,5 +1,6 @@
 "use server"
 import request, { gql } from "graphql-request"
+import { redirect, RedirectType } from "next/navigation"
 import { APOLLO_ROUTER_URL } from "@/constant/graphql"
 import { Card } from "@/models/card"
 
@@ -99,6 +100,35 @@ export async function registerUserCard(userId: string, formData: FormData) {
   })
   const resultCode = data.cardAuth.resultCode
   return resultCode
+}
+
+export async function requestPaymentByUserCard(
+  userId: string,
+  cardId: string,
+  ticketId: string,
+  couponId: string | null,
+) {
+  const REQUEST_PAYMENT_BY_CARD_ID = gql`
+    mutation RequestPaymentByUserCard($userId: String!, $cardId: String!, $ticketId: String!, $couponId: String) {
+      addOrder(input: { userId: $userId, cardId: $cardId, ticketId: $ticketId, couponId: $couponId }) {
+        resultCode
+        resultMsg
+      }
+    }
+  `
+  const data: { addOrder: { resultCode: string; resultMsg: string } } = await request(
+    APOLLO_ROUTER_URL,
+    REQUEST_PAYMENT_BY_CARD_ID,
+    {
+      userId,
+      cardId,
+      ticketId,
+      couponId,
+    },
+  )
+  const { resultCode } = data.addOrder
+  const result = resultCode === "0000" ? "success" : "fail"
+  redirect(`/redirection/payment/${result}`, RedirectType.replace)
 }
 
 export async function deleteCardByCardId(cardId: string) {

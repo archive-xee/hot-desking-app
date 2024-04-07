@@ -1,14 +1,17 @@
-import { deleteCardByCardId } from "@/actions/nicepay"
+import { getUserIdAfterCheckAuthRedirect } from "@/actions/authjs"
+import { deleteCardByCardId, requestPaymentByUserCard } from "@/actions/payment"
 import Button from "@/components/molecules/Button/Button"
 import { Dialog } from "@/components/molecules/Modal/Dialog"
 import SubTitle from "@/components/molecules/Title/SubTitle"
 import { Card } from "@/models/card"
 import { formatCardNumber } from "@/utils/format"
 
-export default async function UserCard(props: { card: Card }) {
-  const { card } = props
+export default async function UserCard(props: { card: Card; ticketId: string; couponId: string | null }) {
+  const { card, ticketId, couponId } = props
+  const userId = await getUserIdAfterCheckAuthRedirect()
   const isRepresentative = card.representative === "0"
   const color = isRepresentative ? "bg-blue-300" : "bg-blue-100"
+  const makeOrderByUserCardId = requestPaymentByUserCard.bind(null, userId, card.id, ticketId, couponId)
   const deleteUserCardByCardId = deleteCardByCardId.bind(null, card.id)
   return (
     <div className="flex flex-row items-center gap-2 overflow-hidden rounded-lg border border-solid bg-white-300 pr-2">
@@ -27,7 +30,7 @@ export default async function UserCard(props: { card: Card }) {
           title="결제하기"
           content={<PayWithCardDialogContent card={card} />}
           actionName="결제하기"
-          action={deleteUserCardByCardId}
+          action={makeOrderByUserCardId}
           // @서버 03/31 빌링키 관련 뮤테이션 아직 만들어지지 않았음
           // @서버 빌링키 관련 뮤테이션이 addOrder인지 확인
 

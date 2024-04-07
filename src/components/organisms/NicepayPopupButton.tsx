@@ -2,21 +2,29 @@
 
 import Script from "next/script"
 import Button from "@/components/molecules/Button/Button"
-import { executeAuthPaymentPopup, sendOrder } from "@/lib/nicepay"
+import { executeAuthPaymentPopup, getPreNicePayOrderInfo } from "@/lib/nicepay"
 import { Order } from "@/models/order"
-// todo: props로 order정보 받기
-export default function NicepayPopupButton(props: { order: Order }) {
-  const { order } = props
+
+type NicepayPopupButtonProps = {
+  userId: string
+  ticketId: string
+  couponId: string | null
+}
+
+export default function NicepayPopupButton(props: NicepayPopupButtonProps) {
+  const { userId, ticketId, couponId } = props
+  const order: Order = { userId, ticketId, couponId, cardId: null }
   return (
     <>
       <Button
         onClick={async () => {
           console.log("order", order)
-          const orderId = await sendOrder(order)
+          const { orderId, priceString, orderName } = await getPreNicePayOrderInfo(order)
+          const price = parseInt(priceString)
           await executeAuthPaymentPopup({
             orderId,
-            ticketName: "온라인 일회권",
-            price: 1000,
+            ticketName: orderName,
+            price,
             paymentMethod: "cardAndEasyPay",
           })
         }}

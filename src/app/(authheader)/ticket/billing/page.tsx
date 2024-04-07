@@ -4,24 +4,24 @@ import BottomSheetButton from "@/components/molecules/Button/BottomSheetButton"
 import BottomSheetModal from "@/components/molecules/Modal/BottomSheetModal"
 import CardTicket from "@/components/molecules/Ticket/CardTicket"
 import Title from "@/components/molecules/Title/Title"
+import { TicketFrame } from "@/models/ticket"
 
 export default async function BillingTicketPage() {
   const billingTicketList = await getAllTicketFrame("billing")
   return (
     <>
       <Title text="정기권 구매하기" />
-      {billingTicketList.map((oneoffTicket: any, idx: number) => (
+      {billingTicketList.map((billingTicketFrame: TicketFrame, idx: number) => (
         <BottomSheetModal
           key={idx}
-          trigger={<CardTicket key={idx} ticketFrame={oneoffTicket}></CardTicket>}
+          trigger={<CardTicket key={idx} ticketFrame={billingTicketFrame}></CardTicket>}
           content={
             <div className="flex flex-row justify-center">
               <Link
                 href={{
-                  pathname: "/payment/online/billing/term",
+                  pathname: "/billingterm",
                   query: {
-                    // 티켓타입, 티켓이름 정도
-                    ticketId: "1",
+                    ticketId: billingTicketFrame.id,
                   },
                 }}
               >
