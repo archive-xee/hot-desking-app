@@ -1,4 +1,5 @@
 import request, { gql } from "graphql-request"
+import { RedirectType, redirect } from "next/navigation"
 import { APOLLO_ROUTER_URL } from "@/constant/graphql"
 
 const SEND_PAYMENT_APPROVAL_MUTATION = gql`
@@ -26,6 +27,6 @@ export async function POST(req: Request) {
   })
 
   const resultCode = data.serverAuth.resultCode
-
-  return Response.json({ resultCode })
+  const result = resultCode === "0000" ? "success" : "fail"
+  redirect(`/redirection/payment/${result}`, RedirectType.replace)
 }

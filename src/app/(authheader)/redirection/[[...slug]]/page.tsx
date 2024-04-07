@@ -49,7 +49,7 @@ const getMsgAndRedirectionPathAndName = (action: string, searchParams: ReadonlyU
       redirectionPathName = "내 쿠폰 리스트 페이지"
       break
     case "payment":
-      successMsg = "일회권 구매가 완료되었습니다."
+      successMsg = "이용권 구매가 완료되었습니다."
       redirectionPath = `/user/ticket/board`
       redirectionPathName = "내 이용권 목록 페이지"
       break
