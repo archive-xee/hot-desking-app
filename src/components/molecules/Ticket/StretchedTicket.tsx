@@ -44,7 +44,7 @@ const StretchedTicket = (props: { ticketFrame: TicketFrame }) => {
             <p className="text-center">{ticketFrame.remaining}개</p>
           </div>
           <div className="flex size-20 flex-col items-center justify-center rounded-r-lg bg-white-700">
-            <p className="font-bold text-black-700 line-through ">{ticketFrame.purchasePrice}원</p>
+            <p className="font-bold text-black-700">{ticketFrame.purchasePrice}원</p>
           </div>
         </div>
       </div>
