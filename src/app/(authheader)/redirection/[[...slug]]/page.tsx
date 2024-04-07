@@ -87,13 +87,16 @@ export default function RedirectionPage({ params }: { params: { slug: string } }
           <div className="h-2"></div>
           <SubTitle bold={true} text={successMsg} />
           <SubTitle text={`${redirectSeconds}초 후 ${redirectionPathName!}로 자동으로 이동합니다.`} />
+          <Link href={redirectionPath}>
+            <Button>{redirectionPathName}으로 돌아가기</Button>
+          </Link>
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center">
           <Title text="실패" />
           <SubTitle bold={true} text={failMsg} />
           <Link href="/">
-            <Button>홈으로 돌아기기</Button>
+            <Button>홈으로 돌아가기</Button>
           </Link>
         </div>
       )}

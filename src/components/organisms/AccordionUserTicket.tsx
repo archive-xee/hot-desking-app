@@ -67,7 +67,7 @@ const AccordionUserTicket = (props: { userTicket: UserTicket }) => {
               actionName="환불하기"
               action={async () => {
                 const result = await refundUserTicket(userTicket.id)
-                router.replace(`/redirection/unsubscribe/${result}`)
+                router.replace(`/redirection/refund/${result}`)
               }}
             ></Dialog>
             {userTicket.ticketType.type === "billing" ? (
