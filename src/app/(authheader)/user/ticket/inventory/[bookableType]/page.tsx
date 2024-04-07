@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { getUserIdAfterCheckAuthRedirect } from "@/actions/authjs"
-import { getAllUserTicketByBookable, useUserTicket } from "@/actions/userticket"
+import { getAllUserTicketByBookable, enterBookableByUserTicket } from "@/actions/userticket"
 import BottomSheetButton from "@/components/molecules/Button/BottomSheetButton"
 import Button from "@/components/molecules/Button/Button"
 import BottomSheetModal from "@/components/molecules/Modal/BottomSheetModal"
@@ -27,14 +27,14 @@ export default async function UserTicketInventoryPage({ params }: { params: { bo
         </Link>
       </div>
       {allUserTicketByBookable.map(async (userTicketByBookable: UserTicket) => {
-        const useUserTicketByUserId = await useUserTicket.bind(null, userId, userTicketByBookable.id)
+        const enterBookable = await enterBookableByUserTicket.bind(null, userId, userTicketByBookable.id)
         return (
           <BottomSheetModal
             key={userTicketByBookable.id}
             trigger={<StretchedTicket ticketFrame={userTicketByBookable.ticketType}></StretchedTicket>}
             content={
               <div className="flex flex-row justify-center">
-                <form action={useUserTicketByUserId}>
+                <form action={enterBookable}>
                   <BottomSheetButton form={true}>사용하기</BottomSheetButton>
                 </form>
               </div>

@@ -77,26 +77,26 @@ export async function getAllUserTicketByBookable(userId: string, bookable: strin
   return allUserTicketByBookable
 }
 
-export async function useUserTicket(userId: string, ticketId: string) {
-  // @서버 아직 쿼리가 만들어지지 않음
-  console.log("에", userId, ticketId)
-  // const NIPOUT_BOOKABLE = gql`
-  //   query NipoutBookable($userId: String!, $bookable: String!) {
-  //     ticket(paid: true, userId: $userId, typeName: $bookable) {
-  //       ticketId
-  //     }
-  //   }
-  // `
+export async function enterBookableByUserTicket(userId: string, ticketId: string) {
+  const ENTER_BOOKABLE_BY_USER_TICKET = gql`
+    mutation EnteringBooking($userId: String!, $ticketId: String!) {
+      enteringBooking(input: { userId: $userId, id: $ticketId }) {
+        resultCode
+      }
+    }
+  `
 
-  // const data: { ticket: { ticketId: string } } = await request(APOLLO_ROUTER_URL, NIPOUT_BOOKABLE, {
-  //   userId,
-  //   bookable,
-  // })
+  const data: { enteringBooking: { resultCode: string } } = await request(
+    APOLLO_ROUTER_URL,
+    ENTER_BOOKABLE_BY_USER_TICKET,
+    {
+      userId,
+      ticketId,
+    },
+  )
 
-  // const { ticketId } = data.ticket
-  // const userTicketActivated = ticketId ? true : false
-  // return userTicketActivated
-  const result = "success"
+  const resultCode = data.enteringBooking.resultCode
+  const result = resultCode === "0000" ? "success" : "fail"
   redirect(`/redirection/useuserticket/${result}`, RedirectType.replace)
 }
 
