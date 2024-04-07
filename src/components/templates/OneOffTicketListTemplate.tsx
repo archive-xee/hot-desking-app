@@ -14,7 +14,7 @@ export default function OneOffTicketListTemplate() {
 
   return (
     <>
-      <Title text="이용권 구매하기" />
+      <Title text="일회권 구매하기" />
       <div className="flex flex-row bg-white-300">
         {[0, 1, 2, 3].map((index) => (
           <div

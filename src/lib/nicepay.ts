@@ -1,4 +1,5 @@
 import request, { gql } from "graphql-request"
+import { RedirectType, redirect } from "next/navigation"
 import { APOLLO_ROUTER_URL } from "@/constant/graphql"
 import { AUTH_PAYMENT_POPUP_RESULT_ENDPOINT, NICEPAY_SERVER_AUTH_CLIENT_KEY } from "@/constant/nicepay"
 import { Order } from "@/models/order"
@@ -30,7 +31,7 @@ export const executeAuthPaymentPopup = async (props: AuthPaymentProps): Promise<
   })
 }
 
-export const sendOrder = async (order: Order) => {
+export const getPreNicePayOrderInfo = async (order: Order) => {
   const SEND_ORDER = gql`
     mutation SendOrder($userId: String!, $cardId: String, $ticketId: String!, $couponId: String) {
       addOrder(input: { userId: $userId, cardId: $cardId, couponId: $couponId, ticketId: $ticketId }) {
@@ -44,8 +45,9 @@ export const sendOrder = async (order: Order) => {
     ...order,
   })
 
-  // orderId, price, ticketName 받아와야 함
   const { resultCode, resultMsg } = data.addOrder
-  console.log(resultCode, resultMsg)
-  return resultCode
+  const result = resultCode === "0000" ? "success" : "fail"
+  if (result === "fail") redirect(`/redirection/nicepay/${result}`, RedirectType.replace)
+  const [orderId, priceString, orderName] = resultMsg.split(":")
+  return { orderId, priceString, orderName }
 }

@@ -2,7 +2,7 @@
 
 import Script from "next/script"
 import Button from "@/components/molecules/Button/Button"
-import { executeAuthPaymentPopup, sendOrder } from "@/lib/nicepay"
+import { executeAuthPaymentPopup, getPreNicePayOrderInfo } from "@/lib/nicepay"
 import { Order } from "@/models/order"
 
 type NicepayPopupButtonProps = {
@@ -19,11 +19,12 @@ export default function NicepayPopupButton(props: NicepayPopupButtonProps) {
       <Button
         onClick={async () => {
           console.log("order", order)
-          const orderId = await sendOrder(order)
+          const { orderId, priceString, orderName } = await getPreNicePayOrderInfo(order)
+          const price = parseInt(priceString)
           await executeAuthPaymentPopup({
             orderId,
-            ticketName: "온라인 일회권",
-            price: 1000,
+            ticketName: orderName,
+            price,
             paymentMethod: "cardAndEasyPay",
           })
         }}
