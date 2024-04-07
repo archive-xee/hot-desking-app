@@ -4,10 +4,10 @@ import { RedirectType, redirect } from "next/navigation"
 import { APOLLO_ROUTER_URL } from "@/constant/graphql"
 import { UserTicket } from "@/models/ticket"
 
-export async function getAllUserTicket(userId: string, bookable?: string) {
+export async function getAllUserTicket(userId: string) {
   const GET_ALL_USERTICKET = gql`
-    query GetAllUserticket($userId: String!, $bookable: String) {
-      ticket(userId: $userId, typeName: $bookable) {
+    query GetAllUserticket($userId: String!) {
+      ticket(userId: $userId) {
         ticketType {
           bookableType {
             name
@@ -34,11 +34,47 @@ export async function getAllUserTicket(userId: string, bookable?: string) {
 
   const data: { ticket: UserTicket[] } = await request(APOLLO_ROUTER_URL, GET_ALL_USERTICKET, {
     userId,
-    bookable,
   })
 
   const { ticket: allUserTicket } = data
   return allUserTicket
+}
+
+export async function getAllUserTicketByBookable(userId: string, bookable: string) {
+  const GET_ALL_USERTICKET_BY_BOOKABLE = gql`
+    query GetAllUserticket($userId: String!, $bookable: String!) {
+      ticket(userId: $userId, typeName: $bookable) {
+        ticketType {
+          bookableType {
+            name
+            type
+          }
+          name
+          remaining
+          purchasePrice
+          expires
+          id
+          limit
+          type
+        }
+        expiresAt
+        endsAt
+        availableTime
+        id
+        refund
+        userId
+        used
+      }
+    }
+  `
+
+  const data: { ticket: UserTicket[] } = await request(APOLLO_ROUTER_URL, GET_ALL_USERTICKET_BY_BOOKABLE, {
+    userId,
+    bookable,
+  })
+
+  const { ticket: allUserTicketByBookable } = data
+  return allUserTicketByBookable
 }
 
 export async function useUserTicket(userId: string, ticketId: string) {

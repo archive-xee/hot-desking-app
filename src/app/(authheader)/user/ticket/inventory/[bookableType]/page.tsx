@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { getUserIdAfterCheckAuthRedirect } from "@/actions/authjs"
-import { getAllUserTicket, useUserTicket } from "@/actions/userticket"
+import { getAllUserTicketByBookable, useUserTicket } from "@/actions/userticket"
 import BottomSheetButton from "@/components/molecules/Button/BottomSheetButton"
 import Button from "@/components/molecules/Button/Button"
 import BottomSheetModal from "@/components/molecules/Modal/BottomSheetModal"
@@ -9,9 +9,10 @@ import SubTitle from "@/components/molecules/Title/SubTitle"
 import Title from "@/components/molecules/Title/Title"
 import { UserTicket } from "@/models/ticket"
 
-export default async function UserTicketInventoryPage() {
+export default async function UserTicketInventoryPage({ params }: { params: { bookableType: string } }) {
+  const { bookableType } = params
   const userId = await getUserIdAfterCheckAuthRedirect()
-  const allUserTicket = await getAllUserTicket(userId)
+  const allUserTicketByBookable = await getAllUserTicketByBookable(userId, bookableType)
 
   return (
     <>
@@ -25,12 +26,12 @@ export default async function UserTicketInventoryPage() {
           <Button color="teal">정기권 구매</Button>
         </Link>
       </div>
-      {allUserTicket.map(async (userTicket: UserTicket) => {
-        const useUserTicketByUserId = await useUserTicket.bind(null, userId, userTicket.id)
+      {allUserTicketByBookable.map(async (userTicketByBookable: UserTicket) => {
+        const useUserTicketByUserId = await useUserTicket.bind(null, userId, userTicketByBookable.id)
         return (
           <BottomSheetModal
-            key={userTicket.id}
-            trigger={<StretchedTicket ticketFrame={userTicket.ticketType}></StretchedTicket>}
+            key={userTicketByBookable.id}
+            trigger={<StretchedTicket ticketFrame={userTicketByBookable.ticketType}></StretchedTicket>}
             content={
               <div className="flex flex-row justify-center">
                 <form action={useUserTicketByUserId}>
