@@ -18,8 +18,7 @@ export default async function ApplicableUserCouponPage() {
   const selectedTicketId = urlObject.searchParams.get("ticketId") ?? "ticketIdError"
   const selectedTicketFrame: TicketFrame = await getTicketFrameById(selectedTicketId)
   const userId = await getUserIdAfterCheckAuthRedirect()
-  console.log(userId)
-  const allApplicableUserCoupon = await getApplicableUserCouponByTicketId("12345", selectedTicketId)
+  const allApplicableUserCoupon = await getApplicableUserCouponByTicketId(userId, selectedTicketId)
   return (
     <>
       <Title text="적용가능한 쿠폰 리스트" />
