@@ -1,13 +1,13 @@
 "use client"
 
 import Link from "next/link"
-import { ReadonlyURLSearchParams, useRouter, useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useState, useEffect } from "react"
 import Button from "@/components/molecules/Button/Button"
 import SubTitle from "@/components/molecules/Title/SubTitle"
 import Title from "@/components/molecules/Title/Title"
 
-const getMsgAndRedirectionPathAndName = (action: string, searchParams: ReadonlyURLSearchParams) => {
+const getMsgAndRedirectionPathAndName = (action: string) => {
   let successMsg = "올바른 접근이 아닙니다."
   const failMsg = "알 수 없는 오류가 발생되었습니다. 관리자에게 문의해주세요."
   let redirectionPath = "/"
@@ -34,10 +34,9 @@ const getMsgAndRedirectionPathAndName = (action: string, searchParams: ReadonlyU
       redirectionPath = "/user/coupon"
       redirectionPathName = "내 쿠폰 리스트 페이지"
       break
-    case "oneoffOrder": {
-      const bookableType = searchParams.get("bookableType")
+    case "payment": {
       successMsg = "일회권 구매가 완료되었습니다."
-      redirectionPath = `/user/ticket/use/${bookableType}`
+      redirectionPath = `/user/ticket/board`
       redirectionPathName = "내 이용권 목록 페이지"
       break
     }

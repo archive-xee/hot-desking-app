@@ -40,7 +40,7 @@ export default async function BookablePage({ params }: { params: { id: string } 
             text={`현재 ${currentBookable.bookableType.name}은 비어있습니다. 티켓을 사용하시면 좌석을 사용할 수 있습니다.`}
           />
           <SubTitle text="티켓을 사용하시겠습니까?" />
-          <Link href={`/user/ticket/use/${currentBookable.bookableType.name}`}>
+          <Link href={`/user/ticket/inventory/${currentBookable.bookableType.type}`}>
             <Button>티켓사용</Button>
           </Link>
         </div>
