@@ -35,11 +35,9 @@ export async function getUserCardList(userId: string) {
     query GetUserCardList($userId: String!) {
       user(userId: $userId) {
         cards {
-          authDate
           cardCode
           cardName
           cardNum
-          orderId
           id
           representative
           userId
@@ -48,10 +46,10 @@ export async function getUserCardList(userId: string) {
     }
   `
 
-  const data: { user: { cards: Card[] } } = await request(APOLLO_ROUTER_URL, GET_USER_CARD_LIST, {
+  const data: { user: [{ cards: Card[] }] } = await request(APOLLO_ROUTER_URL, GET_USER_CARD_LIST, {
     userId,
   })
-  const userCardList = data.user.cards
+  const userCardList = data.user[0].cards
   return userCardList
 }
 
