@@ -129,10 +129,12 @@ export async function requestPaymentByUserCard(
   redirect(`/redirection/payment/${result}`, RedirectType.replace)
 }
 
-export async function deleteCardByCardId(cardId: string) {
+export async function deleteCardByCardId(cardId: string, ticketId: string, couponId: string | null) {
   const DELETE_USER_CARD_BY_CARD_ID = gql`
     mutation DeleteUserCard($cardId: String!) {
-      deleteCardByCardId(cardId: $cardId)
+      deleteCardByCardId(cardId: $cardId) {
+        resultCode
+      }
     }
   `
   // @서버 03/31 input있었는데 없어짐
@@ -145,5 +147,6 @@ export async function deleteCardByCardId(cardId: string) {
     },
   )
   const resultCode = data.deleteCardByCardId.resultCode
-  return resultCode
+  const result = resultCode === "0000" ? "success" : "fail"
+  redirect(`/redirection/carddelete/${result}?ticketId=${ticketId}&couponId=${couponId}`, RedirectType.replace)
 }

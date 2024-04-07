@@ -1,14 +1,14 @@
 "use client"
 
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { ReadonlyURLSearchParams, useRouter, useSearchParams } from "next/navigation"
 import { useState, useEffect } from "react"
 import Button from "@/components/molecules/Button/Button"
 import SubTitle from "@/components/molecules/Title/SubTitle"
 import Title from "@/components/molecules/Title/Title"
 import { ULTSPACE_CS } from "@/constant/utlspace"
 
-const getMsgAndRedirectionPathAndName = (action: string) => {
+const getMsgAndRedirectionPathAndName = (action: string, searchParams: ReadonlyURLSearchParams) => {
   let successMsg = "올바른 접근이 아닙니다."
   let failMsg = "알 수 없는 오류가 발생되었습니다. 관리자에게 문의해주세요."
   let redirectionPath = "/"
@@ -34,18 +34,26 @@ const getMsgAndRedirectionPathAndName = (action: string) => {
       redirectionPath = "/booth/status"
       redirectionPathName = "현황 페이지"
       break
+    case "carddelete": {
+      const ticketId = searchParams.get("ticketId")
+      const couponId = searchParams.get("couponId")
+      successMsg = "카드 삭제가 완료되었습니다."
+      redirectionPath = `/payment?ticketId=${ticketId}&couponId=${couponId}`
+      redirectionPathName = "결제 페이지"
+      break
+    }
     case "registercoupon":
       successMsg = "쿠폰 등록이 완료되었습니다."
       // 플로우에 따라서 달라질 것
       redirectionPath = "/user/coupon"
       redirectionPathName = "내 쿠폰 리스트 페이지"
       break
-    case "payment": {
+    case "payment":
       successMsg = "일회권 구매가 완료되었습니다."
       redirectionPath = `/user/ticket/board`
       redirectionPathName = "내 이용권 목록 페이지"
       break
-    }
+
     case "refund":
       successMsg = "티켓 환불이 완료되었습니다."
       redirectionPath = "/user/ticket/board"
@@ -65,8 +73,11 @@ const getMsgAndRedirectionPathAndName = (action: string) => {
 export default function RedirectionPage({ params }: { params: { slug: string } }) {
   const { slug } = params
   const [action, result] = slug
-  const [successMsg, failMsg, redirectionPath, redirectionPathName] = getMsgAndRedirectionPathAndName(action)
-
+  const searchParams = useSearchParams()
+  const [successMsg, failMsg, redirectionPath, redirectionPathName] = getMsgAndRedirectionPathAndName(
+    action,
+    searchParams,
+  )
   const router = useRouter()
   const [redirectSeconds, setRedirectSeconds] = useState(10)
   useEffect(() => {
