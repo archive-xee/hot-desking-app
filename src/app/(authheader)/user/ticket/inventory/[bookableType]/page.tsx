@@ -12,7 +12,7 @@ import { UserTicket } from "@/models/ticket"
 
 export default async function UserTicketInventoryPage({ params }: { params: { bookableType: string } }) {
   const urlObject = new URL(headers().get("x-url")!)
-  const bookableId = urlObject.searchParams.get("bookableId")
+  const bookableId = urlObject.searchParams.get("bookableId")!
   const { bookableType } = params
   const userId = await getUserIdAfterCheckAuthRedirect()
   const allUserTicketByBookable = await getAllUserTicketByBookable(userId, bookableType)
