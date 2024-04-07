@@ -1,9 +1,9 @@
 import Link from "next/link"
 import Button from "../molecules/Button/Button"
 import StretchedTicket from "../molecules/Ticket/StretchedTicket"
-import { getCouponFrame } from "@/actions/couponframe"
+import StretchedUserCoupon from "./StretchedUserCoupon"
 import { getTicketFrameById } from "@/actions/ticketframe"
-import StretchedCoupon from "@/components/molecules/Coupon/StretchedCoupon"
+import { getUserCouponByCouponId } from "@/actions/usercoupon"
 import SubTitle from "@/components/molecules/Title/SubTitle"
 import { TicketFrame } from "@/models/ticket"
 
@@ -13,8 +13,8 @@ export default async function OrderCard(props: { ticketId: string; couponId: str
   let { number: ticketNumber, purchasePrice: ticketPrice } = ticketFrame
   const { typeName } = ticketFrame
   if (couponId) {
-    const couponFrame = await getCouponFrame(couponId)
-    const { type, number: couponNumber } = couponFrame
+    const userCoupon = await getUserCouponByCouponId(couponId)
+    const { type, number: couponNumber } = userCoupon.type
     switch (type) {
       case "timebonus":
         ticketNumber += couponNumber
@@ -34,9 +34,12 @@ export default async function OrderCard(props: { ticketId: string; couponId: str
         </div>
         <div>
           <SubTitle bold={true} text="선택된 쿠폰" />
-          <StretchedCoupon couponFrame={couponFrame} />
+          <StretchedUserCoupon userCoupon={userCoupon} />
         </div>
-        <div className="flex flex-row justify-end">
+        <div className="flex flex-row justify-end gap-2">
+          <Link href={`/order/?ticketId=${ticketId}`}>
+            <Button color="red">쿠폰 적용 취소하기</Button>
+          </Link>
           <Link href={`/user/coupon/applicable?ticketId=${ticketId}`}>
             <Button>다른 쿠폰 적용해보기</Button>
           </Link>
