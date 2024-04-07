@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { ULTSPACE_CS } from "@/constant/utlspace"
 
 export default function HomePage() {
   return (
@@ -14,11 +15,12 @@ export default function HomePage() {
         <HomeNavButton label="외출" destination="/change/nipout" />
         <HomeNavButton label="퇴실" destination="/change/checkout" />
       </HomeNavSection>
-      <HomeNavSection title="예약">
+      <HomeNavSection title="예약/문의">
         <HomeExternalLinkButton
           label="네이버"
           destination="https://m.place.naver.com/place/1628245132/ticket?entry=ple"
         />
+        <HomeNavButton label="카카오채널" destination={ULTSPACE_CS} />
       </HomeNavSection>
     </div>
   )
