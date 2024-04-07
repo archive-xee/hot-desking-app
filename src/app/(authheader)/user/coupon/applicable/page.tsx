@@ -45,7 +45,7 @@ export default async function ApplicableUserCouponPage() {
           ))}
         </div>
       ) : (
-        <SubTitle text="등록된 쿠폰이 없습니다." />
+        <SubTitle text="적용 가능한 쿠폰이 없습니다." />
       )}
     </>
   )
