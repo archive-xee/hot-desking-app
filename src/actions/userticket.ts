@@ -77,10 +77,10 @@ export async function getAllUserTicketByBookable(userId: string, bookable: strin
   return allUserTicketByBookable
 }
 
-export async function enterBookableByUserTicket(userId: string, ticketId: string) {
+export async function enterBookableByUserTicket(userId: string, ticketId: string, bookableId: string) {
   const ENTER_BOOKABLE_BY_USER_TICKET = gql`
-    mutation EnteringBooking($userId: String!, $ticketId: String!) {
-      enteringBooking(input: { userId: $userId, id: $ticketId }) {
+    mutation EnteringBooking($userId: String!, $ticketId: String!, $bookableId: String!) {
+      enteringBooking(input: { userId: $userId, ticketId: $ticketId, id: $bookableId }) {
         resultCode
       }
     }
@@ -92,6 +92,7 @@ export async function enterBookableByUserTicket(userId: string, ticketId: string
     {
       userId,
       ticketId,
+      bookableId,
     },
   )
 

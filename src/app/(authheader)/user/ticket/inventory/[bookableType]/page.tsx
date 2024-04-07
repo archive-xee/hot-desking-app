@@ -1,3 +1,4 @@
+import { headers } from "next/headers"
 import Link from "next/link"
 import { getUserIdAfterCheckAuthRedirect } from "@/actions/authjs"
 import { getAllUserTicketByBookable, enterBookableByUserTicket } from "@/actions/userticket"
@@ -10,6 +11,8 @@ import Title from "@/components/molecules/Title/Title"
 import { UserTicket } from "@/models/ticket"
 
 export default async function UserTicketInventoryPage({ params }: { params: { bookableType: string } }) {
+  const urlObject = new URL(headers().get("x-url")!)
+  const bookableId = urlObject.searchParams.get("bookableId")
   const { bookableType } = params
   const userId = await getUserIdAfterCheckAuthRedirect()
   const allUserTicketByBookable = await getAllUserTicketByBookable(userId, bookableType)
@@ -27,7 +30,7 @@ export default async function UserTicketInventoryPage({ params }: { params: { bo
         </Link>
       </div>
       {allUserTicketByBookable.map(async (userTicketByBookable: UserTicket) => {
-        const enterBookable = await enterBookableByUserTicket.bind(null, userId, userTicketByBookable.id)
+        const enterBookable = await enterBookableByUserTicket.bind(null, userId, userTicketByBookable.id, bookableId)
         return (
           <BottomSheetModal
             key={userTicketByBookable.id}
