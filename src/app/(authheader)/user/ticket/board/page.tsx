@@ -24,7 +24,9 @@ export default async function UserTicketManagePage() {
             ))
           ) : (
             <div>
-              <p>현재 이용중인 사용권이 없습니다. 예약의 QR코드를 스캔하시면 이용권을 사용할 수 있습니다.</p>
+              <p className="text-center">
+                현재 이용중인 사용권이 없습니다. 예약의 QR코드를 스캔하시면 이용권을 사용할 수 있습니다.
+              </p>
             </div>
           )}
         </div>
