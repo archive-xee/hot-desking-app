@@ -1,6 +1,6 @@
 "use client"
 
-import { useSuspenseQuery } from "@apollo/client"
+import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr"
 import Link from "next/link"
 import BottomSheetButton from "@/components/molecules/Button/BottomSheetButton"
 import BottomSheetModal from "@/components/molecules/Modal/BottomSheetModal"
