@@ -6,7 +6,6 @@ import { useState, useEffect } from "react"
 import Button from "@/components/molecules/Button/Button"
 import SubTitle from "@/components/molecules/Title/SubTitle"
 import Title from "@/components/molecules/Title/Title"
-import { ULTSPACE_CS } from "@/constant/utlspace"
 
 const getMsgAndRedirectionPathAndName = (action: string, searchParams: ReadonlyURLSearchParams) => {
   let successMsg = "올바른 접근이 아닙니다."
@@ -111,7 +110,7 @@ export default function RedirectionPage({ params }: { params: { slug: string } }
             <Link href="/">
               <Button>홈으로 돌아가기</Button>
             </Link>
-            <Link href={ULTSPACE_CS}>
+            <Link href={process.env.ULTSPACE_CS!}>
               <Button>카카오톡 문의하기</Button>
             </Link>
           </div>
