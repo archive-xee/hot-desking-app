@@ -33,13 +33,11 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
-  jwt: {
-    secret: process.env.NEXTAUTH_SECRET_KEY!,
-  },
+  secret: process.env.NEXTAUTH_SECRET_KEY!,
   providers: [
     KakaoProvider({
-      clientId: process.env.KAKAO_AUTH_JAVASCRIPT_KEY!,
-      clientSecret: process.env.NEXTAUTH_KAKAO_CLIENT_SECRET_KEY!,
+      clientId: process.env.NEXTAUTH_KAKAO_ID!,
+      clientSecret: process.env.NEXTAUTH_KAKAO_SECRET!,
     }),
   ],
   callbacks: {
