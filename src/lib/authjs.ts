@@ -1,7 +1,6 @@
 import { DefaultSession, NextAuthOptions } from "next-auth"
 import { ProviderType } from "next-auth/providers"
 import KakaoProvider from "next-auth/providers/kakao"
-import { KAKAO_AUTH_JAVASCRIPT_KEY, NEXTAUTH_KAKAO_CLIENT_SECRET_KEY, NEXTAUTH_SECRET_KEY } from "@/constant/kakaoauth"
 import { addUser, getUser } from "@/gql/user"
 import { KakaoProfile, User } from "@/models/user"
 
@@ -35,12 +34,12 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   jwt: {
-    secret: NEXTAUTH_SECRET_KEY,
+    secret: process.env.NEXTAUTH_SECRET_KEY!,
   },
   providers: [
     KakaoProvider({
-      clientId: KAKAO_AUTH_JAVASCRIPT_KEY,
-      clientSecret: NEXTAUTH_KAKAO_CLIENT_SECRET_KEY,
+      clientId: process.env.KAKAO_AUTH_JAVASCRIPT_KEY!,
+      clientSecret: process.env.NEXTAUTH_KAKAO_CLIENT_SECRET_KEY!,
     }),
   ],
   callbacks: {
