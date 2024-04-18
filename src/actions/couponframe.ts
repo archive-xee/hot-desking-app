@@ -1,6 +1,5 @@
 "use server"
 import request, { gql } from "graphql-request"
-import { APOLLO_ROUTER_URL } from "@/constant/graphql"
 import { CouponFrame } from "@/models/coupon"
 
 export async function getCouponFrame(couponFrameId: string) {
@@ -16,7 +15,7 @@ export async function getCouponFrame(couponFrameId: string) {
     }
   `
 
-  const data: { couponType: CouponFrame[] } = await request(APOLLO_ROUTER_URL, GET_ALL_COUPON_FRAME, {
+  const data: { couponType: CouponFrame[] } = await request(process.env.APOLLO_ROUTER_URL!, GET_ALL_COUPON_FRAME, {
     couponFrameId,
   })
 

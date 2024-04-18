@@ -1,6 +1,5 @@
 import request, { gql } from "graphql-request"
 import { RedirectType, redirect } from "next/navigation"
-import { APOLLO_ROUTER_URL } from "@/constant/graphql"
 import { AUTH_PAYMENT_POPUP_RESULT_ENDPOINT, NICEPAY_SERVER_AUTH_CLIENT_KEY } from "@/constant/nicepay"
 import { Order } from "@/models/order"
 
@@ -41,9 +40,13 @@ export const getPreNicePayOrderInfo = async (order: Order) => {
     }
   `
 
-  const data: { addOrder: { resultCode: string; resultMsg: string } } = await request(APOLLO_ROUTER_URL, SEND_ORDER, {
-    ...order,
-  })
+  const data: { addOrder: { resultCode: string; resultMsg: string } } = await request(
+    process.env.APOLLO_ROUTER_URL!,
+    SEND_ORDER,
+    {
+      ...order,
+    },
+  )
 
   const { resultCode, resultMsg } = data.addOrder
   const result = resultCode === "0000" ? "success" : "fail"

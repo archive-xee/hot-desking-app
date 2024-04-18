@@ -1,7 +1,6 @@
 "use server"
 import request, { gql } from "graphql-request"
 import { RedirectType, redirect } from "next/navigation"
-import { APOLLO_ROUTER_URL } from "@/constant/graphql"
 import { UserCoupon } from "@/models/coupon"
 
 export async function getAllUserCoupon(userId: string) {
@@ -23,7 +22,7 @@ export async function getAllUserCoupon(userId: string) {
     }
   `
 
-  const data: { coupon: UserCoupon[] } = await request(APOLLO_ROUTER_URL, GET_ALL_USERCOUPON, {
+  const data: { coupon: UserCoupon[] } = await request(process.env.APOLLO_ROUTER_URL!, GET_ALL_USERCOUPON, {
     userId,
   })
 
@@ -50,7 +49,7 @@ export async function getUserCouponByCouponId(couponId: string) {
     }
   `
 
-  const data: { coupon: UserCoupon[] } = await request(APOLLO_ROUTER_URL, GET_ALL_USERCOUPON, {
+  const data: { coupon: UserCoupon[] } = await request(process.env.APOLLO_ROUTER_URL!, GET_ALL_USERCOUPON, {
     couponId,
   })
 
@@ -79,7 +78,7 @@ export async function getApplicableUserCouponByTicketId(userId: string, ticketId
     }
   `
 
-  const data: { coupon: UserCoupon[] } = await request(APOLLO_ROUTER_URL, GET_ALL_USERCOUPON, {
+  const data: { coupon: UserCoupon[] } = await request(process.env.APOLLO_ROUTER_URL!, GET_ALL_USERCOUPON, {
     userId,
     ticketId,
   })
@@ -96,10 +95,14 @@ export async function registerUserCoupon(userId: string, couponId: string) {
     }
   `
 
-  const data: { addCouponUser: { resultCode: string } } = await request(APOLLO_ROUTER_URL, REGISTER_USERCOUPON, {
-    userId,
-    couponId,
-  })
+  const data: { addCouponUser: { resultCode: string } } = await request(
+    process.env.APOLLO_ROUTER_URL!,
+    REGISTER_USERCOUPON,
+    {
+      userId,
+      couponId,
+    },
+  )
 
   const resultCode = data.addCouponUser.resultCode
   const result = resultCode === "0000" ? "success" : "fail"
