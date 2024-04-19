@@ -15,9 +15,13 @@ export async function getCouponFrame(couponFrameId: string) {
     }
   `
 
-  const data: { couponType: CouponFrame[] } = await request(process.env.APOLLO_ROUTER_URL!, GET_ALL_COUPON_FRAME, {
-    couponFrameId,
-  })
+  const data: { couponType: CouponFrame[] } = await request(
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
+    GET_ALL_COUPON_FRAME,
+    {
+      couponFrameId,
+    },
+  )
 
   const { couponType: couponFrameList } = data
   const [couponFrame] = couponFrameList

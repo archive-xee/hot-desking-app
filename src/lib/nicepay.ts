@@ -40,7 +40,7 @@ export const getPreNicePayOrderInfo = async (order: Order) => {
   `
 
   const data: { addOrder: { resultCode: string; resultMsg: string } } = await request(
-    process.env.APOLLO_ROUTER_URL!,
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
     SEND_ORDER,
     {
       ...order,

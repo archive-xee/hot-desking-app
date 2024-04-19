@@ -21,7 +21,7 @@ export async function POST(req: Request) {
   const amount = response.get("amount")?.toString()
 
   const data: SendPaymentApprovalResponse = await request(
-    process.env.APOLLO_ROUTER_URL!,
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
     SEND_PAYMENT_APPROVAL_MUTATION,
     {
       tid,

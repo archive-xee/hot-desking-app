@@ -24,7 +24,7 @@ export async function getAllBookable() {
     }
   `
 
-  const data: { booking: Bookable[] } = await request(process.env.APOLLO_ROUTER_URL!, GET_ALL_BOOTH)
+  const data: { booking: Bookable[] } = await request(process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!, GET_ALL_BOOTH)
 
   const { booking: allBookableList } = data
   return allBookableList
@@ -50,7 +50,7 @@ export async function getBoookableById(id: string) {
     }
   `
 
-  const data: { booking: Bookable[] } = await request(process.env.APOLLO_ROUTER_URL!, GET_BOOKABLE_BY_ID, {
+  const data: { booking: Bookable[] } = await request(process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!, GET_BOOKABLE_BY_ID, {
     id,
   })
 
@@ -78,9 +78,13 @@ export async function getUserActivatedBoookable(userId: string, types?: string[]
     }
   `
 
-  const data: { booking: Bookable[] } = await request(process.env.APOLLO_ROUTER_URL!, GET_USER_ACTIVATED_BOOKABLE, {
-    userId,
-  })
+  const data: { booking: Bookable[] } = await request(
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
+    GET_USER_ACTIVATED_BOOKABLE,
+    {
+      userId,
+    },
+  )
 
   const { booking } = data
   let activatedBookableList: Bookable[] = []
@@ -106,7 +110,7 @@ export async function moveToNewBookable(userId: string, bookableId: string) {
   `
 
   const data: { moveBooking: { resultCode: string } } = await request(
-    process.env.APOLLO_ROUTER_URL!,
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
     MOVE_TO_NEW_BOOKABLE,
     {
       userId,

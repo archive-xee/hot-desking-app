@@ -13,7 +13,7 @@ export async function refundUserTicket(ticketId: string) {
   `
 
   const data: { refundTicket: { resultCode: string } } = await request(
-    process.env.APOLLO_ROUTER_URL!,
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
     REFUND_USER_TICKET,
     {
       ticketId,
@@ -35,7 +35,7 @@ export async function unsubscribeUserTicket(ticketId: string) {
   `
 
   const data: { cancelSubscriptionTicket: { resultCode: string } } = await request(
-    process.env.APOLLO_ROUTER_URL!,
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
     UNSUBSCIRE_USER_TICKET,
     {
       ticketId,

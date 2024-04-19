@@ -22,7 +22,7 @@ export async function getAllUserCoupon(userId: string) {
     }
   `
 
-  const data: { coupon: UserCoupon[] } = await request(process.env.APOLLO_ROUTER_URL!, GET_ALL_USERCOUPON, {
+  const data: { coupon: UserCoupon[] } = await request(process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!, GET_ALL_USERCOUPON, {
     userId,
   })
 
@@ -49,7 +49,7 @@ export async function getUserCouponByCouponId(couponId: string) {
     }
   `
 
-  const data: { coupon: UserCoupon[] } = await request(process.env.APOLLO_ROUTER_URL!, GET_ALL_USERCOUPON, {
+  const data: { coupon: UserCoupon[] } = await request(process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!, GET_ALL_USERCOUPON, {
     couponId,
   })
 
@@ -78,7 +78,7 @@ export async function getApplicableUserCouponByTicketId(userId: string, ticketId
     }
   `
 
-  const data: { coupon: UserCoupon[] } = await request(process.env.APOLLO_ROUTER_URL!, GET_ALL_USERCOUPON, {
+  const data: { coupon: UserCoupon[] } = await request(process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!, GET_ALL_USERCOUPON, {
     userId,
     ticketId,
   })
@@ -96,7 +96,7 @@ export async function registerUserCoupon(userId: string, couponId: string) {
   `
 
   const data: { addCouponUser: { resultCode: string } } = await request(
-    process.env.APOLLO_ROUTER_URL!,
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
     REGISTER_USERCOUPON,
     {
       userId,

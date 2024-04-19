@@ -31,7 +31,7 @@ export async function getAllUserTicket(userId: string) {
     }
   `
 
-  const data: { ticket: UserTicket[] } = await request(process.env.APOLLO_ROUTER_URL!, GET_ALL_USERTICKET, {
+  const data: { ticket: UserTicket[] } = await request(process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!, GET_ALL_USERTICKET, {
     userId,
   })
 
@@ -67,10 +67,14 @@ export async function getAllUserTicketByBookable(userId: string, bookable: strin
     }
   `
 
-  const data: { ticket: UserTicket[] } = await request(process.env.APOLLO_ROUTER_URL!, GET_ALL_USERTICKET_BY_BOOKABLE, {
-    userId,
-    bookable,
-  })
+  const data: { ticket: UserTicket[] } = await request(
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
+    GET_ALL_USERTICKET_BY_BOOKABLE,
+    {
+      userId,
+      bookable,
+    },
+  )
 
   const { ticket: allUserTicketByBookable } = data
   return allUserTicketByBookable
@@ -86,7 +90,7 @@ export async function enterBookableByUserTicket(userId: string, ticketId: string
   `
 
   const data: { enteringBooking: { resultCode: string } } = await request(
-    process.env.APOLLO_ROUTER_URL!,
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
     ENTER_BOOKABLE_BY_USER_TICKET,
     {
       userId,
@@ -110,7 +114,7 @@ export async function nipoutUserTicket(userId: string, ticketId: string) {
   `
 
   const data: { outingBooking: { resultCode: string } } = await request(
-    process.env.APOLLO_ROUTER_URL!,
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
     NIPOUT_BOOKABLE,
     {
       userId,
@@ -132,7 +136,7 @@ export async function checkoutUserTicket(userId: string, ticketId: string) {
     }
   `
   const data: { leavingBooking: { resultCode: string } } = await request(
-    process.env.APOLLO_ROUTER_URL!,
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
     CHECKOUT_BOOKABLE,
     {
       userId,
