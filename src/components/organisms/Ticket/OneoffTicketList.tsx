@@ -8,6 +8,8 @@ import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
 import { GET_ALL_TICKET_FRAME } from "@/gql/ticketframe"
 import useIsReactNativeWebview from "@/hooks/useIsReactNativeWebview"
 
+export const dynamic = "force-dynamic"
+
 const OneoffTicketList = (props: { type: string }) => {
   const isReactNativeWebview = useIsReactNativeWebview()
   const { type } = props
