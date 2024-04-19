@@ -16,8 +16,8 @@ export default async function NipoutPage() {
       <Title text="외출" />
       {userActivatedBookableList.length ? (
         <div className="flex flex-col gap-2">
-          <p>현재 이용중인 예약의 외출버튼을 누르면 30분간 외출할 수 있으며 전원은 연결되지 않습니다.</p>
-          <p>사용시간은 자동으로 연장됩니다.</p>
+          <SubTitle text="현재 이용중인 예약의 외출버튼을 누르면 30분간 외출할 수 있으며 전원은 연결되지 않습니다." />
+          <SubTitle text="사용시간은 자동으로 연장됩니다." />
           <SubTitle text="이용중인 예약" bold={true} />
           {userActivatedBookableList.map((activatedBookable: Bookable) => {
             const nipoutUserTicketByTicketId = nipoutUserTicket.bind(null, userId, activatedBookable.ticketId!)
