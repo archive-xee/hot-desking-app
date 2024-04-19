@@ -58,6 +58,7 @@ function CardForm({ userId }: CardFormProps) {
     if (resultCode === "0000") {
       toast.success("카드 등록이 완료되었습니다.")
       router.back()
+      router.refresh()
     } else {
       toast.error(
         "카드 등록이 실패했습니다. 카드 번호나 형식이 맞는지 다시 한번 확인해주시고, 계속 오류가 반복되면 관리자에게 문의해주세요.",

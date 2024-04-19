@@ -1,7 +1,6 @@
 "use server"
 import request, { gql } from "graphql-request"
 import { redirect, RedirectType } from "next/navigation"
-import { APOLLO_ROUTER_URL } from "@/constant/graphql"
 import { Card } from "@/models/card"
 
 export async function getBillingKeyTerm() {
@@ -22,7 +21,7 @@ export async function getBillingKeyTerm() {
       termsTitle: string
       content: string
     }
-  } = await request(APOLLO_ROUTER_URL, GET_BILLING_KEY_TERM_QUERY, {
+  } = await request(process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!, GET_BILLING_KEY_TERM_QUERY, {
     type: "eletorn",
   } as BillingKeyTermRequest)
 
@@ -35,11 +34,9 @@ export async function getUserCardList(userId: string) {
     query GetUserCardList($userId: String!) {
       user(userId: $userId) {
         cards {
-          authDate
           cardCode
           cardName
           cardNum
-          orderId
           id
           representative
           userId
@@ -48,10 +45,14 @@ export async function getUserCardList(userId: string) {
     }
   `
 
-  const data: { user: { cards: Card[] } } = await request(APOLLO_ROUTER_URL, GET_USER_CARD_LIST, {
-    userId,
-  })
-  const userCardList = data.user.cards
+  const data: { user: [{ cards: Card[] }] } = await request(
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
+    GET_USER_CARD_LIST,
+    {
+      userId,
+    },
+  )
+  const userCardList = data.user[0].cards
   return userCardList
 }
 
@@ -90,14 +91,18 @@ export async function registerUserCard(userId: string, formData: FormData) {
   const idNo = formData.get("idNo")
   const cardPw = formData.get("cardPw")
 
-  const data: { cardAuth: { resultCode: string } } = await request(APOLLO_ROUTER_URL, REGISTER_USER_CARD, {
-    userId,
-    expYear,
-    expMonth,
-    idNo,
-    cardPw,
-    cardNo,
-  })
+  const data: { cardAuth: { resultCode: string } } = await request(
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
+    REGISTER_USER_CARD,
+    {
+      userId,
+      expYear,
+      expMonth,
+      idNo,
+      cardPw,
+      cardNo,
+    },
+  )
   const resultCode = data.cardAuth.resultCode
   return resultCode
 }
@@ -117,7 +122,7 @@ export async function requestPaymentByUserCard(
     }
   `
   const data: { addOrder: { resultCode: string; resultMsg: string } } = await request(
-    APOLLO_ROUTER_URL,
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
     REQUEST_PAYMENT_BY_CARD_ID,
     {
       userId,
@@ -131,21 +136,24 @@ export async function requestPaymentByUserCard(
   redirect(`/redirection/payment/${result}`, RedirectType.replace)
 }
 
-export async function deleteCardByCardId(cardId: string) {
+export async function deleteCardByCardId(cardId: string, ticketId: string, couponId: string | null) {
   const DELETE_USER_CARD_BY_CARD_ID = gql`
     mutation DeleteUserCard($cardId: String!) {
-      deleteCardByCardId(cardId: $cardId)
+      deleteCardByCardId(cardId: $cardId) {
+        resultCode
+      }
     }
   `
   // @서버 03/31 input있었는데 없어짐
   // @서버 03/31 resultCode 받아와야하는데 없음
   const data: { deleteCardByCardId: { resultCode: string } } = await request(
-    APOLLO_ROUTER_URL,
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
     DELETE_USER_CARD_BY_CARD_ID,
     {
       cardId,
     },
   )
   const resultCode = data.deleteCardByCardId.resultCode
-  return resultCode
+  const result = resultCode === "0000" ? "success" : "fail"
+  redirect(`/redirection/carddelete/${result}?ticketId=${ticketId}&couponId=${couponId}`, RedirectType.replace)
 }

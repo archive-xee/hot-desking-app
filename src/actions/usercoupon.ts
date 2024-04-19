@@ -1,7 +1,6 @@
 "use server"
 import request, { gql } from "graphql-request"
 import { RedirectType, redirect } from "next/navigation"
-import { APOLLO_ROUTER_URL } from "@/constant/graphql"
 import { UserCoupon } from "@/models/coupon"
 
 export async function getAllUserCoupon(userId: string) {
@@ -23,12 +22,41 @@ export async function getAllUserCoupon(userId: string) {
     }
   `
 
-  const data: { coupon: UserCoupon[] } = await request(APOLLO_ROUTER_URL, GET_ALL_USERCOUPON, {
+  const data: { coupon: UserCoupon[] } = await request(process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!, GET_ALL_USERCOUPON, {
     userId,
   })
 
   const { coupon: userCouponList } = data
   return userCouponList
+}
+
+export async function getUserCouponByCouponId(couponId: string) {
+  const GET_ALL_USERCOUPON = gql`
+    query GetAllUserCoupon($couponId: String!) {
+      coupon(couponId: $couponId) {
+        expiresAt
+        id
+        issuedAt
+        userId
+        type {
+          expires
+          statement
+          name
+          number
+          type
+        }
+      }
+    }
+  `
+
+  const data: { coupon: UserCoupon[] } = await request(process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!, GET_ALL_USERCOUPON, {
+    couponId,
+  })
+
+  const {
+    coupon: [userCoupon],
+  } = data
+  return userCoupon
 }
 
 export async function getApplicableUserCouponByTicketId(userId: string, ticketId: string) {
@@ -50,11 +78,10 @@ export async function getApplicableUserCouponByTicketId(userId: string, ticketId
     }
   `
 
-  const data: { coupon: UserCoupon[] } = await request(APOLLO_ROUTER_URL, GET_ALL_USERCOUPON, {
+  const data: { coupon: UserCoupon[] } = await request(process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!, GET_ALL_USERCOUPON, {
     userId,
     ticketId,
   })
-  console.log("appl", data)
   const { coupon: userCouponList } = data
   return userCouponList
 }
@@ -68,10 +95,14 @@ export async function registerUserCoupon(userId: string, couponId: string) {
     }
   `
 
-  const data: { addCouponUser: { resultCode: string } } = await request(APOLLO_ROUTER_URL, REGISTER_USERCOUPON, {
-    userId,
-    couponId,
-  })
+  const data: { addCouponUser: { resultCode: string } } = await request(
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
+    REGISTER_USERCOUPON,
+    {
+      userId,
+      couponId,
+    },
+  )
 
   const resultCode = data.addCouponUser.resultCode
   const result = resultCode === "0000" ? "success" : "fail"

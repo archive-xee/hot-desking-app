@@ -1,7 +1,5 @@
 import request, { gql } from "graphql-request"
 import { RedirectType, redirect } from "next/navigation"
-import { APOLLO_ROUTER_URL } from "@/constant/graphql"
-import { AUTH_PAYMENT_POPUP_RESULT_ENDPOINT, NICEPAY_SERVER_AUTH_CLIENT_KEY } from "@/constant/nicepay"
 import { Order } from "@/models/order"
 
 // 이후에 order 객체로
@@ -21,12 +19,12 @@ export const executeAuthPaymentPopup = async (props: AuthPaymentProps): Promise<
   const { orderId, ticketName, price, paymentMethod } = props
   const { AUTHNICE } = window
   AUTHNICE.requestPay({
-    clientId: NICEPAY_SERVER_AUTH_CLIENT_KEY,
+    clientId: process.env.NEXT_PUBLIC_NICEPAY_SERVER_AUTH_CLIENT_KEY,
     method: paymentMethod,
     orderId,
     amount: price,
     goodsName: ticketName,
-    returnUrl: AUTH_PAYMENT_POPUP_RESULT_ENDPOINT, //API를 호출할 Endpoint
+    returnUrl: process.env.AUTH_PAYMENT_POPUP_RESULT_ENDPOINT, //API를 호출할 Endpoint
     fnError: (result: AuthPaymentResponse) => alert(result.errorMsg),
   })
 }
@@ -41,9 +39,13 @@ export const getPreNicePayOrderInfo = async (order: Order) => {
     }
   `
 
-  const data: { addOrder: { resultCode: string; resultMsg: string } } = await request(APOLLO_ROUTER_URL, SEND_ORDER, {
-    ...order,
-  })
+  const data: { addOrder: { resultCode: string; resultMsg: string } } = await request(
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
+    SEND_ORDER,
+    {
+      ...order,
+    },
+  )
 
   const { resultCode, resultMsg } = data.addOrder
   const result = resultCode === "0000" ? "success" : "fail"

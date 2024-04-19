@@ -1,12 +1,14 @@
 "use client"
 
-import { useSuspenseQuery } from "@apollo/client"
+import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr"
 import Link from "next/link"
 import BottomSheetButton from "@/components/molecules/Button/BottomSheetButton"
 import BottomSheetModal from "@/components/molecules/Modal/BottomSheetModal"
 import StretchedTicket from "@/components/molecules/Ticket/StretchedTicket"
 import { GET_ALL_TICKET_FRAME } from "@/gql/ticketframe"
 import useIsReactNativeWebview from "@/hooks/useIsReactNativeWebview"
+
+export const dynamic = "force-dynamic"
 
 const OneoffTicketList = (props: { type: string }) => {
   const isReactNativeWebview = useIsReactNativeWebview()

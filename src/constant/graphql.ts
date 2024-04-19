@@ -1,1 +1,0 @@
-export const APOLLO_ROUTER_URL = process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!

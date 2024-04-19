@@ -1,5 +1,4 @@
 import request, { gql } from "graphql-request"
-import { APOLLO_ROUTER_URL } from "@/constant/graphql"
 import { User } from "@/models/user"
 
 export async function getUser(userId: string) {
@@ -18,7 +17,7 @@ export async function getUser(userId: string) {
     }
   `
 
-  const data: { user: User[] } = await request(APOLLO_ROUTER_URL, GET_USER_BY_ID, {
+  const data: { user: User[] } = await request(process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!, GET_USER_BY_ID, {
     userId,
   })
   try {
@@ -57,9 +56,13 @@ export async function addUser(user: User) {
       }
     }
   `
-  const data: { addUser: { resultCode: string } } = await request(APOLLO_ROUTER_URL, ADD_USER_MUTATION, {
-    ...user,
-  })
+  const data: { addUser: { resultCode: string } } = await request(
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
+    ADD_USER_MUTATION,
+    {
+      ...user,
+    },
+  )
   const resultCode = data.addUser.resultCode
   if (resultCode != "0000") {
     throw Error("AddUser: failed to save user")

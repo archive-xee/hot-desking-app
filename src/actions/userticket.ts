@@ -1,7 +1,6 @@
 "use server"
 import request, { gql } from "graphql-request"
 import { RedirectType, redirect } from "next/navigation"
-import { APOLLO_ROUTER_URL } from "@/constant/graphql"
 import { UserTicket } from "@/models/ticket"
 
 export async function getAllUserTicket(userId: string) {
@@ -32,7 +31,7 @@ export async function getAllUserTicket(userId: string) {
     }
   `
 
-  const data: { ticket: UserTicket[] } = await request(APOLLO_ROUTER_URL, GET_ALL_USERTICKET, {
+  const data: { ticket: UserTicket[] } = await request(process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!, GET_ALL_USERTICKET, {
     userId,
   })
 
@@ -43,7 +42,7 @@ export async function getAllUserTicket(userId: string) {
 export async function getAllUserTicketByBookable(userId: string, bookable: string) {
   const GET_ALL_USERTICKET_BY_BOOKABLE = gql`
     query GetAllUserticket($userId: String!, $bookable: String!) {
-      ticket(userId: $userId, typeName: $bookable) {
+      ticket(userId: $userId, bookableType: $bookable) {
         ticketType {
           bookableType {
             name
@@ -68,30 +67,35 @@ export async function getAllUserTicketByBookable(userId: string, bookable: strin
     }
   `
 
-  const data: { ticket: UserTicket[] } = await request(APOLLO_ROUTER_URL, GET_ALL_USERTICKET_BY_BOOKABLE, {
-    userId,
-    bookable,
-  })
+  const data: { ticket: UserTicket[] } = await request(
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
+    GET_ALL_USERTICKET_BY_BOOKABLE,
+    {
+      userId,
+      bookable,
+    },
+  )
 
   const { ticket: allUserTicketByBookable } = data
   return allUserTicketByBookable
 }
 
-export async function enterBookableByUserTicket(userId: string, ticketId: string) {
+export async function enterBookableByUserTicket(userId: string, ticketId: string, bookableId: string) {
   const ENTER_BOOKABLE_BY_USER_TICKET = gql`
-    mutation EnteringBooking($userId: String!, $ticketId: String!) {
-      enteringBooking(input: { userId: $userId, id: $ticketId }) {
+    mutation EnteringBooking($userId: String!, $ticketId: String!, $bookableId: String!) {
+      enteringBooking(input: { userId: $userId, ticketId: $ticketId, id: $bookableId }) {
         resultCode
       }
     }
   `
 
   const data: { enteringBooking: { resultCode: string } } = await request(
-    APOLLO_ROUTER_URL,
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
     ENTER_BOOKABLE_BY_USER_TICKET,
     {
       userId,
       ticketId,
+      bookableId,
     },
   )
 
@@ -109,10 +113,14 @@ export async function nipoutUserTicket(userId: string, ticketId: string) {
     }
   `
 
-  const data: { outingBooking: { resultCode: string } } = await request(APOLLO_ROUTER_URL, NIPOUT_BOOKABLE, {
-    userId,
-    ticketId,
-  })
+  const data: { outingBooking: { resultCode: string } } = await request(
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
+    NIPOUT_BOOKABLE,
+    {
+      userId,
+      ticketId,
+    },
+  )
 
   const resultCode = data.outingBooking.resultCode
   const result = resultCode === "0000" ? "success" : "fail"
@@ -127,10 +135,14 @@ export async function checkoutUserTicket(userId: string, ticketId: string) {
       }
     }
   `
-  const data: { leavingBooking: { resultCode: string } } = await request(APOLLO_ROUTER_URL, CHECKOUT_BOOKABLE, {
-    userId,
-    ticketId,
-  })
+  const data: { leavingBooking: { resultCode: string } } = await request(
+    process.env.NEXT_PUBLIC_APOLLO_ROUTER_URL!,
+    CHECKOUT_BOOKABLE,
+    {
+      userId,
+      ticketId,
+    },
+  )
 
   const resultCode = data.leavingBooking.resultCode
   const result = resultCode === "0000" ? "success" : "fail"
