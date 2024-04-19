@@ -19,7 +19,7 @@ export const executeAuthPaymentPopup = async (props: AuthPaymentProps): Promise<
   const { orderId, ticketName, price, paymentMethod } = props
   const { AUTHNICE } = window
   AUTHNICE.requestPay({
-    clientId: process.env.NICEPAY_SERVER_AUTH_CLIENT_KEY,
+    clientId: process.env.NEXT_PUBLIC_NICEPAY_SERVER_AUTH_CLIENT_KEY,
     method: paymentMethod,
     orderId,
     amount: price,
