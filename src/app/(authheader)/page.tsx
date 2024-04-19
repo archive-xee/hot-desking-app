@@ -19,7 +19,7 @@ export default function HomePage() {
           label="네이버"
           destination="https://m.place.naver.com/place/1628245132/ticket?entry=ple"
         />
-        <HomeNavButton label="카카오채널" destination={process.env.ULTSPACE_CS!} />
+        <HomeNavButton label="카카오채널" destination={process.env.NEXT_PUBLIC_ULTSPACE_CS!} />
       </HomeNavSection>
     </div>
   )

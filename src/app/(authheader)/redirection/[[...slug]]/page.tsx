@@ -110,9 +110,9 @@ export default function RedirectionPage({ params }: { params: { slug: string } }
             <Link href="/">
               <Button>홈으로 돌아가기</Button>
             </Link>
-            <Link href={process.env.ULTSPACE_CS!}>
+            <a href={process.env.NEXT_PUBLIC_ULTSPACE_CS!}>
               <Button>카카오톡 문의하기</Button>
-            </Link>
+            </a>
           </div>
         </div>
       )}
