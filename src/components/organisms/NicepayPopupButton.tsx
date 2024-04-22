@@ -18,7 +18,6 @@ export default function NicepayPopupButton(props: NicepayPopupButtonProps) {
     <>
       <Button
         onClick={async () => {
-          console.log("order", order)
           const { orderId, priceString, orderName } = await getPreNicePayOrderInfo(order)
           const price = parseInt(priceString)
           await executeAuthPaymentPopup({

@@ -24,7 +24,7 @@ export const executeAuthPaymentPopup = async (props: AuthPaymentProps): Promise<
     orderId,
     amount: price,
     goodsName: ticketName,
-    returnUrl: process.env.AUTH_PAYMENT_POPUP_RESULT_ENDPOINT, //API를 호출할 Endpoint
+    returnUrl: process.env.NEXT_PUBLIC_NICEPAY_AUTH_PAYMENT_POPUP_RESULT_ENDPOINT, //API를 호출할 Endpoint
     fnError: (result: AuthPaymentResponse) => alert(result.errorMsg),
   })
 }
