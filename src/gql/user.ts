@@ -32,7 +32,7 @@ export async function addUser(user: User) {
   const ADD_USER_MUTATION = gql`
     mutation AddUser(
       $id: String!
-      $name: String!
+      $name: String
       $phoneNumber: String!
       $ageRange: String
       $birthday: String
