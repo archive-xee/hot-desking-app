@@ -17,7 +17,7 @@ export default async function UserCard(props: { card: Card; ticketId: string; co
     <div className="flex flex-row items-center gap-2 overflow-hidden rounded-lg border border-solid bg-white-300 pr-2">
       <div className={`relative flex flex-col items-center justify-center ${color} h-24 w-16`}>
         <p className="text-white-100">{card.cardName}</p>
-        {isRepresentative ? <p className="text-sm text-white-100">대표</p> : <></>}
+        {isRepresentative ? <p className="text-sm text-white-100">최근결제</p> : <></>}
       </div>
       <div>
         <p className="text-sm">{formatCardNumber(card.cardNum)}</p>
