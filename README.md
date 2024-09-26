@@ -1,14 +1,31 @@
 # Web Service for Workspace Rental Platform (Hot Desking)
 
 Jan 2024 - Apr 2024  
+
 Primarily worked remotely, but met in person one or two days every week to discuss modifications and additional features with the  backend team and the product manager.  
+
+## Architecture
+
+### Preview
+![1728288338673-43055a62-75f4-44dd-816b-8e6f7c9d8b24_1](https://github.com/user-attachments/assets/276d25b7-4d47-4a68-adc2-472c8450ec2d)
+
+[Download PDF with flowcharts and wireframes explaining the architecture](https://drive.google.com/file/d/1QHHlLaWSYSW2CigSqnBbUD6mLeh-m7GS/view?usp=sharing)
+
+
+
+[Application URL, click and explore!](https://hotdesking-git-develop-wontae-chois-projects-63012546.vercel.app/)
+
+
 
 **Methodology**: Assigning one feature every week or two, creating a branch, developing it, then submitting a pull request and merging.
 
+**Commit history**
+
+![Commit history](https://github.com/user-attachments/assets/12a7234a-f2a9-4376-960d-8a9532a6bdb9)
+
+
 ### Notice
 Please disable the `eslint` and `prettier` extensions in your vscode (workspace), and uncheck `format on save` in the vscode settings when running locally.
-
-[Application URL, click and explore!](https://hotdesking-git-develop-wontae-chois-projects-63012546.vercel.app/)
 
 ## Purpose of the Project
 
@@ -57,10 +74,6 @@ All client-side development, collaborating with the backend team.
 - eslint-config-airbnb
 - Vercel (for deployment)
 - NICEPay (payment gateway)
-
-## Architecture
-
-[Download PDF with flowcharts and wireframes explaining the architecture](https://drive.google.com/file/d/1QHHlLaWSYSW2CigSqnBbUD6mLeh-m7GS/view?usp=sharing)
 
 ### What I Learned from the Project
 
